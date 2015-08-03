@@ -1,4 +1,4 @@
-# arcgis-sample-ios
+# arcgis-samples-ios
 
 ArcGIS Runtime SDK for iOS のサンプル集です。Objective-C と Swift 用のサンプルがあります。
 
