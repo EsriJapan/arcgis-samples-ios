@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		967E08051B6F1BED00DA8F19 /* ArcGIS.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 967E08041B6F1BED00DA8F19 /* ArcGIS.bundle */; };
+		5825DD611BA0228A00C796D9 /* ArcGIS.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5825DD601BA0228A00C796D9 /* ArcGIS.bundle */; };
+		5825DD691BA02D0900C796D9 /* ClosestFacilityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5825DD681BA02D0900C796D9 /* ClosestFacilityViewController.m */; };
 		96DFE13D1B6603E2007A7F6D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DFE13C1B6603E2007A7F6D /* main.m */; };
 		96DFE1401B6603E2007A7F6D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DFE13F1B6603E2007A7F6D /* AppDelegate.m */; };
 		96DFE1431B6603E2007A7F6D /* TopMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DFE1421B6603E2007A7F6D /* TopMenuController.m */; };
@@ -37,7 +38,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		967E08041B6F1BED00DA8F19 /* ArcGIS.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ArcGIS.bundle; sourceTree = "<group>"; };
+		5825DD601BA0228A00C796D9 /* ArcGIS.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = ArcGIS.bundle; path = ../../../Library/SDKs/ArcGIS/iOS/ArcGIS.framework/Versions/Current/Resources/ArcGIS.bundle; sourceTree = "<group>"; };
+		5825DD641BA02A6100C796D9 /* ClosestFacilityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClosestFacilityViewController.h; sourceTree = "<group>"; };
+		5825DD681BA02D0900C796D9 /* ClosestFacilityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClosestFacilityViewController.m; sourceTree = "<group>"; };
 		96DFE1371B6603E2007A7F6D /* ArcGISSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArcGISSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96DFE13B1B6603E2007A7F6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		96DFE13C1B6603E2007A7F6D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -101,10 +104,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5825DD621BA0270700C796D9 /* ClosestFacility */ = {
+			isa = PBXGroup;
+			children = (
+				5825DD641BA02A6100C796D9 /* ClosestFacilityViewController.h */,
+				5825DD681BA02D0900C796D9 /* ClosestFacilityViewController.m */,
+			);
+			name = ClosestFacility;
+			path = ArcGISSample/ClosestFacility;
+			sourceTree = "<group>";
+		};
 		96DFE12E1B6603E2007A7F6D = {
 			isa = PBXGroup;
 			children = (
-				967E08041B6F1BED00DA8F19 /* ArcGIS.bundle */,
+				5825DD621BA0270700C796D9 /* ClosestFacility */,
+				5825DD601BA0228A00C796D9 /* ArcGIS.bundle */,
 				96F1ABC91B67780300A088F8 /* tokyo_yokohama.gpx */,
 				96DFE1A11B660FB0007A7F6D /* AttachmentManager */,
 				96DFE1A71B660FB0007A7F6D /* CoordinateConversion */,
@@ -421,8 +435,8 @@
 			files = (
 				96F1ABCA1B67780300A088F8 /* tokyo_yokohama.gpx in Resources */,
 				96DFE14B1B6603E2007A7F6D /* LaunchScreen.xib in Resources */,
-				967E08051B6F1BED00DA8F19 /* ArcGIS.bundle in Resources */,
 				96DFE1481B6603E2007A7F6D /* Images.xcassets in Resources */,
+				5825DD611BA0228A00C796D9 /* ArcGIS.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -452,6 +466,7 @@
 				96DFE1E91B660FB0007A7F6D /* MagnifierViewController.m in Sources */,
 				96DFE13D1B6603E2007A7F6D /* main.m in Sources */,
 				96DFE1F21B660FB0007A7F6D /* TimeViewController.m in Sources */,
+				5825DD691BA02D0900C796D9 /* ClosestFacilityViewController.m in Sources */,
 				96DFE1F41B660FB0007A7F6D /* WmsViewController.m in Sources */,
 				96DFE1EF1B660FB0007A7F6D /* ServiceAreaViewController.m in Sources */,
 				96DFE1E41B660FB0007A7F6D /* GpsViewController.m in Sources */,
@@ -575,6 +590,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = "$(HOME)/Library/SDKs/ArcGIS/iOS";
 				INFOPLIST_FILE = ArcGISSample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -586,6 +602,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = "$(HOME)/Library/SDKs/ArcGIS/iOS";
 				INFOPLIST_FILE = ArcGISSample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";

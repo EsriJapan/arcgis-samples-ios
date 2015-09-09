@@ -35,6 +35,7 @@
                       @"NetworkViewController",
                       @"ServiceAreaViewController",
                       @"CoordinateConversionViewController",
+                      @"ClosestFacilityViewController",
                       @"JsonViewController",
                       nil];
         
@@ -58,6 +59,7 @@
                           @"ルート検索",
                           @"到達圏解析",
                           @"座標変換",
+                          @"最寄り施設検索",
                           @"JSONのエンコード・デコード",
                           nil];
     }
