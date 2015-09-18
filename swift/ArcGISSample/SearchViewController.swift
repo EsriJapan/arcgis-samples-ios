@@ -25,12 +25,12 @@ class SearchViewController: UIViewController, UISearchBarDelegate, AGSQueryTaskD
         self.view.addSubview(self.agsMapView)
         
         //タイルマップサービスレイヤーの追加
-        let url = NSURL(string: "http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer")
+        let url = NSURL(string: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer")
         let tiledLyr = AGSTiledMapServiceLayer(URL:url)
         self.agsMapView.addMapLayer(tiledLyr, withName:"Tiled Layer")
         
         //フィーチャ検索用のフィーチャレイヤーの表示
-        let flayerUrl = NSURL(string: "http://services3.arcgis.com/iH4Iz7CEdh5xTJYb/arcgis/rest/services/Nagareyama_shi_Shisetsu_All/FeatureServer/0")
+        let flayerUrl = NSURL(string: "https://services3.arcgis.com/iH4Iz7CEdh5xTJYb/arcgis/rest/services/Nagareyama_shi_Shisetsu_All/FeatureServer/0")
         let agsFeatureLayer = AGSFeatureLayer(URL: flayerUrl, mode: .OnDemand)
         agsFeatureLayer.outFields = ["*"];
         self.agsMapView.addMapLayer(agsFeatureLayer, withName:"Feature Layer")
@@ -60,7 +60,9 @@ class SearchViewController: UIViewController, UISearchBarDelegate, AGSQueryTaskD
         agsQuery.outFields = ["*"]
         agsQuery.returnGeometry = true
         agsQuery.outSpatialReference = self.agsMapView.spatialReference
-        agsQuery.whereClause = "大分類 = '\(searchBar.text)'"
+        let searchText: String = searchBar.text!
+        agsQuery.whereClause = "大分類 = \'\(searchText)\'"
+
         
         //検索結果をソートするフィールドの指定
         let order = NSMutableArray(array: ["所在地"])
@@ -90,7 +92,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, AGSQueryTaskD
             agsGraphicsLayer.addGraphic(graphic)
             agsGraphicsLayer.setSelected(true, forGraphic: graphic)
             let attr = graphic.attributeForKey("所在地") as! String
-            println("graphic:\(attr)")
+            print("graphic:\(attr)")
             
         }
         
@@ -98,7 +100,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, AGSQueryTaskD
     
     func queryTask(queryTask: AGSQueryTask!, operation op: NSOperation!, didFailWithError error: NSError!) {
         
-        println("Error:\(error)")
+        print("Error:\(error)")
 
     }
     

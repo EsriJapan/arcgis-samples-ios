@@ -23,7 +23,7 @@ class CustomSymbolViewController: UIViewController {
         self.view.addSubview(self.agsMapView)
         
         //タイルマップサービスレイヤーの追加
-        let url = NSURL(string: "http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer")
+        let url = NSURL(string: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer")
         let tiledLyr = AGSTiledMapServiceLayer(URL:url)
         self.agsMapView.addMapLayer(tiledLyr, withName:"Tiled Layer")
         
@@ -97,8 +97,8 @@ class CustomSymbolViewController: UIViewController {
         let locations:[CGFloat] = [ 0.00, 0.2528, 0.5955, 0.7865, 1 ]
         let components:[CGFloat] = [1.0, 1.0, 1,0, 0.9, 1.0, 0.992157, 0.917647, 0.9, 0.878431, 0.854902, 0.811765, 0.9, 0.956863, 0.956863, 0.956863, 0.9, 0.882353, 0.870588, 0.780392, 0.9]
         
-        myColorspace = CGColorSpaceCreateDeviceRGB()
-        myGradient = CGGradientCreateWithColorComponents(myColorspace, components, locations, num_locations)
+        myColorspace = CGColorSpaceCreateDeviceRGB()!
+        myGradient = CGGradientCreateWithColorComponents(myColorspace, components, locations, num_locations)!
         
         let myStartPoint = CGPoint(x: 12, y: 12), myEndPoint = CGPoint(x: 16, y: 16)
         let myStartRadius = CGFloat(0)
@@ -106,7 +106,7 @@ class CustomSymbolViewController: UIViewController {
         
         CGContextAddEllipseInRect(context, CGRectMake(0, 0, 36, 36))
         CGContextClip(context)
-        CGContextDrawRadialGradient(context, myGradient, myStartPoint, myStartRadius, myEndPoint, myEndRadius, CGGradientDrawingOptions(kCGGradientDrawsAfterEndLocation))
+        CGContextDrawRadialGradient(context, myGradient, myStartPoint, myStartRadius, myEndPoint, myEndRadius, CGGradientDrawingOptions.DrawsAfterEndLocation)
         
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()

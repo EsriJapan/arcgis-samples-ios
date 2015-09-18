@@ -28,7 +28,7 @@ class PerspectiveViewController: UIViewController, AGSMapViewLayerDelegate {
         self.view.addSubview(self.agsMapView1)
         
         //タイルマップサービスレイヤーの追加（道路地図）
-        let url1 = NSURL(string: "http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer")
+        let url1 = NSURL(string: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer")
         let tiledLyr1 = AGSTiledMapServiceLayer(URL:url1)
         self.agsMapView1.addMapLayer(tiledLyr1, withName:"Tiled Layer1")
         
@@ -39,7 +39,7 @@ class PerspectiveViewController: UIViewController, AGSMapViewLayerDelegate {
         self.view.addSubview(self.agsMapView2)
         
         //タイルマップサービスレイヤーの追加（衛星画像）
-        let url2 = NSURL(string: "http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer")
+        let url2 = NSURL(string: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer")
         let tiledLyr2 = AGSTiledMapServiceLayer(URL:url2)
         self.agsMapView2.addMapLayer(tiledLyr2, withName:"Tiled Layer2")
         

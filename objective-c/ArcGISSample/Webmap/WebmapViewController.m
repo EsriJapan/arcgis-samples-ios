@@ -23,7 +23,7 @@
     [self.view addSubview:agsMapView];
     
     //組織のArcGIS OnlineのURLとWebマップのIDを指定して、Webマップを作成
-    NSURL *portalUrl = [NSURL URLWithString:@"http://ej.maps.arcgis.com/sharing"];
+    NSURL *portalUrl = [NSURL URLWithString:@"https://ej.maps.arcgis.com/sharing"];
     self.webmap = [[AGSWebMap alloc] initWithItemId:@"d2dacbb4215d44da903a73c245bdce67" sharingEndPoint:portalUrl credential:nil];
     
     self.webmap.delegate = self;

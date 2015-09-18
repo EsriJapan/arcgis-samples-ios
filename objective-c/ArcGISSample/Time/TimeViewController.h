@@ -15,8 +15,8 @@
 
 @property (nonatomic, strong) AGSMapView *agsMapView;
 
-@property (nonatomic, assign) NSDate *startDate;
-@property (nonatomic, assign) NSDate *endDate;
+@property (nonatomic, strong) NSDate *startDate;
+@property (nonatomic, strong) NSDate *endDate;
 
 
 

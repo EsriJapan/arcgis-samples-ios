@@ -81,7 +81,7 @@ class TopMenuController: UIViewController, UITableViewDelegate, UITableViewDataS
     
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) 
         cell.textLabel!.text = "\(itemNames[indexPath.row])"
         return cell
     }
@@ -94,7 +94,7 @@ class TopMenuController: UIViewController, UITableViewDelegate, UITableViewDataS
         let className = strTarget + strVC
         
         if let theClass = NSClassFromString(className) as? UIViewController.Type {
-            let controller = theClass(nibName: nil, bundle: nil)
+            let controller = theClass.init(nibName: nil, bundle: nil)
             self.navigationController!.pushViewController(controller, animated: true)
         }
 

@@ -26,7 +26,7 @@ class GpsViewController: UIViewController, AGSMapViewLayerDelegate {
         self.view.addSubview(self.agsMapView)
         
         //タイルマップサービスレイヤーの追加
-        let url = NSURL(string: "http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer")
+        let url = NSURL(string: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer")
         let tiledLyr = AGSTiledMapServiceLayer(URL:url)
         self.agsMapView.addMapLayer(tiledLyr, withName:"Tiled Layer")
         self.agsMapView.layerDelegate = self
@@ -35,10 +35,10 @@ class GpsViewController: UIViewController, AGSMapViewLayerDelegate {
         self.modeText = UIBarButtonItem(title: "Off", style: .Plain, target: self, action: "changeMode:")
         self.dataText = UIBarButtonItem(title: "GPS", style: .Plain, target: self, action: "changeData:")
         let flexibleItem = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
-        var buttons = ([self.modeText, flexibleItem, self.dataText])
-        var toolbar: UIToolbar = UIToolbar(frame: CGRectMake(0, self.view.frame.size.height - 44, self.view.frame.size.width, 44))
+        let buttons = ([self.modeText, flexibleItem, self.dataText])
+        let toolbar: UIToolbar = UIToolbar(frame: CGRectMake(0, self.view.frame.size.height - 44, self.view.frame.size.width, 44))
         
-        toolbar.setItems(buttons as [AnyObject], animated: true)
+        toolbar.setItems(buttons as? [UIBarButtonItem], animated: true)
         self.view .addSubview(toolbar)
         
     }

@@ -25,6 +25,8 @@
     self.rootController = [[UINavigationController alloc] initWithRootViewController:topMenu];
     [self.window addSubview:self.rootController.view];
     [self.window makeKeyAndVisible];
+    [self.window setRootViewController:self.rootController];
+    
     
     return YES;
 }

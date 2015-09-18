@@ -22,7 +22,7 @@
     self.agsMapView.touchDelegate = self;
 
     //タイルマップサービスレイヤーの追加
-    NSURL *url = [NSURL URLWithString:@"http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer"];
+    NSURL *url = [NSURL URLWithString:@"https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer"];
     AGSTiledMapServiceLayer *agsTiledMapServiceLayer = [[AGSTiledMapServiceLayer alloc] initWithURL:url];
     [self.agsMapView addMapLayer:agsTiledMapServiceLayer withName:@"tiledLayer"];
     
@@ -30,7 +30,7 @@
     [self.agsMapView zoomToEnvelope:envelope animated:NO];
     
     //住所検索を行うジオコードサービスのURLを設定
-    NSURL *geocodeUrl = [NSURL URLWithString: @"http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/"];
+    NSURL *geocodeUrl = [NSURL URLWithString: @"https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/"];
     
     //ジオコードサービスのURLを指定して住所検索を行うタスク（AGSLocator）を作成
     self.agsLocator = [[AGSLocator alloc] initWithURL:geocodeUrl];

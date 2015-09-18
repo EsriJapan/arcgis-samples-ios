@@ -19,12 +19,12 @@
 	[self.view addSubview:agsMapView];
 
     //タイルマップサービスレイヤーの追加
-	NSURL *url = [NSURL URLWithString:@"http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer"];
+	NSURL *url = [NSURL URLWithString:@"https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer"];
 	AGSTiledMapServiceLayer *tiledMapServiceLayer = [[AGSTiledMapServiceLayer alloc] initWithURL:url];
     [agsMapView addMapLayer:tiledMapServiceLayer withName:@"Tiled Layer"];
     
     //シンボル表示用のフィーチャレイヤーの表示
-    NSURL *flayerUrl = [NSURL URLWithString:@"http://tmservices1.esri.com/arcgis/rest/services/LiveFeeds/NOAA_METAR_current_wind_speed_direction/MapServer/0"];
+    NSURL *flayerUrl = [NSURL URLWithString:@"https://tmservices1.esri.com/arcgis/rest/services/LiveFeeds/NOAA_METAR_current_wind_speed_direction/MapServer/0"];
     AGSFeatureLayer *flayer = [AGSFeatureLayer featureServiceLayerWithURL:flayerUrl mode:AGSFeatureLayerModeOnDemand];
     flayer.outFields = [NSArray arrayWithObjects: @"WIND_DIRECT", nil];
     [agsMapView addMapLayer:flayer withName:@"Feature Layer"];

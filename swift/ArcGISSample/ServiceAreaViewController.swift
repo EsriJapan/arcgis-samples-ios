@@ -24,7 +24,7 @@ class ServiceAreaViewController: UIViewController, AGSServiceAreaTaskDelegate {
         self.view.addSubview(self.agsMapView)
         
         //タイルマップサービスレイヤーの追加
-        let url = NSURL(string: "http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer")
+        let url = NSURL(string: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer")
         let tiledLyr = AGSTiledMapServiceLayer(URL:url)
         self.agsMapView.addMapLayer(tiledLyr, withName:"Tiled Layer")
         
@@ -33,7 +33,7 @@ class ServiceAreaViewController: UIViewController, AGSServiceAreaTaskDelegate {
         
         //認証の設定:検証用（ArcGIS Onlineのユーザー名とパスワードを指定）
         let credntial = AGSCredential(user: "<ユーザー名>", password: "<パスワード>", authenticationType: .Token)
-        
+
         //到達圏解析用のサービスURLの指定
         let saUrl = NSURL(string: "https://route.arcgis.com/arcgis/rest/services/World/ServiceAreas/NAServer/ServiceArea_World")
         self.agsSaTask = AGSServiceAreaTask(URL: saUrl, credential: credntial)
@@ -51,9 +51,9 @@ class ServiceAreaViewController: UIViewController, AGSServiceAreaTaskDelegate {
         let buttonSolve = UIBarButtonItem(barButtonSystemItem: .Search, target: self, action: "networkSolve:")
         let buttonClear = UIBarButtonItem(barButtonSystemItem: .Trash, target: self, action: "clearStops:")
         
-        var buttons = ([buttonSolve, buttonClear])
-        var toolbar: UIToolbar = UIToolbar(frame: CGRectMake(0, self.view.frame.size.height - 44, self.view.frame.size.width, 44))
-        toolbar.setItems(buttons as [AnyObject], animated: true)
+        let buttons = ([buttonSolve, buttonClear])
+        let toolbar: UIToolbar = UIToolbar(frame: CGRectMake(0, self.view.frame.size.height - 44, self.view.frame.size.width, 44))
+        toolbar.setItems(buttons as [UIBarButtonItem], animated: true)
         self.view .addSubview(toolbar)
         
         //マップの中心にカーソルを表示

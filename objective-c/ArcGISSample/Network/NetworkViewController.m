@@ -21,7 +21,7 @@
 	[self.view addSubview:self.agsMapView];
     
     //タイルマップサービスレイヤーの追加
-    NSURL *url = [NSURL URLWithString:@"http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer"];
+    NSURL *url = [NSURL URLWithString:@"https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer"];
     AGSTiledMapServiceLayer *tiledMapServiceLayer = [[AGSTiledMapServiceLayer alloc] initWithURL:url];
     [self.agsMapView addMapLayer:tiledMapServiceLayer withName:@"Tiled Layer"];
     
@@ -35,7 +35,7 @@
     AGSCredential *credntial = [[AGSCredential alloc] initWithUser:@"<ユーザー名>" password:@"<パスワード>" authenticationType:AGSAuthenticationTypeToken];
 
     //ルート検索用のサービスURLの指定
-    NSURL *networkUrl = [NSURL URLWithString:@"http://route.arcgis.com/arcgis/rest/services/World/Route/NAServer/Route_World"];
+    NSURL *networkUrl = [NSURL URLWithString:@"https://route.arcgis.com/arcgis/rest/services/World/Route/NAServer/Route_World"];
     self.agsRouteTask = [[AGSRouteTask alloc] initWithURL:networkUrl credential:credntial];
     self.agsRouteTask.delegate = self;
 
@@ -78,6 +78,7 @@
     [self drawCenterSign];
     
 }
+
 
 - (void)drawCenterSign {
     
@@ -154,6 +155,7 @@
         agsRouteTaskParams.returnDirections = YES;
         agsRouteTaskParams.outSpatialReference = [AGSSpatialReference spatialReferenceWithWKID:102100];
         [agsRouteTaskParams setStopsWithFeatures:self.stopPoints];
+        agsRouteTaskParams.impedanceAttributeName = @"WalkTime";
         
         //ルート検索を実行
         [self.agsRouteTask solveWithParameters:agsRouteTaskParams];

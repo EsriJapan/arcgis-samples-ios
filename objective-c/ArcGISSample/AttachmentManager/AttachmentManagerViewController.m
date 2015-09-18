@@ -20,7 +20,7 @@
 	[self.view addSubview:self.agsMapView];
     
     //タイルマップサービスレイヤーの追加
-    NSURL *url = [NSURL URLWithString:@"http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer"];
+    NSURL *url = [NSURL URLWithString:@"https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer"];
     AGSTiledMapServiceLayer *agsTiledMapServiceLayer = [[AGSTiledMapServiceLayer alloc] initWithURL:url];
     [self.agsMapView addMapLayer:agsTiledMapServiceLayer withName:@"Tiled layer"];
     

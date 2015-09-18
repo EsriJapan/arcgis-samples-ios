@@ -25,7 +25,7 @@ class SketchViewController: UIViewController{
         self.view.addSubview(agsMapView)
         
         //タイルマップサービスレイヤーの追加
-        let url = NSURL(string: "http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer")
+        let url = NSURL(string: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer")
         let tiledLyr = AGSTiledMapServiceLayer(URL:url)
         agsMapView.addMapLayer(tiledLyr, withName:"Tiled Layer")
         
@@ -48,9 +48,9 @@ class SketchViewController: UIViewController{
         let buttonRemove = UIBarButtonItem(barButtonSystemItem: .Trash, target: self, action: "removeSketch:")
         let buttonSubmit = UIBarButtonItem(barButtonSystemItem: .Save, target: self, action: "submitSketch:")
 
-        var buttons = ([buttonUndo, buttonRedo, buttonRemove, buttonSubmit])
-        var toolbar: UIToolbar = UIToolbar(frame: CGRectMake(0, self.view.frame.size.height - 44, self.view.frame.size.width, 44))
-        toolbar.setItems(buttons as [AnyObject], animated: true)
+        let buttons = ([buttonUndo, buttonRedo, buttonRemove, buttonSubmit])
+        let toolbar: UIToolbar = UIToolbar(frame: CGRectMake(0, self.view.frame.size.height - 44, self.view.frame.size.width, 44))
+        toolbar.setItems(buttons as [UIBarButtonItem], animated: true)
         self.view .addSubview(toolbar)
         
     }

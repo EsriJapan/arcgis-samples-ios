@@ -22,12 +22,12 @@
 	[self.view addSubview:self.agsMapView];
     
     //タイルマップサービスレイヤーの追加（衛星画像）
-	NSURL *url1 = [NSURL URLWithString:@"http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer"];
+	NSURL *url1 = [NSURL URLWithString:@"https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer"];
 	AGSTiledMapServiceLayer *tiledMapServiceLayer1 = [[AGSTiledMapServiceLayer alloc] initWithURL:url1];
 	[self.agsMapView addMapLayer:tiledMapServiceLayer1 withName:@"World_Imagery"];
 
     //タイルマップサービスレイヤーの追加（道路地図）
-    NSURL *url2 = [NSURL URLWithString:@"http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer"];
+    NSURL *url2 = [NSURL URLWithString:@"https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer"];
 	AGSTiledMapServiceLayer *tiledMapServiceLayer2 = [[AGSTiledMapServiceLayer alloc] initWithURL:url2];
     [self.agsMapView addMapLayer:tiledMapServiceLayer2 withName:@"World_Street_Map"];
 

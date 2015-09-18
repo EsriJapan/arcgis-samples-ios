@@ -26,7 +26,7 @@ class SwipeViewController: UIViewController{
         self.view.addSubview(agsMapView1)
         
         //マップにタイルマップサービスレイヤーを追加（道路地図）
-        let url1 = NSURL(string: "http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer")
+        let url1 = NSURL(string: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer")
         let tiledMapServiceLayer1 = AGSTiledMapServiceLayer (URL: url1)
         agsMapView1.addMapLayer(tiledMapServiceLayer1, withName:"Tiled Layer1")
         
@@ -42,7 +42,7 @@ class SwipeViewController: UIViewController{
         self.layerView.addSubview(agsMapView2)
         
         //マップにタイルマップサービスレイヤーを追加（衛星画像）
-        let url2 = NSURL(string: "http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer")
+        let url2 = NSURL(string: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer")
         let tiledMapServiceLayer2 = AGSTiledMapServiceLayer (URL: url2)
         agsMapView2.addMapLayer(tiledMapServiceLayer2, withName:"Tiled Layer2")
         agsMapView2.zoomToEnvelope(envelope, animated: true)

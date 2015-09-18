@@ -21,12 +21,12 @@
 	[self.view addSubview:self.agsMapView];
     
     //タイルマップサービスレイヤーの追加
-    NSURL *url = [NSURL URLWithString:@"http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer"];
+    NSURL *url = [NSURL URLWithString:@"https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer"];
     AGSTiledMapServiceLayer *tiledMapServiceLayer = [[AGSTiledMapServiceLayer alloc] initWithURL:url];
     [self.agsMapView addMapLayer:tiledMapServiceLayer withName:@"Tiled Layer"];
     
     //フィーチャ検索用のフィーチャレイヤーの表示
-    NSURL *flayerUrl = [NSURL URLWithString:@"http://services3.arcgis.com/iH4Iz7CEdh5xTJYb/arcgis/rest/services/Nagareyama_shi_Shisetsu_All/FeatureServer/0"];
+    NSURL *flayerUrl = [NSURL URLWithString:@"https://services3.arcgis.com/iH4Iz7CEdh5xTJYb/arcgis/rest/services/Nagareyama_shi_Shisetsu_All/FeatureServer/0"];
     AGSFeatureLayer *agsFeatureLayer = [AGSFeatureLayer featureServiceLayerWithURL:flayerUrl mode:AGSFeatureLayerModeOnDemand];
     agsFeatureLayer.outFields = [NSArray arrayWithObjects:@"*", nil];
     [self.agsMapView addMapLayer:agsFeatureLayer withName:@"Feature Layer"];

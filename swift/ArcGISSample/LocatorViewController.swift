@@ -26,7 +26,7 @@ class LocatorViewController: UIViewController, AGSLocatorDelegate, AGSMapViewTou
         self.agsMapView.touchDelegate = self;
         
         //タイルマップサービスレイヤーの追加
-        let url = NSURL(string: "http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer")
+        let url = NSURL(string: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer")
         let tiledLyr = AGSTiledMapServiceLayer(URL:url)
         self.agsMapView.addMapLayer(tiledLyr, withName:"Tiled Layer")
         
@@ -34,7 +34,7 @@ class LocatorViewController: UIViewController, AGSLocatorDelegate, AGSMapViewTou
         self.agsMapView.zoomToEnvelope(envelope, animated: true)
         
         //住所検索を行うジオコードサービスのURLを設定
-        let geocodeUrl = NSURL(string: "http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/")
+        let geocodeUrl = NSURL(string: "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/")
 
         //ジオコードサービスのURLを指定して住所検索を行うタスク（AGSLocator）を作成
         self.agsLocator = AGSLocator(URL: geocodeUrl)
@@ -76,7 +76,7 @@ class LocatorViewController: UIViewController, AGSLocatorDelegate, AGSMapViewTou
     
     
     func locator(locator: AGSLocator!, operation op: NSOperation!, didFailAddressForLocation error: NSError!) {
-        println("Error:\(error)")
+        print("Error:\(error)")
     }
 
 

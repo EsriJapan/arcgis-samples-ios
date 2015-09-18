@@ -31,7 +31,7 @@ class NetworkViewController: UIViewController, AGSRouteTaskDelegate {
         self.view.addSubview(self.agsMapView)
         
         //タイルマップサービスレイヤーの追加
-        let url = NSURL(string: "http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer")
+        let url = NSURL(string: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer")
         let tiledLyr = AGSTiledMapServiceLayer(URL:url)
         self.agsMapView.addMapLayer(tiledLyr, withName:"Tiled Layer")
         
@@ -43,7 +43,7 @@ class NetworkViewController: UIViewController, AGSRouteTaskDelegate {
         let credntial = AGSCredential(user: "<ユーザー名>", password: "<パスワード>", authenticationType: .Token)
 
         //ルート検索用のサービスURLの指定
-        let networkUrl = NSURL(string: "http://route.arcgis.com/arcgis/rest/services/World/Route/NAServer/Route_World")
+        let networkUrl = NSURL(string: "https://route.arcgis.com/arcgis/rest/services/World/Route/NAServer/Route_World")
         self.agsRouteTask = AGSRouteTask(URL: networkUrl, credential: credntial)
         self.agsRouteTask.delegate = self
 
@@ -75,9 +75,9 @@ class NetworkViewController: UIViewController, AGSRouteTaskDelegate {
         let buttonClear = UIBarButtonItem(barButtonSystemItem: .Trash, target: self, action: "clearStops:")
         let buttonNext = UIBarButtonItem(barButtonSystemItem: .Play, target: self, action: "moveToNextPoint:")
         
-        var buttons = ([buttonAdd, buttonSolve, buttonClear, buttonNext])
-        var toolbar: UIToolbar = UIToolbar(frame: CGRectMake(0, self.view.frame.size.height - 44, self.view.frame.size.width, 44))
-        toolbar.setItems(buttons as [AnyObject], animated: true)
+        let buttons = ([buttonAdd, buttonSolve, buttonClear, buttonNext])
+        let toolbar: UIToolbar = UIToolbar(frame: CGRectMake(0, self.view.frame.size.height - 44, self.view.frame.size.width, 44))
+        toolbar.setItems(buttons as [UIBarButtonItem], animated: true)
         self.view .addSubview(toolbar)
         
         //マップの中心にカーソルを表示

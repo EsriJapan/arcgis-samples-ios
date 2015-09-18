@@ -26,7 +26,7 @@ class AttachmentManagerViewController: UIViewController, AGSAttachmentManagerDel
         self.view.addSubview(self.agsMapView)
         
         //タイルマップサービスレイヤーの追加
-        let url = NSURL(string: "http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer")
+        let url = NSURL(string: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer")
         let tiledLyr = AGSTiledMapServiceLayer(URL:url)
         self.agsMapView.addMapLayer(tiledLyr, withName:"Tiled Layer")
 
@@ -38,9 +38,9 @@ class AttachmentManagerViewController: UIViewController, AGSAttachmentManagerDel
         
         
         let buttonAttachment = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "addAttachment:")
-        var buttons = ([buttonAttachment])
-        var toolbar: UIToolbar = UIToolbar(frame: CGRectMake(0, self.view.frame.size.height - 44, self.view.frame.size.width, 44))
-        toolbar.setItems(buttons as [AnyObject], animated: true)
+        let buttons = ([buttonAttachment])
+        let toolbar: UIToolbar = UIToolbar(frame: CGRectMake(0, self.view.frame.size.height - 44, self.view.frame.size.width, 44))
+        toolbar.setItems(buttons as [UIBarButtonItem], animated: true)
         self.view .addSubview(toolbar)
         
         //マップの中心にカーソルを表示
@@ -116,7 +116,7 @@ class AttachmentManagerViewController: UIViewController, AGSAttachmentManagerDel
     
     func featureLayer(featureLayer: AGSFeatureLayer!, operation op: NSOperation!, didFailFeatureEditsWithError error: NSError!) {
         
-        println("Error:\(error)")
+        print("Error:\(error)")
 
     }
     
@@ -152,18 +152,18 @@ class AttachmentManagerViewController: UIViewController, AGSAttachmentManagerDel
                 
                 if attachment.networkError != nil {
                     let reason = attachment.networkError.localizedDescription
-                    println("Error:\(reason)")
+                    print("Error:\(reason)")
 
                 } else if attachment.editResultError != nil {
                     let reason = attachment.editResultError.errorDescription
-                    println("Error:\(reason)")
+                    print("Error:\(reason)")
                 }
 
             }
             
             //写真の添付に成功
             if (success){
-                println("didPostLocalEditsToServer")
+                print("didPostLocalEditsToServer")
             }
         
 

@@ -20,12 +20,12 @@ class RotationRendererViewController: UIViewController, AGSWebMapDelegate {
         self.view.addSubview(agsMapView)
         
         //タイルマップサービスレイヤーの追加
-        let url = NSURL(string: "http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer")
+        let url = NSURL(string: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer")
         let tiledLyr = AGSTiledMapServiceLayer(URL:url)
         agsMapView.addMapLayer(tiledLyr, withName:"Tiled Layer")
         
         //シンボル表示用のフィーチャレイヤーの表示
-        let flayerUrl = NSURL(string: "http://tmservices1.esri.com/arcgis/rest/services/LiveFeeds/NOAA_METAR_current_wind_speed_direction/MapServer/0")
+        let flayerUrl = NSURL(string: "https://tmservices1.esri.com/arcgis/rest/services/LiveFeeds/NOAA_METAR_current_wind_speed_direction/MapServer/0")
         let flayer = AGSFeatureLayer(URL: flayerUrl, mode: .OnDemand)
         flayer.outFields = ["WIND_DIRECT"]
         agsMapView.addMapLayer(flayer, withName:"Feature Layer")

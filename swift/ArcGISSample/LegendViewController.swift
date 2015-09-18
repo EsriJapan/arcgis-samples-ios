@@ -26,7 +26,7 @@ class LegendViewController: UIViewController, AGSLayerDelegate, AGSMapServiceInf
         self.view.addSubview(self.agsMapView)
         
         //タイルマップサービスレイヤーの追加
-        let url = NSURL(string: "http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer")
+        let url = NSURL(string: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer")
         let tiledLyr = AGSTiledMapServiceLayer(URL:url)
         self.agsMapView.addMapLayer(tiledLyr, withName:"Tiled Layer")
         
@@ -54,7 +54,7 @@ class LegendViewController: UIViewController, AGSLayerDelegate, AGSMapServiceInf
             agsMapServiceInfo.delegate = self
             agsMapServiceInfo.retrieveLegendInfo()
             
-            println("\(agsMapServiceInfo.serviceDescription)")
+            print("\(agsMapServiceInfo.serviceDescription)")
             
         }
     }
@@ -62,7 +62,7 @@ class LegendViewController: UIViewController, AGSLayerDelegate, AGSMapServiceInf
     
     func mapServiceInfo(mapServiceInfo: AGSMapServiceInfo!, operation op: NSOperation!, didFailToRetrieveLegendInfoWithError error: NSError!) {
         
-        println("\(error)")
+        print("\(error)")
     
     }
     

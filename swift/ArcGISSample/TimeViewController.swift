@@ -27,12 +27,12 @@ class TimeViewController: UIViewController, AGSWebMapDelegate {
         self.view.addSubview(self.agsMapView)
         
         //タイルマップサービスレイヤーの追加
-        let url = NSURL(string: "http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer")
+        let url = NSURL(string: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer")
         let tiledLyr = AGSTiledMapServiceLayer(URL:url)
         self.agsMapView.addMapLayer(tiledLyr, withName:"Tiled Layer")
         
         //時間対応レイヤー表示用のフィーチャレイヤーの追加
-        let timeUrl = NSURL(string: "http://sampleserver3.arcgisonline.com/ArcGIS/rest/services/Hurricanes/NOAA_Tracks_1851_2007/MapServer/0")
+        let timeUrl = NSURL(string: "https://sampleserver3.arcgisonline.com/ArcGIS/rest/services/Hurricanes/NOAA_Tracks_1851_2007/MapServer/0")
         let agsFeatureLayer = AGSFeatureLayer(URL: timeUrl, mode: .OnDemand)
         self.agsMapView.addMapLayer(agsFeatureLayer, withName:"Time Layer")
 
@@ -66,7 +66,7 @@ class TimeViewController: UIViewController, AGSWebMapDelegate {
         self.startDate = startDateNew
         self.endDate = endDateNew
         
-        println("Start:\(self.startDate.description)", "End:\(self.endDate.description)")
+        print("Start:\(self.startDate.description)", "End:\(self.endDate.description)")
 
         let agsTimeExtent = AGSTimeExtent(start: self.startDate, end: self.endDate)
         self.agsMapView.timeExtent = agsTimeExtent

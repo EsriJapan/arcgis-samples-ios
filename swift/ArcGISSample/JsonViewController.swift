@@ -23,7 +23,7 @@ class JsonViewController: UIViewController, AGSLayerCalloutDelegate {
         self.view.addSubview(self.agsMapView)
         
         //タイルマップサービスレイヤーの追加
-        let url = NSURL(string: "http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer")
+        let url = NSURL(string: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer")
         let tiledLyr = AGSTiledMapServiceLayer(URL:url)
         self.agsMapView.addMapLayer(tiledLyr, withName:"Tiled Layer")
         
@@ -33,8 +33,9 @@ class JsonViewController: UIViewController, AGSLayerCalloutDelegate {
         
         
         let path = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true);
-        let filePath = path[0].stringByAppendingPathComponent("offlineFeature")
-
+        let filePath = (path[0] as NSString).stringByAppendingPathComponent("offlineFeature")
+        
+        
         //新規フィーチャーを作成
         let point = AGSPoint(x: 15554789.5566484, y: 4254781.24130285, spatialReference:AGSSpatialReference(WKID: 102100))
         let markerSymbol = AGSSimpleMarkerSymbol(color: UIColor.blueColor())
@@ -47,14 +48,20 @@ class JsonViewController: UIViewController, AGSLayerCalloutDelegate {
         let jsonString = json.ags_JSONRepresentation()
         
         //JSONの文字列をファイルに保存
-        let bSuccess:Bool = jsonString.writeToFile(filePath, atomically: true, encoding: NSUnicodeStringEncoding, error: nil)
+        let bSuccess:Bool
+        do {
+            try jsonString.writeToFile(filePath, atomically: true, encoding: NSUnicodeStringEncoding)
+            bSuccess = true
+        } catch _ {
+            bSuccess = false
+        }
         
         if bSuccess == true {
-            println("保存場所:\(filePath), JSON:\(jsonString)")
+            print("保存場所:\(filePath), JSON:\(jsonString)")
         }
         
         //JSONの文字列からフィーチャを新規作成
-        let fSetString = NSString(contentsOfFile: filePath, encoding: NSUnicodeStringEncoding, error: nil)
+        let fSetString = try? NSString(contentsOfFile: filePath, encoding: NSUnicodeStringEncoding)
         let fSetDictionary:AnyObject! = fSetString!.ags_JSONValue()
         let offlineFset = AGSFeatureSet(JSON: fSetDictionary as! [NSObject : AnyObject])
         

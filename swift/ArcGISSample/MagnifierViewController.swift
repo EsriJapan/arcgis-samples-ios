@@ -20,7 +20,7 @@ class MagnifierViewController: UIViewController {
         self.view.addSubview(agsMapView)
     
         //タイルマップサービスレイヤーの追加
-        let url = NSURL(string: "http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer")
+        let url = NSURL(string: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer")
         let tiledLyr = AGSTiledMapServiceLayer(URL:url)
         agsMapView.addMapLayer(tiledLyr, withName:"Tiled Layer")
             

@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5825DD611BA0228A00C796D9 /* ArcGIS.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5825DD601BA0228A00C796D9 /* ArcGIS.bundle */; };
 		5825DD691BA02D0900C796D9 /* ClosestFacilityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5825DD681BA02D0900C796D9 /* ClosestFacilityViewController.m */; };
+		96811DF21BAB9D5F00DDD914 /* ArcGIS.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 96811DF11BAB9D5F00DDD914 /* ArcGIS.bundle */; settings = {ASSET_TAGS = (); }; };
 		96DFE13D1B6603E2007A7F6D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DFE13C1B6603E2007A7F6D /* main.m */; };
 		96DFE1401B6603E2007A7F6D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DFE13F1B6603E2007A7F6D /* AppDelegate.m */; };
 		96DFE1431B6603E2007A7F6D /* TopMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DFE1421B6603E2007A7F6D /* TopMenuController.m */; };
@@ -38,9 +38,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		5825DD601BA0228A00C796D9 /* ArcGIS.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = ArcGIS.bundle; path = ../../../Library/SDKs/ArcGIS/iOS/ArcGIS.framework/Versions/Current/Resources/ArcGIS.bundle; sourceTree = "<group>"; };
 		5825DD641BA02A6100C796D9 /* ClosestFacilityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClosestFacilityViewController.h; sourceTree = "<group>"; };
 		5825DD681BA02D0900C796D9 /* ClosestFacilityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClosestFacilityViewController.m; sourceTree = "<group>"; };
+		96811DF11BAB9D5F00DDD914 /* ArcGIS.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = ArcGIS.bundle; path = ../../../../../../../Library/SDKs/ArcGIS/iOS/ArcGIS.framework/Versions/Current/Resources/ArcGIS.bundle; sourceTree = "<group>"; };
 		96DFE1371B6603E2007A7F6D /* ArcGISSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArcGISSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96DFE13B1B6603E2007A7F6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		96DFE13C1B6603E2007A7F6D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -117,9 +117,9 @@
 		96DFE12E1B6603E2007A7F6D = {
 			isa = PBXGroup;
 			children = (
-				5825DD621BA0270700C796D9 /* ClosestFacility */,
-				5825DD601BA0228A00C796D9 /* ArcGIS.bundle */,
 				96F1ABC91B67780300A088F8 /* tokyo_yokohama.gpx */,
+				96811DF11BAB9D5F00DDD914 /* ArcGIS.bundle */,
+				5825DD621BA0270700C796D9 /* ClosestFacility */,
 				96DFE1A11B660FB0007A7F6D /* AttachmentManager */,
 				96DFE1A71B660FB0007A7F6D /* CoordinateConversion */,
 				96DFE1AA1B660FB0007A7F6D /* CustomSymbol */,
@@ -402,7 +402,7 @@
 		96DFE12F1B6603E2007A7F6D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0640;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = esrij;
 				TargetAttributes = {
 					96DFE1361B6603E2007A7F6D = {
@@ -435,8 +435,8 @@
 			files = (
 				96F1ABCA1B67780300A088F8 /* tokyo_yokohama.gpx in Resources */,
 				96DFE14B1B6603E2007A7F6D /* LaunchScreen.xib in Resources */,
+				96811DF21BAB9D5F00DDD914 /* ArcGIS.bundle in Resources */,
 				96DFE1481B6603E2007A7F6D /* Images.xcassets in Resources */,
-				5825DD611BA0228A00C796D9 /* ArcGIS.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -508,7 +508,9 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(HOME)/Library/SDKs/ArcGIS/iOS/";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -560,6 +562,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(HOME)/Library/SDKs/ArcGIS/iOS/";
@@ -573,6 +576,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-framework",
@@ -593,6 +597,8 @@
 				FRAMEWORK_SEARCH_PATHS = "$(HOME)/Library/SDKs/ArcGIS/iOS";
 				INFOPLIST_FILE = ArcGISSample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "esrij.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -605,6 +611,8 @@
 				FRAMEWORK_SEARCH_PATHS = "$(HOME)/Library/SDKs/ArcGIS/iOS";
 				INFOPLIST_FILE = ArcGISSample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "esrij.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

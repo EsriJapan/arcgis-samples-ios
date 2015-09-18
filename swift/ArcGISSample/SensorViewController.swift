@@ -24,7 +24,7 @@ class SensorViewController: UIViewController, CLLocationManagerDelegate {
         self.view.addSubview(self.agsMapView)
         
         //タイルマップサービスレイヤーの追加
-        let url = NSURL(string: "http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer")
+        let url = NSURL(string: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer")
         let tiledLyr = AGSTiledMapServiceLayer(URL:url)
         self.agsMapView.addMapLayer(tiledLyr, withName:"Tiled Layer")
         
@@ -44,13 +44,15 @@ class SensorViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     
-    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+    
+    
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
-        let location = locations.last as! CLLocation
-        
+        let location = locations.last
+                
         //CLLocationManagerで取得した現在位置からポイントを作成
         let agsGeomEngine = AGSGeometryEngine.defaultGeometryEngine()
-        let agsPoint = AGSPoint(x: location.coordinate.longitude, y: location.coordinate.latitude, spatialReference: AGSSpatialReference(WKID:4326))
+        let agsPoint = AGSPoint(x: location!.coordinate.longitude, y: location!.coordinate.latitude, spatialReference: AGSSpatialReference(WKID:4326))
         let agsProjectedPoint = agsGeomEngine.projectGeometry(agsPoint, toSpatialReference: AGSSpatialReference(WKID:102100)) as! AGSPoint
 
         //ポイントをグラフィックスレイヤーに追加
@@ -63,7 +65,7 @@ class SensorViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     
-    func locationManager(manager: CLLocationManager!, didUpdateHeading newHeading: CLHeading!) {
+    func locationManager(manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
         
         if (newHeading.headingAccuracy > 0){
             
