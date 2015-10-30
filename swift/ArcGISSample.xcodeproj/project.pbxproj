@@ -10,6 +10,7 @@
 		965AEFF71B6DB81300070B7F /* NetworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965AEFF61B6DB81300070B7F /* NetworkViewController.swift */; };
 		965AEFF91B6DD2BF00070B7F /* ServiceAreaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965AEFF81B6DD2BF00070B7F /* ServiceAreaViewController.swift */; };
 		96811DF41BABA00000DDD914 /* ArcGIS.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 96811DF31BABA00000DDD914 /* ArcGIS.bundle */; settings = {ASSET_TAGS = (); }; };
+		96AF6D711BB5081800625E21 /* SpatialQueryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AF6D701BB5081800625E21 /* SpatialQueryViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		96CE6BB01B662B9E0053F476 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CE6BAF1B662B9E0053F476 /* AppDelegate.swift */; };
 		96CE6BB21B662B9E0053F476 /* TopMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CE6BB11B662B9E0053F476 /* TopMenuController.swift */; };
 		96CE6BB51B662B9E0053F476 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96CE6BB31B662B9E0053F476 /* Main.storyboard */; };
@@ -40,6 +41,7 @@
 		965AEFF61B6DB81300070B7F /* NetworkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkViewController.swift; sourceTree = "<group>"; };
 		965AEFF81B6DD2BF00070B7F /* ServiceAreaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceAreaViewController.swift; sourceTree = "<group>"; };
 		96811DF31BABA00000DDD914 /* ArcGIS.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = ArcGIS.bundle; path = ../../../../../../../Library/SDKs/ArcGIS/iOS/ArcGIS.framework/Versions/Current/Resources/ArcGIS.bundle; sourceTree = "<group>"; };
+		96AF6D701BB5081800625E21 /* SpatialQueryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpatialQueryViewController.swift; sourceTree = "<group>"; };
 		96CE6BAA1B662B9E0053F476 /* ArcGISSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArcGISSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96CE6BAE1B662B9E0053F476 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		96CE6BAF1B662B9E0053F476 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 				965AEFF61B6DB81300070B7F /* NetworkViewController.swift */,
 				965AEFF81B6DD2BF00070B7F /* ServiceAreaViewController.swift */,
 				96CE6BCF1B662F7B0053F476 /* MagnifierViewController.swift */,
+				96AF6D701BB5081800625E21 /* SpatialQueryViewController.swift */,
 				96CE6BB31B662B9E0053F476 /* Main.storyboard */,
 				96CE6BB61B662B9E0053F476 /* Images.xcassets */,
 				96CE6BB81B662B9E0053F476 /* LaunchScreen.xib */,
@@ -226,6 +229,7 @@
 				96F1ABC41B6707F800A088F8 /* GpsViewController.swift in Sources */,
 				96CE6BD01B662F7B0053F476 /* MagnifierViewController.swift in Sources */,
 				96FCA3901B68F2C3007B5D25 /* SketchViewController.swift in Sources */,
+				96AF6D711BB5081800625E21 /* SpatialQueryViewController.swift in Sources */,
 				96FCA38C1B68EACA007B5D25 /* TimeViewController.swift in Sources */,
 				96CE6BB01B662B9E0053F476 /* AppDelegate.swift in Sources */,
 				96D828DE1B6CFF91000E25A9 /* PerspectiveViewController.swift in Sources */,
