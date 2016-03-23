@@ -24,6 +24,7 @@ class CustomSymbolViewController: UIViewController {
         
         //タイルマップサービスレイヤーの追加
         let url = NSURL(string: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer")
+        
         let tiledLyr = AGSTiledMapServiceLayer(URL:url)
         self.agsMapView.addMapLayer(tiledLyr, withName:"Tiled Layer")
         
@@ -54,7 +55,7 @@ class CustomSymbolViewController: UIViewController {
         let slider = UISlider(frame: CGRectMake(0, 100, self.view.frame.size.width, 50))
         slider.minimumValue = -180.0
         slider.maximumValue = 180.0
-        slider.addTarget(self, action: "sliderEvent:", forControlEvents: .ValueChanged)
+        slider.addTarget(self, action: #selector(CustomSymbolViewController.sliderEvent), forControlEvents: .ValueChanged)
         self.view.addSubview(slider)
 
     }

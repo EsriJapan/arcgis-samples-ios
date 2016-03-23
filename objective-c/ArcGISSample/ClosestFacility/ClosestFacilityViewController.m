@@ -16,7 +16,7 @@
     [self.view addSubview:self.agsMapView];
     
     // タイルマップ サービス レイヤの追加
-    NSURL *url = [NSURL URLWithString:@"http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer"];
+    NSURL *url = [NSURL URLWithString:@"https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer"];
     AGSTiledMapServiceLayer *tiledMapServiceLayer = [[AGSTiledMapServiceLayer alloc] initWithURL:url];
     [_agsMapView addMapLayer:tiledMapServiceLayer withName:@"Tiled Layer"];
     
@@ -40,7 +40,7 @@
     AGSCredential *credntial = [[AGSCredential alloc] initWithUser:@"ユーザー" password:@"パスワード" authenticationType:AGSAuthenticationTypeToken];
     
     // 最寄り施設解析用のサービスを指定
-    NSURL *cfUrl = [NSURL URLWithString:@"http://route.arcgis.com/arcgis/rest/services/World/ClosestFacility/NAServer/ClosestFacility_World"];
+    NSURL *cfUrl = [NSURL URLWithString:@"https://route.arcgis.com/arcgis/rest/services/World/ClosestFacility/NAServer/ClosestFacility_World"];
     
     self.agsCfTask = [[AGSClosestFacilityTask alloc] initWithURL:cfUrl credential:credntial];
     self.agsCfTask.delegate = self;

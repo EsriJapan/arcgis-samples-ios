@@ -43,10 +43,10 @@ class SketchViewController: UIViewController{
         agsMapView.touchDelegate = self.agsSketchGraphicsLayer
         
         
-        let buttonUndo = UIBarButtonItem(barButtonSystemItem: .Undo, target: self, action: "undoSketch:")
-        let buttonRedo = UIBarButtonItem(barButtonSystemItem: .Redo, target: self, action: "redoSketch:")
-        let buttonRemove = UIBarButtonItem(barButtonSystemItem: .Trash, target: self, action: "removeSketch:")
-        let buttonSubmit = UIBarButtonItem(barButtonSystemItem: .Save, target: self, action: "submitSketch:")
+        let buttonUndo = UIBarButtonItem(barButtonSystemItem: .Undo, target: self, action: #selector(SketchViewController.undoSketch))
+        let buttonRedo = UIBarButtonItem(barButtonSystemItem: .Redo, target: self, action: #selector(SketchViewController.redoSketch))
+        let buttonRemove = UIBarButtonItem(barButtonSystemItem: .Trash, target: self, action: #selector(SketchViewController.removeSketch))
+        let buttonSubmit = UIBarButtonItem(barButtonSystemItem: .Save, target: self, action: #selector(SketchViewController.submitSketch))
 
         let buttons = ([buttonUndo, buttonRedo, buttonRemove, buttonSubmit])
         let toolbar: UIToolbar = UIToolbar(frame: CGRectMake(0, self.view.frame.size.height - 44, self.view.frame.size.width, 44))

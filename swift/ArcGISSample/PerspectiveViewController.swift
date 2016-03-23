@@ -44,7 +44,7 @@ class PerspectiveViewController: UIViewController, AGSMapViewLayerDelegate {
         self.agsMapView2.addMapLayer(tiledLyr2, withName:"Tiled Layer2")
         
         
-        let persItem = UIBarButtonItem(barButtonSystemItem: .Refresh, target: self, action: "buttonEvent:")
+        let persItem = UIBarButtonItem(barButtonSystemItem: .Refresh, target: self, action: #selector(PerspectiveViewController.buttonEvent))
         self.navigationItem.rightBarButtonItem = persItem
         
         self.perspective = false
@@ -56,8 +56,8 @@ class PerspectiveViewController: UIViewController, AGSMapViewLayerDelegate {
         
         //マップのズームとパンニングを監視して通知する
         let notificationCenter = NSNotificationCenter.defaultCenter()
-        notificationCenter.addObserver(self, selector: "respondToEndPanning:", name: "AGSMapViewDidEndPanningNotification", object: mapView)
-        notificationCenter.addObserver(self, selector: "respondToEndZooming:", name: "AGSMapViewDidEndZoomingNotification", object: mapView)
+        notificationCenter.addObserver(self, selector: #selector(PerspectiveViewController.respondToEndPanning), name: "AGSMapViewDidEndPanningNotification", object: mapView)
+        notificationCenter.addObserver(self, selector: #selector(PerspectiveViewController.respondToEndZooming), name: "AGSMapViewDidEndZoomingNotification", object: mapView)
         
     }
     

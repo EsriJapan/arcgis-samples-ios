@@ -38,13 +38,13 @@ class LayersViewController: UIViewController {
         let switch1 = UISwitch(frame: CGRectMake(20, 90, 20, 20))
         switch1.tag = 1
         switch1.on = true
-        switch1.addTarget(self, action:"switchEvent:", forControlEvents: .ValueChanged)
+        switch1.addTarget(self, action:#selector(LayersViewController.switchEvent), forControlEvents: .ValueChanged)
         self.view.addSubview(switch1)
         
         let switch2 = UISwitch(frame: CGRectMake(20, 130, 20, 20))
         switch2.tag = 2
         switch2.on = true
-        switch2.addTarget(self, action:"switchEvent:", forControlEvents: .ValueChanged)
+        switch2.addTarget(self, action:#selector(LayersViewController.switchEvent), forControlEvents: .ValueChanged)
         self.view.addSubview(switch2)
         
     }

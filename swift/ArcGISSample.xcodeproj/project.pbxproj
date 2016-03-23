@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		965AEFF71B6DB81300070B7F /* NetworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965AEFF61B6DB81300070B7F /* NetworkViewController.swift */; };
 		965AEFF91B6DD2BF00070B7F /* ServiceAreaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965AEFF81B6DD2BF00070B7F /* ServiceAreaViewController.swift */; };
-		96811DF41BABA00000DDD914 /* ArcGIS.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 96811DF31BABA00000DDD914 /* ArcGIS.bundle */; settings = {ASSET_TAGS = (); }; };
-		96AF6D711BB5081800625E21 /* SpatialQueryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AF6D701BB5081800625E21 /* SpatialQueryViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		96811DF41BABA00000DDD914 /* ArcGIS.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 96811DF31BABA00000DDD914 /* ArcGIS.bundle */; };
+		96AF6D711BB5081800625E21 /* SpatialQueryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AF6D701BB5081800625E21 /* SpatialQueryViewController.swift */; };
 		96CE6BB01B662B9E0053F476 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CE6BAF1B662B9E0053F476 /* AppDelegate.swift */; };
 		96CE6BB21B662B9E0053F476 /* TopMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CE6BB11B662B9E0053F476 /* TopMenuController.swift */; };
 		96CE6BB51B662B9E0053F476 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96CE6BB31B662B9E0053F476 /* Main.storyboard */; };

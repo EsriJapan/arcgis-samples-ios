@@ -31,6 +31,10 @@
     agsFeatureLayer.outFields = [NSArray arrayWithObjects:@"*", nil];
     [self.agsMapView addMapLayer:agsFeatureLayer withName:@"Feature Layer"];
     
+    //検索結果を表示するグラフィックスレイヤーを表示
+    self.agsGraphicsLayer = [AGSGraphicsLayer graphicsLayer];
+    [self.agsMapView addMapLayer:self.agsGraphicsLayer withName:@"Graphics Layer"];
+    
     AGSEnvelope *envelope = [AGSEnvelope envelopeWithXmin:139.891126 ymin:35.831845 xmax:139.9517425  ymax:35.9132698000001  spatialReference:[AGSSpatialReference spatialReferenceWithWKID:104111]];
     [self.agsMapView zoomToEnvelope:envelope animated:YES];
 
@@ -70,9 +74,7 @@
 - (void)queryTask:(AGSQueryTask *)queryTask operation:(NSOperation *)op didExecuteWithFeatureSetResult:(AGSFeatureSet *)featureSet
 {
     
-    //検索結果を表示するグラフィックスレイヤーを表示
-    AGSGraphicsLayer *agsGraphicsLayer = [AGSGraphicsLayer graphicsLayer];
-    [self.agsMapView addMapLayer:agsGraphicsLayer withName:@"Graphics Layer"];
+    [self.agsGraphicsLayer removeAllGraphics];
     
     AGSSymbol *mySymbol = [AGSSimpleMarkerSymbol simpleMarkerSymbolWithColor:([UIColor whiteColor])];
     
@@ -81,8 +83,8 @@
         //検索結果のフィーチャにシンボルを設定してグラフィックスレイヤーに追加
         AGSGraphic *graphic = [featureSet.features objectAtIndex:i];
         graphic.symbol = mySymbol;
-        [agsGraphicsLayer addGraphic:graphic];
-        [agsGraphicsLayer setSelected:YES forGraphic:graphic];
+        [self.agsGraphicsLayer addGraphic:graphic];
+        [self.agsGraphicsLayer setSelected:YES forGraphic:graphic];
         NSLog(@"graphic: %@", [graphic attributeAsStringForKey:@"所在地"]);
     
     }

@@ -47,6 +47,7 @@ class SpatialQueryViewController: UIViewController, AGSQueryTaskDelegate, AGSMap
         
         //検索するレイヤーのURLを指定してフィーチャ検索用タスク（AGSQueryTask）を作成
         self.agsQueryTask = AGSQueryTask(URL: flayerUrl)
+        self.agsQueryTask.requestCachePolicy = .ReloadIgnoringLocalCacheData
         self.agsQueryTask.delegate = self
         
     }
@@ -111,8 +112,7 @@ class SpatialQueryViewController: UIViewController, AGSQueryTaskDelegate, AGSMap
         let mySymbol = AGSSimpleMarkerSymbol(color: UIColor.whiteColor())
         var count = 0
         
-        for var i=0; i < featureSet.features.count ; ++i {
-            
+        for i in 0 ..< featureSet.features.count  {
             //検索結果のフィーチャにシンボルを設定してグラフィックスレイヤーに追加
             let graphic = featureSet.features[i] as! AGSGraphic
             graphic.symbol = mySymbol

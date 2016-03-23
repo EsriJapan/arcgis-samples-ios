@@ -47,9 +47,9 @@ class SensorViewController: UIViewController, CLLocationManagerDelegate {
     
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
+
         let location = locations.last
-                
+        
         //CLLocationManagerで取得した現在位置からポイントを作成
         let agsGeomEngine = AGSGeometryEngine.defaultGeometryEngine()
         let agsPoint = AGSPoint(x: location!.coordinate.longitude, y: location!.coordinate.latitude, spatialReference: AGSSpatialReference(WKID:4326))

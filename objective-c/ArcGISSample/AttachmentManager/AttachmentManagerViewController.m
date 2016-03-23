@@ -25,8 +25,7 @@
     [self.agsMapView addMapLayer:agsTiledMapServiceLayer withName:@"Tiled layer"];
     
     //写真を添付する編集用フィーチャレイヤーの追加
-    //NSURL *featureLayerUrl = [NSURL URLWithString:@"http://sampleserver3.arcgisonline.com/ArcGIS/rest/services/SanFrancisco/311Incidents/FeatureServer/0"];
-    NSURL *featureLayerUrl = [NSURL URLWithString:@"http://sampleserver6.arcgisonline.com/arcgis/rest/services/CommercialDamageAssessment/FeatureServer/0"];
+    NSURL *featureLayerUrl = [NSURL URLWithString:@"https://sampleserver6.arcgisonline.com/arcgis/rest/services/CommercialDamageAssessment/FeatureServer/0"];
     self.agsFeatureLayer = [AGSFeatureLayer featureServiceLayerWithURL:featureLayerUrl mode:AGSFeatureLayerModeOnDemand];
     [self.agsMapView addMapLayer:self.agsFeatureLayer withName:@"Feature Layer"];
 

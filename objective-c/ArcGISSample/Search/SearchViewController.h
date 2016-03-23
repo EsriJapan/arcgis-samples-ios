@@ -13,5 +13,7 @@
 
 @property (nonatomic, strong) AGSMapView *agsMapView;
 @property (nonatomic, strong) AGSQueryTask *agsQueryTask;
+@property (nonatomic, strong) AGSGraphicsLayer *agsGraphicsLayer;
+
 
 @end

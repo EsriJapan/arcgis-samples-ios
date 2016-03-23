@@ -15,7 +15,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, AGSQueryTaskD
     
     var agsMapView: AGSMapView!
     var agsQueryTask: AGSQueryTask!
-    
+    var agsGraphicsLayer: AGSGraphicsLayer!
     
     override func viewDidLoad() {
         
@@ -34,6 +34,10 @@ class SearchViewController: UIViewController, UISearchBarDelegate, AGSQueryTaskD
         let agsFeatureLayer = AGSFeatureLayer(URL: flayerUrl, mode: .OnDemand)
         agsFeatureLayer.outFields = ["*"];
         self.agsMapView.addMapLayer(agsFeatureLayer, withName:"Feature Layer")
+        
+        //検索結果を表示するグラフィックスレイヤーを表示
+        self.agsGraphicsLayer = AGSGraphicsLayer()
+        self.agsMapView.addMapLayer(self.agsGraphicsLayer, withName:"Graphics Layer")
 
         let envelope = AGSEnvelope.envelopeWithXmin(139.891126, ymin:35.831845, xmax:139.9517425, ymax:35.9132698000001, spatialReference:AGSSpatialReference(WKID: 104111)) as! AGSEnvelope
         self.agsMapView.zoomToEnvelope(envelope, animated: true)
@@ -78,19 +82,17 @@ class SearchViewController: UIViewController, UISearchBarDelegate, AGSQueryTaskD
     
     func queryTask(queryTask: AGSQueryTask!, operation op: NSOperation!, didExecuteWithFeatureSetResult featureSet: AGSFeatureSet!) {
 
-        //検索結果を表示するグラフィックスレイヤーを表示
-        let agsGraphicsLayer = AGSGraphicsLayer()
-        agsMapView.addMapLayer(agsGraphicsLayer, withName:"Graphics Layer")
+        self.agsGraphicsLayer.removeAllGraphics()
         
         let mySymbol = AGSSimpleMarkerSymbol(color: UIColor.whiteColor())
         
-        for var i=0; i < featureSet.features.count ; ++i {
+        for i in 0 ..< featureSet.features.count  {
             
             //検索結果のフィーチャにシンボルを設定してグラフィックスレイヤーに追加
             let graphic = featureSet.features[i] as! AGSGraphic
             graphic.symbol = mySymbol
-            agsGraphicsLayer.addGraphic(graphic)
-            agsGraphicsLayer.setSelected(true, forGraphic: graphic)
+            self.agsGraphicsLayer.addGraphic(graphic)
+            self.agsGraphicsLayer.setSelected(true, forGraphic: graphic)
             let attr = graphic.attributeForKey("所在地") as! String
             print("graphic:\(attr)")
             

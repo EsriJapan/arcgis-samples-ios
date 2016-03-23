@@ -31,13 +31,12 @@ class AttachmentManagerViewController: UIViewController, AGSAttachmentManagerDel
         self.agsMapView.addMapLayer(tiledLyr, withName:"Tiled Layer")
 
         //写真を添付する編集用フィーチャレイヤーの追加
-        //let featureLayerUrl = NSURL(string: "http://sampleserver3.arcgisonline.com/ArcGIS/rest/services/SanFrancisco/311Incidents/FeatureServer/0")
-        let featureLayerUrl = NSURL(string: "http://sampleserver6.arcgisonline.com/arcgis/rest/services/CommercialDamageAssessment/FeatureServer/0")
+        let featureLayerUrl = NSURL(string: "https://sampleserver6.arcgisonline.com/arcgis/rest/services/CommercialDamageAssessment/FeatureServer/0")
         self.agsFeatureLayer = AGSFeatureLayer(URL: featureLayerUrl, mode: .OnDemand)
         self.agsMapView.addMapLayer(agsFeatureLayer, withName:"Feature Layer")
         
         
-        let buttonAttachment = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "addAttachment:")
+        let buttonAttachment = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(AttachmentManagerViewController.addAttachment))
         let buttons = ([buttonAttachment])
         let toolbar: UIToolbar = UIToolbar(frame: CGRectMake(0, self.view.frame.size.height - 44, self.view.frame.size.width, 44))
         toolbar.setItems(buttons as [UIBarButtonItem], animated: true)

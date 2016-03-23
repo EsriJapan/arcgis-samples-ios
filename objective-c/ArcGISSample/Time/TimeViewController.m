@@ -26,7 +26,7 @@
     [self.agsMapView addMapLayer:tiledMapServiceLayer withName:@"Tiled Layer"];
 
     //時間対応レイヤー表示用のフィーチャレイヤーの追加
-    NSURL *timeUrl = [NSURL URLWithString:@"http://sampleserver3.arcgisonline.com/ArcGIS/rest/services/Hurricanes/NOAA_Tracks_1851_2007/MapServer/0"];
+    NSURL *timeUrl = [NSURL URLWithString:@"https://sampleserver3.arcgisonline.com/ArcGIS/rest/services/Hurricanes/NOAA_Tracks_1851_2007/MapServer/0"];
     AGSFeatureLayer *agsFeatureLayer = [[AGSFeatureLayer alloc] initWithURL:timeUrl mode:AGSFeatureLayerModeOnDemand];
 	[self.agsMapView addMapLayer:agsFeatureLayer withName:@"Time Layer"];
     

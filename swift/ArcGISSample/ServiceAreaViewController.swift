@@ -48,8 +48,8 @@ class ServiceAreaViewController: UIViewController, AGSServiceAreaTaskDelegate {
         self.agsMapView.addMapLayer(agsFacilitiesLayer, withName:"Facilities Layer")
         
         
-        let buttonSolve = UIBarButtonItem(barButtonSystemItem: .Search, target: self, action: "networkSolve:")
-        let buttonClear = UIBarButtonItem(barButtonSystemItem: .Trash, target: self, action: "clearStops:")
+        let buttonSolve = UIBarButtonItem(barButtonSystemItem: .Search, target: self, action: #selector(ServiceAreaViewController.networkSolve))
+        let buttonClear = UIBarButtonItem(barButtonSystemItem: .Trash, target: self, action: #selector(ServiceAreaViewController.clearStops))
         
         let buttons = ([buttonSolve, buttonClear])
         let toolbar: UIToolbar = UIToolbar(frame: CGRectMake(0, self.view.frame.size.height - 44, self.view.frame.size.width, 44))

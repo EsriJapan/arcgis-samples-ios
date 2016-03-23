@@ -31,7 +31,7 @@ class LegendViewController: UIViewController, AGSLayerDelegate, AGSMapServiceInf
         self.agsMapView.addMapLayer(tiledLyr, withName:"Tiled Layer")
         
         //凡例用のダイナミックマップサービスレイヤーの追加
-        let dynamicLayerUrl = NSURL(string: "http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_StateCityHighway_USA/MapServer")
+        let dynamicLayerUrl = NSURL(string: "https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_StateCityHighway_USA/MapServer")
         let agsDynamicMapServiceLayer = AGSDynamicMapServiceLayer(URL:dynamicLayerUrl)
         self.agsMapView.addMapLayer(agsDynamicMapServiceLayer, withName:"Legend Layer")
 
@@ -80,8 +80,7 @@ class LegendViewController: UIViewController, AGSLayerDelegate, AGSMapServiceInf
         let layerInfo = mapServiceInfo.layerInfos[2] as! AGSLayerInfo
 
 
-        for var i=0; i < layerInfo.legendImages.count ; ++i {
-            
+        for i in 0 ..< layerInfo.legendImages.count  {
             //各凡例の画像とラベルを取得
             let legendImage = layerInfo.legendImages[i] as! UIImage
             let imageView = UIImageView(image: legendImage)

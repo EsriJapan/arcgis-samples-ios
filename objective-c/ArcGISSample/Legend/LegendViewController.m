@@ -26,7 +26,7 @@
     [self.agsMapView addMapLayer:agsTiledMapServiceLayer withName:@"Tiled layer"];
     
     //凡例用のダイナミックマップサービスレイヤーの追加
-	NSURL *dynamicLayerUrl = [NSURL URLWithString:@"http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_StateCityHighway_USA/MapServer"];
+	NSURL *dynamicLayerUrl = [NSURL URLWithString:@"https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_StateCityHighway_USA/MapServer"];
     AGSDynamicMapServiceLayer *agsDynamicMapServiceLayer = [[AGSDynamicMapServiceLayer alloc] initWithURL:dynamicLayerUrl];
     [self.agsMapView addMapLayer:agsDynamicMapServiceLayer withName:@"Legend Layer"];
     

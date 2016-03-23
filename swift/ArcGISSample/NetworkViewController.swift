@@ -70,10 +70,10 @@ class NetworkViewController: UIViewController, AGSRouteTaskDelegate {
         self.directionLabel.layer.borderColor = UIColor.darkGrayColor().CGColor
         self.directionLabel.layer.borderWidth = 3.0
         
-        let buttonAdd = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "addStop:")
-        let buttonSolve = UIBarButtonItem(barButtonSystemItem: .Search, target: self, action: "networkSolve:")
-        let buttonClear = UIBarButtonItem(barButtonSystemItem: .Trash, target: self, action: "clearStops:")
-        let buttonNext = UIBarButtonItem(barButtonSystemItem: .Play, target: self, action: "moveToNextPoint:")
+        let buttonAdd = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(NetworkViewController.addStop))
+        let buttonSolve = UIBarButtonItem(barButtonSystemItem: .Search, target: self, action: #selector(NetworkViewController.networkSolve))
+        let buttonClear = UIBarButtonItem(barButtonSystemItem: .Trash, target: self, action: #selector(NetworkViewController.clearStops))
+        let buttonNext = UIBarButtonItem(barButtonSystemItem: .Play, target: self, action: #selector(NetworkViewController.moveToNextPoint))
         
         let buttons = ([buttonAdd, buttonSolve, buttonClear, buttonNext])
         let toolbar: UIToolbar = UIToolbar(frame: CGRectMake(0, self.view.frame.size.height - 44, self.view.frame.size.width, 44))
@@ -265,10 +265,10 @@ class NetworkViewController: UIViewController, AGSRouteTaskDelegate {
             if self.directionIndex == agsDirections.graphics.count - 1 {
                 self.directionIndex = 0
             } else {
-                self.directionIndex++
+                self.directionIndex += 1
             }
         } else {
-            self.pointIndex++
+            self.pointIndex += 1
         }
     }
     

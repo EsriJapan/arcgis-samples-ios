@@ -53,7 +53,7 @@ class SwipeViewController: UIViewController{
         let slider = UISlider(frame: CGRectMake(0, 100, self.view.frame.size.width, 50))
         slider.minimumValue = 0.0
         slider.maximumValue = 1.0
-        slider .addTarget(self, action: "sliderEvent:", forControlEvents: .ValueChanged)        
+        slider .addTarget(self, action: #selector(SwipeViewController.sliderEvent), forControlEvents: .ValueChanged)        
         self.view.addSubview(slider)
         
     }

@@ -31,7 +31,7 @@
     
     //認証の設定:検証用（ArcGIS Onlineのユーザー名とパスワードを指定）
     AGSCredential *credntial = [[AGSCredential alloc] initWithUser:@"<ユーザー名>" password:@"<パスワード>" authenticationType:AGSAuthenticationTypeToken];
-    
+
     //到達圏解析用のサービスURLの指定
     NSURL *saUrl = [NSURL URLWithString:@"https://route.arcgis.com/arcgis/rest/services/World/ServiceAreas/NAServer/ServiceArea_World"];
     self.agsSaTask = [[AGSServiceAreaTask alloc] initWithURL:saUrl credential:credntial];

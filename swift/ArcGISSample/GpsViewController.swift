@@ -32,8 +32,8 @@ class GpsViewController: UIViewController, AGSMapViewLayerDelegate {
         self.agsMapView.layerDelegate = self
         
         
-        self.modeText = UIBarButtonItem(title: "Off", style: .Plain, target: self, action: "changeMode:")
-        self.dataText = UIBarButtonItem(title: "GPS", style: .Plain, target: self, action: "changeData:")
+        self.modeText = UIBarButtonItem(title: "Off", style: .Plain, target: self, action: #selector(GpsViewController.changeMode))
+        self.dataText = UIBarButtonItem(title: "GPS", style: .Plain, target: self, action: #selector(GpsViewController.changeData))
         let flexibleItem = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
         let buttons = ([self.modeText, flexibleItem, self.dataText])
         let toolbar: UIToolbar = UIToolbar(frame: CGRectMake(0, self.view.frame.size.height - 44, self.view.frame.size.width, 44))

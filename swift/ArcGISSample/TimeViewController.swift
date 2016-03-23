@@ -47,7 +47,7 @@ class TimeViewController: UIViewController, AGSWebMapDelegate {
         self.agsMapView.timeExtent = agsTimeExtent
         
         
-        let timeItem = UIBarButtonItem(barButtonSystemItem: .Play, target: self, action: "buttonEvent:")
+        let timeItem = UIBarButtonItem(barButtonSystemItem: .Play, target: self, action: #selector(TimeViewController.buttonEvent))
         self.navigationItem.rightBarButtonItem = timeItem
         
     }
