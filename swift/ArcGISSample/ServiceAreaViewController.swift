@@ -34,6 +34,7 @@ class ServiceAreaViewController: UIViewController, AGSServiceAreaTaskDelegate {
         //認証の設定:検証用（ArcGIS Onlineのユーザー名とパスワードを指定）
         let credntial = AGSCredential(user: "<ユーザー名>", password: "<パスワード>", authenticationType: .Token)
 
+
         //到達圏解析用のサービスURLの指定
         let saUrl = NSURL(string: "https://route.arcgis.com/arcgis/rest/services/World/ServiceAreas/NAServer/ServiceArea_World")
         self.agsSaTask = AGSServiceAreaTask(URL: saUrl, credential: credntial)

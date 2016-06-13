@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		965AEFF71B6DB81300070B7F /* NetworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965AEFF61B6DB81300070B7F /* NetworkViewController.swift */; };
 		965AEFF91B6DD2BF00070B7F /* ServiceAreaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965AEFF81B6DD2BF00070B7F /* ServiceAreaViewController.swift */; };
-		96811DF41BABA00000DDD914 /* ArcGIS.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 96811DF31BABA00000DDD914 /* ArcGIS.bundle */; };
 		96AF6D711BB5081800625E21 /* SpatialQueryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AF6D701BB5081800625E21 /* SpatialQueryViewController.swift */; };
+		96C590551CF42EB30016BCEC /* ArcGIS.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 96C590541CF42EB30016BCEC /* ArcGIS.bundle */; };
 		96CE6BB01B662B9E0053F476 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CE6BAF1B662B9E0053F476 /* AppDelegate.swift */; };
 		96CE6BB21B662B9E0053F476 /* TopMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CE6BB11B662B9E0053F476 /* TopMenuController.swift */; };
 		96CE6BB51B662B9E0053F476 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96CE6BB31B662B9E0053F476 /* Main.storyboard */; };
@@ -40,8 +40,8 @@
 /* Begin PBXFileReference section */
 		965AEFF61B6DB81300070B7F /* NetworkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkViewController.swift; sourceTree = "<group>"; };
 		965AEFF81B6DD2BF00070B7F /* ServiceAreaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceAreaViewController.swift; sourceTree = "<group>"; };
-		96811DF31BABA00000DDD914 /* ArcGIS.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = ArcGIS.bundle; path = ../../../../../../../Library/SDKs/ArcGIS/iOS/ArcGIS.framework/Versions/Current/Resources/ArcGIS.bundle; sourceTree = "<group>"; };
 		96AF6D701BB5081800625E21 /* SpatialQueryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpatialQueryViewController.swift; sourceTree = "<group>"; };
+		96C590541CF42EB30016BCEC /* ArcGIS.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = ArcGIS.bundle; path = ../../../../../Desktop/esri/ArcGIS.bundle; sourceTree = "<group>"; };
 		96CE6BAA1B662B9E0053F476 /* ArcGISSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArcGISSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96CE6BAE1B662B9E0053F476 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		96CE6BAF1B662B9E0053F476 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -84,8 +84,8 @@
 		96CE6BA11B662B9E0053F476 = {
 			isa = PBXGroup;
 			children = (
-				96811DF31BABA00000DDD914 /* ArcGIS.bundle */,
 				96F1ABC71B6776FF00A088F8 /* tokyo_yokohama.gpx */,
+				96C590541CF42EB30016BCEC /* ArcGIS.bundle */,
 				96CE6BAC1B662B9E0053F476 /* ArcGISSample */,
 				96CE6BAB1B662B9E0053F476 /* Products */,
 			);
@@ -204,7 +204,7 @@
 				96CE6BBA1B662B9E0053F476 /* LaunchScreen.xib in Resources */,
 				96F1ABC81B6776FF00A088F8 /* tokyo_yokohama.gpx in Resources */,
 				96CE6BB71B662B9E0053F476 /* Images.xcassets in Resources */,
-				96811DF41BABA00000DDD914 /* ArcGIS.bundle in Resources */,
+				96C590551CF42EB30016BCEC /* ArcGIS.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

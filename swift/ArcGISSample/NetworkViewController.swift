@@ -42,6 +42,7 @@ class NetworkViewController: UIViewController, AGSRouteTaskDelegate {
         //認証の設定:検証用（ArcGIS Onlineのユーザー名とパスワードを指定）
         let credntial = AGSCredential(user: "<ユーザー名>", password: "<パスワード>", authenticationType: .Token)
 
+
         //ルート検索用のサービスURLの指定
         let networkUrl = NSURL(string: "https://route.arcgis.com/arcgis/rest/services/World/Route/NAServer/Route_World")
         self.agsRouteTask = AGSRouteTask(URL: networkUrl, credential: credntial)

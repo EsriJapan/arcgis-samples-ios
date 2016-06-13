@@ -108,6 +108,7 @@
 
 - (void)featureLayer:(AGSFeatureLayer *) featureLayer operation:(NSOperation *) op didFailFeatureEditsWithError:(NSError *)error{
     
+    // 編集に失敗
     NSLog(@"Error:%@", error);
     
 }
@@ -116,18 +117,29 @@
 - (void)featureLayer:(AGSFeatureLayer *) featureLayer operation:(NSOperation *) op didFeatureEditsWithResults:(AGSFeatureLayerEditResults *) editResults
 {
     
-    //新規に作成したフィーチャに対してAGSAttachmentManagerを作成
     AGSEditResult *results = [editResults.addResults objectAtIndex:0];
-    AGSGraphic *agsFeature = [self.agsFeatureLayer lookupFeatureWithObjectId:results.objectId];
-    self.agsAttachmentMgr = [self.agsFeatureLayer attachmentManagerForFeature:agsFeature];
-    self.agsAttachmentMgr.delegate = self;
     
-    //フォトライブリから選択した写真に名前を指定してフィーチャに添付
-    [self.agsAttachmentMgr addAttachmentAsJpgWithImage:self.image name:@"temp.jpg"];
+    if (results.error != nil) {
+        
+        // 編集に失敗
+        NSLog(@"Error:%@", results.error.description);
+        
+    } else {
+
+        // 編集に成功
+        //新規に作成したフィーチャに対してAGSAttachmentManagerを作成
+        AGSGraphic *agsFeature = [self.agsFeatureLayer lookupFeatureWithObjectId:results.objectId];
+        self.agsAttachmentMgr = [self.agsFeatureLayer attachmentManagerForFeature:agsFeature];
+        self.agsAttachmentMgr.delegate = self;
     
-    if([self.agsAttachmentMgr hasLocalEdits])
-        [self.agsAttachmentMgr postLocalEditsToServer];
+        //フォトライブリから選択した写真に名前を指定してフィーチャに添付
+        [self.agsAttachmentMgr addAttachmentAsJpgWithImage:self.image name:@"temp.jpg"];
     
+        if([self.agsAttachmentMgr hasLocalEdits])
+            [self.agsAttachmentMgr postLocalEditsToServer];
+        
+    }
+
 }
 
 

@@ -115,6 +115,7 @@ class AttachmentManagerViewController: UIViewController, AGSAttachmentManagerDel
     
     func featureLayer(featureLayer: AGSFeatureLayer!, operation op: NSOperation!, didFailFeatureEditsWithError error: NSError!) {
         
+        // 編集に失敗
         print("Error:\(error)")
 
     }
@@ -122,18 +123,31 @@ class AttachmentManagerViewController: UIViewController, AGSAttachmentManagerDel
     
     func featureLayer(featureLayer: AGSFeatureLayer!, operation op: NSOperation!, didFeatureEditsWithResults editResults: AGSFeatureLayerEditResults!) {
         
-        //新規に作成したフィーチャに対してAGSAttachmentManagerを作成
+        
         let results = editResults.addResults[0] as! AGSEditResult
-        let agsFeature = self.agsFeatureLayer.lookupFeatureWithObjectId(results.objectId)
-        self.agsAttachmentMgr = self.agsFeatureLayer.attachmentManagerForFeature(agsFeature)
-        self.agsAttachmentMgr.delegate = self
         
-        //フォトライブリから選択した写真に名前を指定してフィーチャに添付
-        self.agsAttachmentMgr.addAttachmentAsJpgWithImage(self.image, name: "temp.jpg")
-        
-        if(self.agsAttachmentMgr .hasLocalEdits()){
-            self.agsAttachmentMgr.postLocalEditsToServer()
+        if (results.error != nil) {
+            
+            // 編集に失敗
+            print("Error:\(results.error.description)")
+            
+        } else {
+            
+            // 編集に成功
+            //新規に作成したフィーチャに対してAGSAttachmentManagerを作成
+            let agsFeature = self.agsFeatureLayer.lookupFeatureWithObjectId(results.objectId)
+            self.agsAttachmentMgr = self.agsFeatureLayer.attachmentManagerForFeature(agsFeature)
+            self.agsAttachmentMgr.delegate = self
+            
+            //フォトライブリから選択した写真に名前を指定してフィーチャに添付
+            self.agsAttachmentMgr.addAttachmentAsJpgWithImage(self.image, name: "temp.jpg")
+            
+            if(self.agsAttachmentMgr .hasLocalEdits()){
+                self.agsAttachmentMgr.postLocalEditsToServer()
+            }
+            
         }
+        
         
     }
     
