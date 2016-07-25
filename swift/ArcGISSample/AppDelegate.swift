@@ -17,6 +17,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
+        if(UIApplication.instancesRespondToSelector(#selector(UIApplication.registerUserNotificationSettings(_:)))) {
+            application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Sound, .Alert, .Badge], categories: nil))
+        }
+        
         let topViewController: TopMenuController = TopMenuController()
         navigationController = UINavigationController(rootViewController: topViewController)
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
@@ -24,6 +28,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.makeKeyAndVisible()
         
         return true
+    }
+    
+    func application(application: UIApplication, performFetchWithCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+        BackgroundHelper.checkJobStatusInBackground(completionHandler)
+    }
+    
+    func application(application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: () -> Void) {
+        BackgroundHelper.downloadJobResultInBackgroundWithURLSession(identifier, completionHandler: completionHandler)
     }
 
     func applicationWillResignActive(application: UIApplication) {

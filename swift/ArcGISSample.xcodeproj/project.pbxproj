@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		965AEFF71B6DB81300070B7F /* NetworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965AEFF61B6DB81300070B7F /* NetworkViewController.swift */; };
 		965AEFF91B6DD2BF00070B7F /* ServiceAreaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965AEFF81B6DD2BF00070B7F /* ServiceAreaViewController.swift */; };
+		965D7D5B1D44AF5B00BFCF5C /* ExportTilesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965D7D5A1D44AF5B00BFCF5C /* ExportTilesViewController.swift */; };
+		965D7D5F1D44B00300BFCF5C /* BackgroundHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965D7D5E1D44B00300BFCF5C /* BackgroundHelper.swift */; };
 		96AF6D711BB5081800625E21 /* SpatialQueryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AF6D701BB5081800625E21 /* SpatialQueryViewController.swift */; };
 		96C590551CF42EB30016BCEC /* ArcGIS.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 96C590541CF42EB30016BCEC /* ArcGIS.bundle */; };
 		96CE6BB01B662B9E0053F476 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CE6BAF1B662B9E0053F476 /* AppDelegate.swift */; };
@@ -40,6 +42,8 @@
 /* Begin PBXFileReference section */
 		965AEFF61B6DB81300070B7F /* NetworkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkViewController.swift; sourceTree = "<group>"; };
 		965AEFF81B6DD2BF00070B7F /* ServiceAreaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceAreaViewController.swift; sourceTree = "<group>"; };
+		965D7D5A1D44AF5B00BFCF5C /* ExportTilesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExportTilesViewController.swift; sourceTree = "<group>"; };
+		965D7D5E1D44B00300BFCF5C /* BackgroundHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BackgroundHelper.swift; path = ArcGISSample/BackgroundHelper.swift; sourceTree = "<group>"; };
 		96AF6D701BB5081800625E21 /* SpatialQueryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpatialQueryViewController.swift; sourceTree = "<group>"; };
 		96C590541CF42EB30016BCEC /* ArcGIS.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = ArcGIS.bundle; path = ../../../../../Desktop/esri/ArcGIS.bundle; sourceTree = "<group>"; };
 		96CE6BAA1B662B9E0053F476 /* ArcGISSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArcGISSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -81,9 +85,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		965D7D601D44B01900BFCF5C /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				965D7D5E1D44B00300BFCF5C /* BackgroundHelper.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
 		96CE6BA11B662B9E0053F476 = {
 			isa = PBXGroup;
 			children = (
+				965D7D601D44B01900BFCF5C /* Helpers */,
 				96F1ABC71B6776FF00A088F8 /* tokyo_yokohama.gpx */,
 				96C590541CF42EB30016BCEC /* ArcGIS.bundle */,
 				96CE6BAC1B662B9E0053F476 /* ArcGISSample */,
@@ -102,6 +115,7 @@
 		96CE6BAC1B662B9E0053F476 /* ArcGISSample */ = {
 			isa = PBXGroup;
 			children = (
+				965D7D5A1D44AF5B00BFCF5C /* ExportTilesViewController.swift */,
 				96CE6BAF1B662B9E0053F476 /* AppDelegate.swift */,
 				96CE6BB11B662B9E0053F476 /* TopMenuController.swift */,
 				96D828DB1B6CF2B4000E25A9 /* SearchViewController.swift */,
@@ -174,6 +188,11 @@
 				TargetAttributes = {
 					96CE6BA91B662B9E0053F476 = {
 						CreatedOnToolsVersion = 6.4;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -217,6 +236,7 @@
 			files = (
 				96FCA3861B68DDF9007B5D25 /* WebmapViewController.swift in Sources */,
 				96FCA3841B68B80B007B5D25 /* LocatorViewController.swift in Sources */,
+				965D7D5F1D44B00300BFCF5C /* BackgroundHelper.swift in Sources */,
 				96D828D81B6CDD97000E25A9 /* CustomSymbolViewController.swift in Sources */,
 				96FCA37C1B685C65007B5D25 /* JsonViewController.swift in Sources */,
 				96CE6BB21B662B9E0053F476 /* TopMenuController.swift in Sources */,
@@ -235,6 +255,7 @@
 				96D828DE1B6CFF91000E25A9 /* PerspectiveViewController.swift in Sources */,
 				96FCA38A1B68E38B007B5D25 /* SwipeViewController.swift in Sources */,
 				96FCA3921B68F9AD007B5D25 /* SensorViewController.swift in Sources */,
+				965D7D5B1D44AF5B00BFCF5C /* ExportTilesViewController.swift in Sources */,
 				96FCA38E1B68F0F6007B5D25 /* RotationRendererViewController.swift in Sources */,
 				965AEFF71B6DB81300070B7F /* NetworkViewController.swift in Sources */,
 				96D828D61B6CC761000E25A9 /* AttachmentManagerViewController.swift in Sources */,

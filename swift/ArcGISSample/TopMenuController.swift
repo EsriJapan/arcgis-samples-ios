@@ -32,7 +32,8 @@ class TopMenuController: UIViewController, UITableViewDelegate, UITableViewDataS
         "NetworkViewController",
         "ServiceAreaViewController",
         "CoordinateConversionViewController",
-        "JsonViewController"
+        "JsonViewController",
+        "ExportTilesViewController"
     ]
     
     private let itemNames = [
@@ -56,7 +57,8 @@ class TopMenuController: UIViewController, UITableViewDelegate, UITableViewDataS
         "ルート検索",
         "到達圏解析",
         "座標変換",
-        "JSONのエンコード・デコード"
+        "JSONのエンコード・デコード",
+        "タイルのエクスポート"
     ]
     
     
