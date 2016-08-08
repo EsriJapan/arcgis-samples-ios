@@ -149,7 +149,7 @@ class ExportTilesViewController: UIViewController, AGSLayerDelegate {
                         
                         let message = allMessages![i].description as String
                         
-                        //一度のリクエストでダウンロードできるタイル数は1000,000タイルが上限
+                        //一度のリクエストでダウンロードできるタイル数は100,000タイルが上限
                         if message.containsString("ERROR 001564") {
                             limitDescription = message
                         }
