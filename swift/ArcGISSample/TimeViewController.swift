@@ -15,61 +15,62 @@ class TimeViewController: UIViewController, AGSWebMapDelegate {
     
     var agsMapView: AGSMapView!
     
-    var startDate: NSDate!
-    var endDate: NSDate!
+    var startDate: Date!
+    var endDate: Date!
 
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
-        self.agsMapView = AGSMapView(frame: self.view.bounds)
-        self.view.addSubview(self.agsMapView)
+        agsMapView = AGSMapView(frame: view.bounds)
+        view.addSubview(agsMapView)
         
         //タイルマップサービスレイヤーの追加
-        let url = NSURL(string: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer")
-        let tiledLyr = AGSTiledMapServiceLayer(URL:url)
-        self.agsMapView.addMapLayer(tiledLyr, withName:"Tiled Layer")
+        let url = URL(string: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer")
+        let tiledLyr = AGSTiledMapServiceLayer(url:url)
+        agsMapView.addMapLayer(tiledLyr, withName:"Tiled Layer")
         
         //時間対応レイヤー表示用のフィーチャレイヤーの追加
-        let timeUrl = NSURL(string: "https://sampleserver3.arcgisonline.com/ArcGIS/rest/services/Hurricanes/NOAA_Tracks_1851_2007/MapServer/0")
-        let agsFeatureLayer = AGSFeatureLayer(URL: timeUrl, mode: .OnDemand)
-        self.agsMapView.addMapLayer(agsFeatureLayer, withName:"Time Layer")
+        let timeUrl = URL(string: "https://sampleserver3.arcgisonline.com/ArcGIS/rest/services/Hurricanes/NOAA_Tracks_1851_2007/MapServer/0")
+        let agsFeatureLayer = AGSFeatureLayer(url: timeUrl, mode: .onDemand)
+        agsMapView.addMapLayer(agsFeatureLayer, withName:"Time Layer")
 
         //マップ上でフィーチャを表示する時間範囲を指定
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         
-        self.startDate = dateFormatter.dateFromString("1900-1-1")
-        self.endDate = dateFormatter.dateFromString("1901-1-1")
+        startDate = dateFormatter.date(from: "1900-1-1")
+        endDate = dateFormatter.date(from: "1901-1-1")
         
-        let agsTimeExtent = AGSTimeExtent(start: self.startDate, end: self.endDate)
-        self.agsMapView.timeExtent = agsTimeExtent
+        let agsTimeExtent = AGSTimeExtent(start: startDate, end: endDate)
+        agsMapView.timeExtent = agsTimeExtent
         
         
-        let timeItem = UIBarButtonItem(barButtonSystemItem: .Play, target: self, action: #selector(TimeViewController.buttonEvent))
-        self.navigationItem.rightBarButtonItem = timeItem
+        let timeItem = UIBarButtonItem(barButtonSystemItem: .play, target: self, action: #selector(TimeViewController.buttonEvent))
+        navigationItem.rightBarButtonItem = timeItem
         
     }
     
     
-    func buttonEvent(sender: UIBarButtonItem) {
+    func buttonEvent(_ sender: UIBarButtonItem) {
         
         //マップ上でフィーチャを表示する時間範囲を1年単位で変更
-        let comps = NSDateComponents()
+        var comps = DateComponents()
         comps.year = 1
-        let calendar = NSCalendar.currentCalendar()
+        let calendar = Calendar.current
         
-        let startDateNew = calendar.dateByAddingComponents(comps, toDate: self.startDate, options: NSCalendarOptions(rawValue: 0))
-        let endDateNew = calendar.dateByAddingComponents(comps, toDate: self.endDate, options: NSCalendarOptions(rawValue: 0))
-        
-        self.startDate = startDateNew
-        self.endDate = endDateNew
-        
-        print("Start:\(self.startDate.description)", "End:\(self.endDate.description)")
+        let startDateNew = calendar.date(byAdding: comps, to: startDate)
+        let endDateNew = calendar.date(byAdding: comps, to: endDate)
 
-        let agsTimeExtent = AGSTimeExtent(start: self.startDate, end: self.endDate)
-        self.agsMapView.timeExtent = agsTimeExtent
+        
+        startDate = startDateNew
+        endDate = endDateNew
+        
+        print("Start:\(startDate.description)", "End:\(endDate.description)")
+
+        let agsTimeExtent = AGSTimeExtent(start: startDate, end: endDate)
+        agsMapView.timeExtent = agsTimeExtent
         
     }
     

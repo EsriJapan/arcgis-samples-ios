@@ -11,8 +11,8 @@
 		965AEFF91B6DD2BF00070B7F /* ServiceAreaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965AEFF81B6DD2BF00070B7F /* ServiceAreaViewController.swift */; };
 		965D7D5B1D44AF5B00BFCF5C /* ExportTilesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965D7D5A1D44AF5B00BFCF5C /* ExportTilesViewController.swift */; };
 		965D7D5F1D44B00300BFCF5C /* BackgroundHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965D7D5E1D44B00300BFCF5C /* BackgroundHelper.swift */; };
+		96A698711D8B916C003F53EA /* ArcGIS.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 96A698701D8B916C003F53EA /* ArcGIS.bundle */; };
 		96AF6D711BB5081800625E21 /* SpatialQueryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AF6D701BB5081800625E21 /* SpatialQueryViewController.swift */; };
-		96C590551CF42EB30016BCEC /* ArcGIS.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 96C590541CF42EB30016BCEC /* ArcGIS.bundle */; };
 		96CE6BB01B662B9E0053F476 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CE6BAF1B662B9E0053F476 /* AppDelegate.swift */; };
 		96CE6BB21B662B9E0053F476 /* TopMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CE6BB11B662B9E0053F476 /* TopMenuController.swift */; };
 		96CE6BB51B662B9E0053F476 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96CE6BB31B662B9E0053F476 /* Main.storyboard */; };
@@ -44,8 +44,10 @@
 		965AEFF81B6DD2BF00070B7F /* ServiceAreaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceAreaViewController.swift; sourceTree = "<group>"; };
 		965D7D5A1D44AF5B00BFCF5C /* ExportTilesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExportTilesViewController.swift; sourceTree = "<group>"; };
 		965D7D5E1D44B00300BFCF5C /* BackgroundHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BackgroundHelper.swift; path = ArcGISSample/BackgroundHelper.swift; sourceTree = "<group>"; };
+		96A698701D8B916C003F53EA /* ArcGIS.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = ArcGIS.bundle; path = ../../../../../Library/SDKs/ArcGIS/iOS/ArcGIS.framework/Versions/Current/Resources/ArcGIS.bundle; sourceTree = "<group>"; };
 		96AF6D701BB5081800625E21 /* SpatialQueryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpatialQueryViewController.swift; sourceTree = "<group>"; };
-		96C590541CF42EB30016BCEC /* ArcGIS.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = ArcGIS.bundle; path = ../../../../../Desktop/esri/ArcGIS.bundle; sourceTree = "<group>"; };
+		96C270191D8A391900F291F9 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
+		96C2701A1D8A391900F291F9 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		96CE6BAA1B662B9E0053F476 /* ArcGISSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArcGISSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96CE6BAE1B662B9E0053F476 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		96CE6BAF1B662B9E0053F476 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -96,9 +98,9 @@
 		96CE6BA11B662B9E0053F476 = {
 			isa = PBXGroup;
 			children = (
+				96A698701D8B916C003F53EA /* ArcGIS.bundle */,
 				965D7D601D44B01900BFCF5C /* Helpers */,
 				96F1ABC71B6776FF00A088F8 /* tokyo_yokohama.gpx */,
-				96C590541CF42EB30016BCEC /* ArcGIS.bundle */,
 				96CE6BAC1B662B9E0053F476 /* ArcGISSample */,
 				96CE6BAB1B662B9E0053F476 /* Products */,
 			);
@@ -115,9 +117,9 @@
 		96CE6BAC1B662B9E0053F476 /* ArcGISSample */ = {
 			isa = PBXGroup;
 			children = (
-				965D7D5A1D44AF5B00BFCF5C /* ExportTilesViewController.swift */,
 				96CE6BAF1B662B9E0053F476 /* AppDelegate.swift */,
 				96CE6BB11B662B9E0053F476 /* TopMenuController.swift */,
+				965D7D5A1D44AF5B00BFCF5C /* ExportTilesViewController.swift */,
 				96D828DB1B6CF2B4000E25A9 /* SearchViewController.swift */,
 				96D828DD1B6CFF91000E25A9 /* PerspectiveViewController.swift */,
 				96D828D51B6CC761000E25A9 /* AttachmentManagerViewController.swift */,
@@ -183,11 +185,12 @@
 			attributes = {
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = esrij;
 				TargetAttributes = {
 					96CE6BA91B662B9E0053F476 = {
 						CreatedOnToolsVersion = 6.4;
+						LastSwiftMigration = 0800;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -219,11 +222,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96A698711D8B916C003F53EA /* ArcGIS.bundle in Resources */,
 				96CE6BB51B662B9E0053F476 /* Main.storyboard in Resources */,
 				96CE6BBA1B662B9E0053F476 /* LaunchScreen.xib in Resources */,
 				96F1ABC81B6776FF00A088F8 /* tokyo_yokohama.gpx in Resources */,
 				96CE6BB71B662B9E0053F476 /* Images.xcassets in Resources */,
-				96C590551CF42EB30016BCEC /* ArcGIS.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,6 +272,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				96CE6BB41B662B9E0053F476 /* Base */,
+				96C270191D8A391900F291F9 /* ja */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -277,6 +281,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				96CE6BB91B662B9E0053F476 /* Base */,
+				96C2701A1D8A391900F291F9 /* ja */,
 			);
 			name = LaunchScreen.xib;
 			sourceTree = "<group>";
@@ -288,6 +293,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -297,8 +303,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -335,6 +343,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -344,8 +353,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -365,6 +376,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "armv7 armv7s arm64";
@@ -375,6 +387,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(HOME)/Library/SDKs/ArcGIS/iOS/";
 				INFOPLIST_FILE = ArcGISSample/Info.plist;
@@ -390,6 +403,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "esrij.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				VALID_ARCHS = "armv7 armv7s arm64";
 				"VALID_ARCHS[sdk=*]" = "armv7 armv7s arm64";
 			};
@@ -399,6 +413,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(HOME)/Library/SDKs/ArcGIS/iOS/";
 				INFOPLIST_FILE = ArcGISSample/Info.plist;
@@ -414,6 +429,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "esrij.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Release;

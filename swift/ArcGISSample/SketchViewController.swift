@@ -21,75 +21,77 @@ class SketchViewController: UIViewController{
         
         super.viewDidLoad()
         
-        let agsMapView = AGSMapView(frame: self.view.bounds)
-        self.view.addSubview(agsMapView)
+        let agsMapView = AGSMapView(frame: view.bounds)
+        view.addSubview(agsMapView)
         
         //タイルマップサービスレイヤーの追加
-        let url = NSURL(string: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer")
-        let tiledLyr = AGSTiledMapServiceLayer(URL:url)
+        let url = URL(string: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer")
+        let tiledLyr = AGSTiledMapServiceLayer(url:url)
         agsMapView.addMapLayer(tiledLyr, withName:"Tiled Layer")
         
         //スケッチしたグラフィック表示用のグラフィックスレイヤーの追加
-        self.agsGraphicsLayer = AGSGraphicsLayer()
-        agsMapView.addMapLayer(self.agsGraphicsLayer, withName:"Graphics Layer")
+        agsGraphicsLayer = AGSGraphicsLayer()
+        agsMapView.addMapLayer(agsGraphicsLayer, withName:"Graphics Layer")
         
         //スケッチレイヤーの追加
-        self.agsSketchGraphicsLayer = AGSSketchGraphicsLayer()
-        self.agsSketchGraphicsLayer.midVertexSymbol = nil
-        agsMapView.addMapLayer(self.agsSketchGraphicsLayer, withName:"Sketch Layer")
+        agsSketchGraphicsLayer = AGSSketchGraphicsLayer()
+        agsSketchGraphicsLayer.midVertexSymbol = nil
+        agsMapView.addMapLayer(agsSketchGraphicsLayer, withName:"Sketch Layer")
         
         //作成するジオメトリタイプの指定
-        self.agsSketchGraphicsLayer.geometry = AGSMutablePolygon()
-        agsMapView.touchDelegate = self.agsSketchGraphicsLayer
+        agsSketchGraphicsLayer.geometry = AGSMutablePolygon()
+        agsMapView.touchDelegate = agsSketchGraphicsLayer
         
         
-        let buttonUndo = UIBarButtonItem(barButtonSystemItem: .Undo, target: self, action: #selector(SketchViewController.undoSketch))
-        let buttonRedo = UIBarButtonItem(barButtonSystemItem: .Redo, target: self, action: #selector(SketchViewController.redoSketch))
-        let buttonRemove = UIBarButtonItem(barButtonSystemItem: .Trash, target: self, action: #selector(SketchViewController.removeSketch))
-        let buttonSubmit = UIBarButtonItem(barButtonSystemItem: .Save, target: self, action: #selector(SketchViewController.submitSketch))
+        let buttonUndo = UIBarButtonItem(barButtonSystemItem: .undo, target: self, action: #selector(SketchViewController.undoSketch))
+        let buttonRedo = UIBarButtonItem(barButtonSystemItem: .redo, target: self, action: #selector(SketchViewController.redoSketch))
+        let buttonRemove = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(SketchViewController.removeSketch))
+        let buttonSubmit = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(SketchViewController.submitSketch))
+        let flexibleItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
 
-        let buttons = ([buttonUndo, buttonRedo, buttonRemove, buttonSubmit])
-        let toolbar: UIToolbar = UIToolbar(frame: CGRectMake(0, self.view.frame.size.height - 44, self.view.frame.size.width, 44))
+
+        let buttons = ([buttonUndo, flexibleItem, buttonRedo, flexibleItem, buttonRemove, flexibleItem, buttonSubmit])
+        let toolbar: UIToolbar = UIToolbar(frame: CGRect(x: 0, y: view.frame.size.height - 44, width: view.frame.size.width, height: 44))
         toolbar.setItems(buttons as [UIBarButtonItem], animated: true)
-        self.view .addSubview(toolbar)
+        view .addSubview(toolbar)
         
     }
     
     
-    func undoSketch(sender: UIBarButtonItem) {
+    func undoSketch(_ sender: UIBarButtonItem) {
         
         //編集を元に戻す
-        if (self.agsSketchGraphicsLayer.undoManager.canUndo) {
-            self.agsSketchGraphicsLayer.undoManager.undo()
+        if (agsSketchGraphicsLayer.undoManager.canUndo) {
+            agsSketchGraphicsLayer.undoManager.undo()
         }
         
     }
     
-    func redoSketch(sender: UIBarButtonItem) {
+    func redoSketch(_ sender: UIBarButtonItem) {
         
         //編集をやり直す
-        if (self.agsSketchGraphicsLayer.undoManager.canRedo) {
-            self.agsSketchGraphicsLayer.undoManager.redo()
+        if (agsSketchGraphicsLayer.undoManager.canRedo) {
+            agsSketchGraphicsLayer.undoManager.redo()
         }
         
     }
     
-    func removeSketch(sender: UIBarButtonItem) {
+    func removeSketch(_ sender: UIBarButtonItem) {
         
         //選択されている頂点を削除する
-        self.agsSketchGraphicsLayer.removeSelectedVertex()
+        agsSketchGraphicsLayer.removeSelectedVertex()
         
     }
     
     
-    func submitSketch(sender: UIBarButtonItem) {
+    func submitSketch(_ sender: UIBarButtonItem) {
         
         //作成したジオメトリからシンボルを指定してグラフィックを作成し、グラフィックスレイヤーに追加
-        let fillSymbol = AGSSimpleFillSymbol(color: UIColor.purpleColor() .colorWithAlphaComponent(0.25), outlineColor: UIColor.darkGrayColor())
-        let agsGraphic = AGSGraphic(geometry: self.agsSketchGraphicsLayer.geometry, symbol: fillSymbol, attributes: nil)
+        let fillSymbol = AGSSimpleFillSymbol(color: UIColor.purple .withAlphaComponent(0.25), outlineColor: UIColor.darkGray)
+        let agsGraphic = AGSGraphic(geometry: agsSketchGraphicsLayer.geometry, symbol: fillSymbol, attributes: nil)
         
-        self.agsGraphicsLayer.addGraphic(agsGraphic)
-        self.agsSketchGraphicsLayer.clear()
+        agsGraphicsLayer.addGraphic(agsGraphic)
+        agsSketchGraphicsLayer.clear()
         
     }
     

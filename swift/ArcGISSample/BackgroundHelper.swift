@@ -16,36 +16,36 @@ import ArcGIS
 
 class BackgroundHelper {
     
-    class func checkJobStatusInBackground(completionHandler:(UIBackgroundFetchResult) -> Void) {
+    class func checkJobStatusInBackground(completionHandler:@escaping (UIBackgroundFetchResult) -> Void) {
         if AGSTask.activeResumeIDs().count > 0  {
             
             //AGSExportTileCacheTask がサーバー処理のステータスをチェックすることを許可する
             //タイルのダウンロードが可能な場合は、ダウンロードが開始される
-            AGSTask.checkStatusForAllResumableTaskJobsWithCompletion(completionHandler)
+            AGSTask.checkStatusForAllResumableTaskJobs(completion: completionHandler)
         }
         else {
             
             //再開可能な処理が無い場合は UIBackgroundFetchResult.NoData を返す
-            completionHandler(UIBackgroundFetchResult.NoData)
+            completionHandler(UIBackgroundFetchResult.noData)
         }
     }
     
-    class func downloadJobResultInBackgroundWithURLSession(identifier:String, completionHandler:() -> ()) {
+    class func downloadJobResultInBackgroundWithURLSession(identifier:String, completionHandler:@escaping () -> ()) {
         
         //ASyncTask がバックグラウンドでダウンロードの状態をモニターし、ダウンロードが完了したら completion ブロックを呼び出す
-        AGSURLSessionManager.sharedManager().setBackgroundURLSessionCompletionHandler(completionHandler, forIdentifier: identifier)
+        AGSURLSessionManager.shared().setBackgroundURLSessionCompletionHandler(completionHandler, forIdentifier: identifier)
     }
     
     class func postLocalNotificationIfAppNotActive(message:String) {
         
         //アプリが実行中でない時にローカル通知を行う
-        let state = UIApplication.sharedApplication().applicationState
+        let state = UIApplication.shared.applicationState
         
-        if state != .Active
+        if state != .active
         {
             let localNotification = UILocalNotification()
             localNotification.alertBody = message
-            UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
+            UIApplication.shared.scheduleLocalNotification(localNotification)
         }
     }
 }

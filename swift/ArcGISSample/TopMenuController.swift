@@ -11,7 +11,7 @@ import UIKit
 class TopMenuController: UIViewController, UITableViewDelegate, UITableViewDataSource  {
 
     
-    private let items = [
+    let items = [
         "LayersViewController",
         "SwipeViewController",
         "PerspectiveViewController",
@@ -36,7 +36,7 @@ class TopMenuController: UIViewController, UITableViewDelegate, UITableViewDataS
         "ExportTilesViewController"
     ]
     
-    private let itemNames = [
+    let itemNames = [
         "レイヤの表示・非表示",
         "スワイプ",
         "パース表示",
@@ -56,42 +56,40 @@ class TopMenuController: UIViewController, UITableViewDelegate, UITableViewDataS
         "リバース ジオコーディング",
         "ルート検索",
         "到達圏解析",
-        "座標変換",
-        "JSONのエンコード・デコード",
+        "座標の表示形式",
+        "フィーチャをJSON形式で保存",
         "タイルのエクスポート"
     ]
     
     
     
-    private var tableView: UITableView!
-    private var myNavigationController: UINavigationController?
-
+    var tableView: UITableView!
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
-
-        self.title = "メニュー"
-        tableView = UITableView(frame: self.view.bounds)
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        
+        title = "メニュー"
+        tableView = UITableView(frame: view.bounds)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         tableView.dataSource = self
         tableView.delegate = self
-        self.view.addSubview(tableView)
+        view.addSubview(tableView)
     }
 
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return items.count
     }
     
 
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) 
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) 
         cell.textLabel!.text = "\(itemNames[indexPath.row])"
         return cell
     }
     
 
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let strTarget:String = "ArcGISSample."
         let strVC:String = items[indexPath.row] as String
@@ -99,7 +97,7 @@ class TopMenuController: UIViewController, UITableViewDelegate, UITableViewDataS
         
         if let theClass = NSClassFromString(className) as? UIViewController.Type {
             let controller = theClass.init(nibName: nil, bundle: nil)
-            self.navigationController!.pushViewController(controller, animated: true)
+            navigationController!.pushViewController(controller, animated: true)
         }
 
 
