@@ -33,7 +33,8 @@ class TopMenuController: UIViewController, UITableViewDelegate, UITableViewDataS
         "ServiceAreaViewController",
         "CoordinateConversionViewController",
         "JsonViewController",
-        "ExportTilesViewController"
+        "ExportTilesViewController",
+        "AppLoginViewController"
     ]
     
     let itemNames = [
@@ -58,7 +59,8 @@ class TopMenuController: UIViewController, UITableViewDelegate, UITableViewDataS
         "到達圏解析",
         "座標の表示形式",
         "フィーチャをJSON形式で保存",
-        "タイルのエクスポート"
+        "タイルのエクスポート",
+        "アプリ認証"
     ]
     
     

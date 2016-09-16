@@ -170,7 +170,11 @@ class ExportTilesViewController: UIViewController, AGSLayerDelegate {
                 }
                 
                 //エラー表示
-                UIAlertView(title: "エラー", message: errorMessage, delegate: nil, cancelButtonTitle: "OK").show()
+                let alert = UIAlertController(title:"エラー", message: errorMessage, preferredStyle: UIAlertControllerStyle.alert)
+                let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                alert.addAction(defaultAction)
+                self.present(alert, animated: true, completion: nil)
+
                 
             } else {
                 
@@ -183,7 +187,11 @@ class ExportTilesViewController: UIViewController, AGSLayerDelegate {
                     self.agsMapView.maxScale = MaxScale
                 }
                 
-                UIAlertView(title: "ダウンロード完了", message: "ダウンロードしたタイルをマップに表示します", delegate: nil, cancelButtonTitle: "OK").show()
+                let alert = UIAlertController(title:"ダウンロード完了", message: "ダウンロードしたタイルをマップに表示します", preferredStyle: UIAlertControllerStyle.alert)
+                let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                alert.addAction(defaultAction)
+                self.present(alert, animated: true, completion: nil)
+                
                 BackgroundHelper.postLocalNotificationIfAppNotActive(message: "タイルのダウンロードが完了しました。")
                 
                 self.resetBtn.isEnabled = true

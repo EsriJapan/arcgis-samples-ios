@@ -12,6 +12,7 @@
 		965D7D5B1D44AF5B00BFCF5C /* ExportTilesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965D7D5A1D44AF5B00BFCF5C /* ExportTilesViewController.swift */; };
 		965D7D5F1D44B00300BFCF5C /* BackgroundHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965D7D5E1D44B00300BFCF5C /* BackgroundHelper.swift */; };
 		96A698711D8B916C003F53EA /* ArcGIS.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 96A698701D8B916C003F53EA /* ArcGIS.bundle */; };
+		96A698731D8BB6B1003F53EA /* AppLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A698721D8BB6B1003F53EA /* AppLoginViewController.swift */; };
 		96AF6D711BB5081800625E21 /* SpatialQueryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AF6D701BB5081800625E21 /* SpatialQueryViewController.swift */; };
 		96CE6BB01B662B9E0053F476 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CE6BAF1B662B9E0053F476 /* AppDelegate.swift */; };
 		96CE6BB21B662B9E0053F476 /* TopMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CE6BB11B662B9E0053F476 /* TopMenuController.swift */; };
@@ -45,6 +46,7 @@
 		965D7D5A1D44AF5B00BFCF5C /* ExportTilesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExportTilesViewController.swift; sourceTree = "<group>"; };
 		965D7D5E1D44B00300BFCF5C /* BackgroundHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BackgroundHelper.swift; path = ArcGISSample/BackgroundHelper.swift; sourceTree = "<group>"; };
 		96A698701D8B916C003F53EA /* ArcGIS.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = ArcGIS.bundle; path = ../../../../../Library/SDKs/ArcGIS/iOS/ArcGIS.framework/Versions/Current/Resources/ArcGIS.bundle; sourceTree = "<group>"; };
+		96A698721D8BB6B1003F53EA /* AppLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppLoginViewController.swift; sourceTree = "<group>"; };
 		96AF6D701BB5081800625E21 /* SpatialQueryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpatialQueryViewController.swift; sourceTree = "<group>"; };
 		96C270191D8A391900F291F9 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
 		96C2701A1D8A391900F291F9 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 				96CE6BAF1B662B9E0053F476 /* AppDelegate.swift */,
 				96CE6BB11B662B9E0053F476 /* TopMenuController.swift */,
 				965D7D5A1D44AF5B00BFCF5C /* ExportTilesViewController.swift */,
+				96A698721D8BB6B1003F53EA /* AppLoginViewController.swift */,
 				96D828DB1B6CF2B4000E25A9 /* SearchViewController.swift */,
 				96D828DD1B6CFF91000E25A9 /* PerspectiveViewController.swift */,
 				96D828D51B6CC761000E25A9 /* AttachmentManagerViewController.swift */,
@@ -261,6 +264,7 @@
 				965D7D5B1D44AF5B00BFCF5C /* ExportTilesViewController.swift in Sources */,
 				96FCA38E1B68F0F6007B5D25 /* RotationRendererViewController.swift in Sources */,
 				965AEFF71B6DB81300070B7F /* NetworkViewController.swift in Sources */,
+				96A698731D8BB6B1003F53EA /* AppLoginViewController.swift in Sources */,
 				96D828D61B6CC761000E25A9 /* AttachmentManagerViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
