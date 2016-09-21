@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		960C6AC51D92B461006E5DC2 /* ArcGIS.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 960C6AC41D92B461006E5DC2 /* ArcGIS.bundle */; };
 		965AEFF71B6DB81300070B7F /* NetworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965AEFF61B6DB81300070B7F /* NetworkViewController.swift */; };
 		965AEFF91B6DD2BF00070B7F /* ServiceAreaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965AEFF81B6DD2BF00070B7F /* ServiceAreaViewController.swift */; };
 		965D7D5B1D44AF5B00BFCF5C /* ExportTilesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965D7D5A1D44AF5B00BFCF5C /* ExportTilesViewController.swift */; };
 		965D7D5F1D44B00300BFCF5C /* BackgroundHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965D7D5E1D44B00300BFCF5C /* BackgroundHelper.swift */; };
-		96A698711D8B916C003F53EA /* ArcGIS.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 96A698701D8B916C003F53EA /* ArcGIS.bundle */; };
 		96A698731D8BB6B1003F53EA /* AppLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A698721D8BB6B1003F53EA /* AppLoginViewController.swift */; };
 		96AF6D711BB5081800625E21 /* SpatialQueryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AF6D701BB5081800625E21 /* SpatialQueryViewController.swift */; };
 		96CE6BB01B662B9E0053F476 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CE6BAF1B662B9E0053F476 /* AppDelegate.swift */; };
@@ -41,11 +41,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		960C6AC41D92B461006E5DC2 /* ArcGIS.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = ArcGIS.bundle; path = ../../../../../Library/SDKs/ArcGIS/iOS/ArcGIS.framework/Versions/Current/Resources/ArcGIS.bundle; sourceTree = "<group>"; };
 		965AEFF61B6DB81300070B7F /* NetworkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkViewController.swift; sourceTree = "<group>"; };
 		965AEFF81B6DD2BF00070B7F /* ServiceAreaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceAreaViewController.swift; sourceTree = "<group>"; };
 		965D7D5A1D44AF5B00BFCF5C /* ExportTilesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExportTilesViewController.swift; sourceTree = "<group>"; };
 		965D7D5E1D44B00300BFCF5C /* BackgroundHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BackgroundHelper.swift; path = ArcGISSample/BackgroundHelper.swift; sourceTree = "<group>"; };
-		96A698701D8B916C003F53EA /* ArcGIS.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = ArcGIS.bundle; path = ../../../../../Library/SDKs/ArcGIS/iOS/ArcGIS.framework/Versions/Current/Resources/ArcGIS.bundle; sourceTree = "<group>"; };
 		96A698721D8BB6B1003F53EA /* AppLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppLoginViewController.swift; sourceTree = "<group>"; };
 		96AF6D701BB5081800625E21 /* SpatialQueryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpatialQueryViewController.swift; sourceTree = "<group>"; };
 		96C270191D8A391900F291F9 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
@@ -100,7 +100,7 @@
 		96CE6BA11B662B9E0053F476 = {
 			isa = PBXGroup;
 			children = (
-				96A698701D8B916C003F53EA /* ArcGIS.bundle */,
+				960C6AC41D92B461006E5DC2 /* ArcGIS.bundle */,
 				965D7D601D44B01900BFCF5C /* Helpers */,
 				96F1ABC71B6776FF00A088F8 /* tokyo_yokohama.gpx */,
 				96CE6BAC1B662B9E0053F476 /* ArcGISSample */,
@@ -225,11 +225,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				96A698711D8B916C003F53EA /* ArcGIS.bundle in Resources */,
 				96CE6BB51B662B9E0053F476 /* Main.storyboard in Resources */,
 				96CE6BBA1B662B9E0053F476 /* LaunchScreen.xib in Resources */,
 				96F1ABC81B6776FF00A088F8 /* tokyo_yokohama.gpx in Resources */,
 				96CE6BB71B662B9E0053F476 /* Images.xcassets in Resources */,
+				960C6AC51D92B461006E5DC2 /* ArcGIS.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
