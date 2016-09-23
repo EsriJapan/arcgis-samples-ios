@@ -20,25 +20,25 @@ class SensorViewController: UIViewController, CLLocationManagerDelegate {
         
         super.viewDidLoad()
         
-        self.agsMapView = AGSMapView(frame: self.view.bounds)
-        self.view.addSubview(self.agsMapView)
+        agsMapView = AGSMapView(frame: view.bounds)
+        view.addSubview(agsMapView)
         
         //タイルマップサービスレイヤーの追加
-        let url = NSURL(string: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer")
-        let tiledLyr = AGSTiledMapServiceLayer(URL:url)
-        self.agsMapView.addMapLayer(tiledLyr, withName:"Tiled Layer")
+        let url = URL(string: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer")
+        let tiledLyr = AGSTiledMapServiceLayer(url:url)
+        agsMapView.addMapLayer(tiledLyr, withName:"Tiled Layer")
         
         //グラフィックスレイヤーの追加
         let agsGraphicsLayer = AGSGraphicsLayer()
         agsMapView.addMapLayer(agsGraphicsLayer, withName:"Graphics Layer")
         
         
-        self.locationManager = CLLocationManager()
-        self.locationManager.delegate = self
-        self.locationManager.requestWhenInUseAuthorization()
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
         
-        self.locationManager.startUpdatingLocation()
-        self.locationManager.startUpdatingHeading()
+        locationManager.startUpdatingLocation()
+        locationManager.startUpdatingHeading()
         
         
     }
@@ -46,31 +46,31 @@ class SensorViewController: UIViewController, CLLocationManagerDelegate {
     
     
     
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 
         let location = locations.last
         
         //CLLocationManagerで取得した現在位置からポイントを作成
-        let agsGeomEngine = AGSGeometryEngine.defaultGeometryEngine()
-        let agsPoint = AGSPoint(x: location!.coordinate.longitude, y: location!.coordinate.latitude, spatialReference: AGSSpatialReference(WKID:4326))
-        let agsProjectedPoint = agsGeomEngine.projectGeometry(agsPoint, toSpatialReference: AGSSpatialReference(WKID:102100)) as! AGSPoint
+        let agsGeomEngine = AGSGeometryEngine.default()
+        let agsPoint = AGSPoint(x: location!.coordinate.longitude, y: location!.coordinate.latitude, spatialReference: AGSSpatialReference(wkid:4326))
+        let agsProjectedPoint = agsGeomEngine?.projectGeometry(agsPoint, to: AGSSpatialReference(wkid:102100)) as! AGSPoint
 
         //ポイントをグラフィックスレイヤーに追加
-        let graphicsLayer = self.agsMapView.mapLayerForName("Graphics Layer") as! AGSGraphicsLayer
-        let markerSymbol = AGSSimpleMarkerSymbol(color: UIColor .blueColor())
-        let graphic = AGSGraphic.graphicWithGeometry(agsProjectedPoint, symbol: markerSymbol, attributes: nil) as! AGSGraphic
+        let graphicsLayer = agsMapView.mapLayer(forName: "Graphics Layer") as! AGSGraphicsLayer
+        let markerSymbol = AGSSimpleMarkerSymbol(color: UIColor .blue)
+        let graphic = AGSGraphic.graphic(with: agsProjectedPoint, symbol: markerSymbol, attributes: nil) as! AGSGraphic
         graphicsLayer.removeAllGraphics()
         graphicsLayer.addGraphic(graphic)
-        self.agsMapView.zoomToScale(100000, withCenterPoint: agsProjectedPoint, animated: true)
+        agsMapView.zoom(toScale: 100000, withCenter: agsProjectedPoint, animated: true)
     }
     
     
-    func locationManager(manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
+    func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
         
         if (newHeading.headingAccuracy > 0){
             
             //CLLocationManagerで取得した方位に応じてマップを回転
-            self.agsMapView.setRotationAngle(newHeading.magneticHeading, animated: true)
+            agsMapView.setRotationAngle(newHeading.magneticHeading, animated: true)
             
         }
     }

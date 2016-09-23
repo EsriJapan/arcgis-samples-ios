@@ -16,18 +16,18 @@ class RotationRendererViewController: UIViewController, AGSWebMapDelegate {
         
         super.viewDidLoad()
         
-        let agsMapView = AGSMapView(frame: self.view.bounds)
-        self.view.addSubview(agsMapView)
+        let agsMapView = AGSMapView(frame: view.bounds)
+        view.addSubview(agsMapView)
         
         //タイルマップサービスレイヤーの追加
-        let url = NSURL(string: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer")
-        let tiledLyr = AGSTiledMapServiceLayer(URL:url)
+        let url = URL(string: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer")
+        let tiledLyr = AGSTiledMapServiceLayer(url:url)
         agsMapView.addMapLayer(tiledLyr, withName:"Tiled Layer")
         
         //シンボル表示用のフィーチャレイヤーの表示
-        let flayerUrl = NSURL(string: "https://tmservices1.esri.com/arcgis/rest/services/LiveFeeds/NOAA_METAR_current_wind_speed_direction/MapServer/0")
-        let flayer = AGSFeatureLayer(URL: flayerUrl, mode: .OnDemand)
-        flayer.outFields = ["WIND_DIRECT"]
+        let flayerUrl = URL(string: "https://tmservices1.esri.com/arcgis/rest/services/LiveFeeds/NOAA_METAR_current_wind_speed_direction/MapServer/0")
+        let flayer = AGSFeatureLayer(url: flayerUrl, mode: .onDemand)
+        flayer?.outFields = ["WIND_DIRECT"]
         agsMapView.addMapLayer(flayer, withName:"Feature Layer")
 
         //画像ファイルを指定してシンボルとレンダラーを作成
@@ -36,11 +36,11 @@ class RotationRendererViewController: UIViewController, AGSWebMapDelegate {
         let renderer = AGSSimpleRenderer(symbol: pointSymbol)
 
         //レンダラーの回転角度の値をフィーチャレイヤーの"WIND_DIRECT"フィールドから取得
-        renderer.rotationType = .Geographic
-        renderer.rotationExpression = "[WIND_DIRECT]"
+        renderer?.rotationType = .geographic
+        renderer?.rotationExpression = "[WIND_DIRECT]"
         
         //レンダラーをフィーチャレイヤーに適用
-        flayer.renderer = renderer
+        flayer?.renderer = renderer
         
     }
     

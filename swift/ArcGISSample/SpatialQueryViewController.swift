@@ -23,69 +23,71 @@ class SpatialQueryViewController: UIViewController, AGSQueryTaskDelegate, AGSMap
         
         super.viewDidLoad()
         
-        self.agsMapView = AGSMapView(frame: self.view.bounds)
-        self.view.addSubview(self.agsMapView)
-        self.agsMapView.layerDelegate = self
-        self.agsMapView.touchDelegate = self
+        agsMapView = AGSMapView(frame: view.bounds)
+        view.addSubview(agsMapView)
+        agsMapView.layerDelegate = self
+        agsMapView.touchDelegate = self
         
         //タイルマップサービスレイヤーの追加
-        let url = NSURL(string: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer")
-        let tiledLyr = AGSTiledMapServiceLayer(URL:url)
-        self.agsMapView.addMapLayer(tiledLyr, withName:"Tiled Layer")
+        let url = URL(string: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer")
+        let tiledLyr = AGSTiledMapServiceLayer(url:url)
+        agsMapView.addMapLayer(tiledLyr, withName:"Tiled Layer")
         
         //フィーチャ検索用のフィーチャレイヤーの追加（流山市のオープンデータ:AED設置場所）        
-        let flayerUrl = NSURL(string: "https://services.arcgis.com/CmCcqeRAPUx17PGk/arcgis/rest/services/AED_2_201506/FeatureServer/0")
-        let agsFeatureLayer = AGSFeatureLayer(URL: flayerUrl, mode: .OnDemand)
-        agsFeatureLayer.outFields = ["*"];
+        let flayerUrl = URL(string: "https://services.arcgis.com/CmCcqeRAPUx17PGk/arcgis/rest/services/AED_2_201506/FeatureServer/0")
+        let agsFeatureLayer = AGSFeatureLayer(url: flayerUrl, mode: .onDemand)
+        agsFeatureLayer?.outFields = ["*"];
+        agsMapView.addMapLayer(agsFeatureLayer, withName:"Feature Layer")
+
         
         //グラフィックスレイヤーの追加
-        self.agsGraphicsLayer = AGSGraphicsLayer()
-        self.agsMapView.addMapLayer(self.agsGraphicsLayer, withName:"Graphics Layer")
+        agsGraphicsLayer = AGSGraphicsLayer()
+        agsMapView.addMapLayer(agsGraphicsLayer, withName:"Graphics Layer")
         
-        let envelope = AGSEnvelope.envelopeWithXmin(139.891126, ymin:35.831845, xmax:139.9517425, ymax:35.9132698000001, spatialReference:AGSSpatialReference(WKID: 104111)) as! AGSEnvelope
-        self.agsMapView.zoomToEnvelope(envelope, animated: true)
+        let envelope = AGSEnvelope.envelope(withXmin: 139.891126, ymin:35.831845, xmax:139.9517425, ymax:35.9132698000001, spatialReference:AGSSpatialReference(wkid: 104111)) as! AGSEnvelope
+        agsMapView.zoom(to: envelope, animated: true)
         
         //検索するレイヤーのURLを指定してフィーチャ検索用タスク（AGSQueryTask）を作成
-        self.agsQueryTask = AGSQueryTask(URL: flayerUrl)
-        self.agsQueryTask.requestCachePolicy = .ReloadIgnoringLocalCacheData
-        self.agsQueryTask.delegate = self
+        agsQueryTask = AGSQueryTask(url: flayerUrl)
+        agsQueryTask.requestCachePolicy = .reloadIgnoringLocalCacheData
+        agsQueryTask.delegate = self
         
     }
     
-    
-    func mapView(mapView: AGSMapView!, didTapAndHoldAtPoint screen: CGPoint, mapPoint mappoint: AGSPoint!, graphics: [NSObject : AnyObject]!) {
+    func mapView(_ mapView: AGSMapView!, didTapAndHoldAt screen: CGPoint, mapPoint mappoint: AGSPoint!, graphics: [AnyHashable: Any]!) {
         
         print("Tap")
         
+        //マップ上をホールドしながら指を動かして検索範囲を描画する
         //マップ上をホールド時に、フリーハンド用のポリゴンを新規に作成する
-        self.agsGraphicsLayer.removeAllGraphics()
-        self.agsPolygon = AGSMutablePolygon(spatialReference: self.agsMapView.spatialReference)
+        agsGraphicsLayer.removeAllGraphics()
+        agsPolygon = AGSMutablePolygon(spatialReference: agsMapView.spatialReference)
         
         //ホールドした地点（ポイント）をポリゴンの頂点に追加する
-        self.agsPolygon.addRingToPolygon()
-        self.agsPolygon.addPointToRing(mappoint)
+        agsPolygon.addRingToPolygon()
+        agsPolygon.addPoint(toRing: mappoint)
         
     }
     
-    func mapView(mapView: AGSMapView!, didMoveTapAndHoldAtPoint screen: CGPoint, mapPoint mappoint: AGSPoint!, graphics: [NSObject : AnyObject]!) {
+    func mapView(_ mapView: AGSMapView!, didMoveTapAndHoldAt screen: CGPoint, mapPoint mappoint: AGSPoint!, graphics: [AnyHashable: Any]!) {
         
         print("Move")
         
         //マップ上をホールド中に指を動かしたら、動かした地点をポリゴンの頂点として追加する
-        self.agsPolygon.addPointToRing(mappoint)
+        agsPolygon.addPoint(toRing: mappoint)
         
         //ポリゴンからグラフィックを作成し、グラフィックス レイヤーに追加
         //指を動かしたらグラフィックを再作成する
-        self.agsGraphicsLayer.removeAllGraphics()
+        agsGraphicsLayer.removeAllGraphics()
         let myPolygonSymbol = AGSSimpleFillSymbol()
-        myPolygonSymbol.color = UIColor.orangeColor().colorWithAlphaComponent(0.5)
-        myPolygonSymbol.outline.color = UIColor.clearColor()
-        let polygonGraphic = AGSGraphic(geometry: self.agsPolygon, symbol: myPolygonSymbol, attributes: nil)
-        self.agsGraphicsLayer.addGraphic(polygonGraphic)
+        myPolygonSymbol.color = UIColor.orange.withAlphaComponent(0.5)
+        myPolygonSymbol.outline.color = UIColor.clear
+        let polygonGraphic = AGSGraphic(geometry: agsPolygon, symbol: myPolygonSymbol, attributes: nil)
+        agsGraphicsLayer.addGraphic(polygonGraphic)
         
     }
     
-    func mapView(mapView: AGSMapView!, didEndTapAndHoldAtPoint screen: CGPoint, mapPoint mappoint: AGSPoint!, graphics: [NSObject : AnyObject]!) {
+    func mapView(_ mapView: AGSMapView!, didEndTapAndHoldAt screen: CGPoint, mapPoint mappoint: AGSPoint!, graphics: [AnyHashable: Any]!) {
         
         print("End")
         
@@ -94,44 +96,44 @@ class SpatialQueryViewController: UIViewController, AGSQueryTaskDelegate, AGSMap
         let agsQuery = AGSQuery()
         agsQuery.outFields = ["*"]
         agsQuery.returnGeometry = true
-        agsQuery.outSpatialReference = self.agsMapView.spatialReference
+        agsQuery.outSpatialReference = agsMapView.spatialReference
         //フリーハンドポリゴン内に含まれるフィーチャを検索
-        let agsGeomEngine = AGSGeometryEngine.defaultGeometryEngine()
-        agsQuery.geometry = agsGeomEngine.simplifyGeometry(self.agsPolygon)
-        agsQuery.spatialRelationship = AGSSpatialRelationship.Contains
+        let agsGeomEngine = AGSGeometryEngine.default()
+        agsQuery.geometry = agsGeomEngine?.simplifyGeometry(agsPolygon)
+        agsQuery.spatialRelationship = AGSSpatialRelationship.contains
         
         //フィーチャの検索を実行
-        self.agsQueryTask.executeWithQuery(agsQuery)
+        agsQueryTask.execute(with: agsQuery)
         
     }
     
     
     
-    func queryTask(queryTask: AGSQueryTask!, operation op: NSOperation!, didExecuteWithFeatureSetResult featureSet: AGSFeatureSet!) {
+    func queryTask(_ queryTask: AGSQueryTask!, operation op: Operation!, didExecuteWithFeatureSetResult featureSet: AGSFeatureSet!) {
         
-        let mySymbol = AGSSimpleMarkerSymbol(color: UIColor.whiteColor())
+        let mySymbol = AGSSimpleMarkerSymbol(color: UIColor.white)
         var count = 0
         
         for i in 0 ..< featureSet.features.count  {
             //検索結果のフィーチャにシンボルを設定してグラフィックスレイヤーに追加
             let graphic = featureSet.features[i] as! AGSGraphic
             graphic.symbol = mySymbol
-            self.agsGraphicsLayer.addGraphic(graphic)
-            count = count + graphic.attributeAsIntegerForKey("台数", exists: nil)
+            agsGraphicsLayer.addGraphic(graphic)
+            count = count + graphic.attributeAsInteger(forKey: "台数", exists: nil)
             
         }
         
-        let alert = UIAlertController(title:"検索結果", message: String(count) + " 台が見つかりました。", preferredStyle: UIAlertControllerStyle.Alert)
-        let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+        let alert = UIAlertController(title:"検索結果", message: String(count) + " 台の AED が見つかりました。", preferredStyle: UIAlertControllerStyle.alert)
+        let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         alert.addAction(defaultAction)
-        presentViewController(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
 
         
     }
     
-    func queryTask(queryTask: AGSQueryTask!, operation op: NSOperation!, didFailWithError error: NSError!) {
+    func queryTask(_ queryTask: AGSQueryTask!, operation op: Operation!, didFailWithError error: Error!) {
         
-        print("Error:\(error)")
+        print("Error:\(error.localizedDescription)")
         
     }
     

@@ -21,29 +21,29 @@ class LegendViewController: UIViewController, AGSLayerDelegate, AGSMapServiceInf
         
         super.viewDidLoad()
         
-        self.agsMapView = AGSMapView(frame: self.view.bounds)
-        self.agsMapView.enableWrapAround()
-        self.view.addSubview(self.agsMapView)
+        agsMapView = AGSMapView(frame: view.bounds)
+        agsMapView.enableWrapAround()
+        view.addSubview(agsMapView)
         
         //タイルマップサービスレイヤーの追加
-        let url = NSURL(string: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer")
-        let tiledLyr = AGSTiledMapServiceLayer(URL:url)
-        self.agsMapView.addMapLayer(tiledLyr, withName:"Tiled Layer")
+        let url = URL(string: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer")
+        let tiledLyr = AGSTiledMapServiceLayer(url:url)
+        agsMapView.addMapLayer(tiledLyr, withName:"Tiled Layer")
         
         //凡例用のダイナミックマップサービスレイヤーの追加
-        let dynamicLayerUrl = NSURL(string: "https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_StateCityHighway_USA/MapServer")
-        let agsDynamicMapServiceLayer = AGSDynamicMapServiceLayer(URL:dynamicLayerUrl)
-        self.agsMapView.addMapLayer(agsDynamicMapServiceLayer, withName:"Legend Layer")
+        let dynamicLayerUrl = URL(string: "https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_StateCityHighway_USA/MapServer")
+        let agsDynamicMapServiceLayer = AGSDynamicMapServiceLayer(url:dynamicLayerUrl)
+        agsMapView.addMapLayer(agsDynamicMapServiceLayer, withName:"Legend Layer")
 
-        agsDynamicMapServiceLayer.delegate = self
+        agsDynamicMapServiceLayer?.delegate = self
 
     }
     
-    func layerDidLoad(layer: AGSLayer!) {
+    func layerDidLoad(_ layer: AGSLayer!) {
         
         if (layer.name == "Legend Layer") {
             
-            self.agsMapView.zoomToEnvelope(layer.initialEnvelope, animated: true)
+            agsMapView.zoom(to:layer.initialEnvelope, animated: false)
             
             //ダイナミックマップサービスレイヤーの表示設定（ID:2のレイヤを表示）
             let dlayer = layer as! AGSDynamicMapServiceLayer
@@ -51,26 +51,26 @@ class LegendViewController: UIViewController, AGSLayerDelegate, AGSMapServiceInf
             
             //ダイナミックマップサービスレイヤーの凡例情報の取得
             let agsMapServiceInfo = dlayer.mapServiceInfo
-            agsMapServiceInfo.delegate = self
-            agsMapServiceInfo.retrieveLegendInfo()
+            agsMapServiceInfo?.delegate = self
+            _ = agsMapServiceInfo?.retrieveLegendInfo()
             
-            print("\(agsMapServiceInfo.serviceDescription)")
+            print("\(agsMapServiceInfo?.serviceDescription)")
             
         }
     }
     
     
-    func mapServiceInfo(mapServiceInfo: AGSMapServiceInfo!, operation op: NSOperation!, didFailToRetrieveLegendInfoWithError error: NSError!) {
+    func mapServiceInfo(_ mapServiceInfo: AGSMapServiceInfo!, operation op: Operation!, didFailToRetrieveLegendInfoWithError error: Error!) {
         
-        print("\(error)")
+        print("\(error.localizedDescription)")
     
     }
     
     
-    func mapServiceInfo(mapServiceInfo: AGSMapServiceInfo!, operationDidRetrieveLegendInfo op: NSOperation!) {
+    func mapServiceInfo(_ mapServiceInfo: AGSMapServiceInfo!, operationDidRetrieveLegendInfo op: Operation!) {
         
-        let legendView = UIScrollView(frame: CGRectMake(10, 100, 150, 200))
-        legendView.backgroundColor = UIColor.whiteColor()
+        let legendView = UIScrollView(frame: CGRect(x: 10, y: 100, width: 150, height: 200))
+        legendView.backgroundColor = UIColor.white
         legendView.alpha = 0.8
         legendView.layer.cornerRadius = 10.0
         
@@ -88,10 +88,9 @@ class LegendViewController: UIViewController, AGSLayerDelegate, AGSMapServiceInf
             imageView.frame = frame
             legendView.addSubview(imageView)
             
-            
-            let legendlabel = UILabel(frame: CGRectMake(legendImage.size.width + 15, y, 100, legendImage.size.height))
-            legendlabel.font = UIFont.boldSystemFontOfSize(10)
-            legendlabel.textColor = UIColor .blackColor()
+            let legendlabel = UILabel(frame: CGRect(x: legendImage.size.width + 15, y: y, width: 100, height: legendImage.size.height))
+            legendlabel.font = UIFont.boldSystemFont(ofSize: 10)
+            legendlabel.textColor = UIColor.black
             legendlabel.text = layerInfo.legendLabels[i] as? String
             legendView.addSubview(legendlabel)
             
@@ -99,8 +98,8 @@ class LegendViewController: UIViewController, AGSLayerDelegate, AGSMapServiceInf
             
         }
         
-        legendView.contentSize = CGSizeMake(150, y)
-        self.view.addSubview(legendView)
+        legendView.contentSize = CGSize(width: 150, height: y)
+        view.addSubview(legendView)
         
     }
     

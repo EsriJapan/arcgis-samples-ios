@@ -16,17 +16,17 @@ class MagnifierViewController: UIViewController {
     
         super.viewDidLoad()
         
-        let agsMapView = AGSMapView(frame: self.view.bounds)
-        self.view.addSubview(agsMapView)
+        let agsMapView = AGSMapView(frame: view.bounds)
+        view.addSubview(agsMapView)
     
         //タイルマップサービスレイヤーの追加
-        let url = NSURL(string: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer")
-        let tiledLyr = AGSTiledMapServiceLayer(URL:url)
+        let url = URL(string: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer")
+        let tiledLyr = AGSTiledMapServiceLayer(url:url)
         agsMapView.addMapLayer(tiledLyr, withName:"Tiled Layer")
             
-        let point = AGSPoint(x: 15554789.5566484, y: 4254781.24130285, spatialReference:AGSSpatialReference(WKID: 102100))
-        agsMapView .zoomToScale(100000, withCenterPoint: point, animated: true)
-        
+        let point = AGSPoint(x: 15554789.5566484, y: 4254781.24130285, spatialReference:AGSSpatialReference(wkid: 102100))
+        agsMapView.zoom(toScale: 100000, withCenter: point, animated: true)
+
         //マップ上を長押しすると拡大鏡を表示
         agsMapView.showMagnifierOnTapAndHold = true
         

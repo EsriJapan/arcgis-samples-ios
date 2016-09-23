@@ -22,106 +22,105 @@ class AttachmentManagerViewController: UIViewController, AGSAttachmentManagerDel
         
         super.viewDidLoad()
         
-        self.agsMapView = AGSMapView(frame: self.view.bounds)
-        self.view.addSubview(self.agsMapView)
+        agsMapView = AGSMapView(frame: view.bounds)
+        view.addSubview(agsMapView)
         
         //タイルマップサービスレイヤーの追加
-        let url = NSURL(string: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer")
-        let tiledLyr = AGSTiledMapServiceLayer(URL:url)
-        self.agsMapView.addMapLayer(tiledLyr, withName:"Tiled Layer")
+        let url = URL(string: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer")
+        let tiledLyr = AGSTiledMapServiceLayer(url:url)
+        agsMapView.addMapLayer(tiledLyr, withName:"Tiled Layer")
 
         //写真を添付する編集用フィーチャレイヤーの追加
-        let featureLayerUrl = NSURL(string: "https://sampleserver6.arcgisonline.com/arcgis/rest/services/CommercialDamageAssessment/FeatureServer/0")
-        self.agsFeatureLayer = AGSFeatureLayer(URL: featureLayerUrl, mode: .OnDemand)
-        self.agsMapView.addMapLayer(agsFeatureLayer, withName:"Feature Layer")
+        let featureLayerUrl = URL(string: "https://sampleserver6.arcgisonline.com/arcgis/rest/services/CommercialDamageAssessment/FeatureServer/0")
+        agsFeatureLayer = AGSFeatureLayer(url: featureLayerUrl, mode: .onDemand)
+        agsMapView.addMapLayer(agsFeatureLayer, withName:"Feature Layer")
         
         
-        let buttonAttachment = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(AttachmentManagerViewController.addAttachment))
+        let buttonAttachment = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(AttachmentManagerViewController.addAttachment))
         let buttons = ([buttonAttachment])
-        let toolbar: UIToolbar = UIToolbar(frame: CGRectMake(0, self.view.frame.size.height - 44, self.view.frame.size.width, 44))
+        let toolbar: UIToolbar = UIToolbar(frame: CGRect(x: 0, y: view.frame.size.height - 44, width: view.frame.size.width, height: 44))
         toolbar.setItems(buttons as [UIBarButtonItem], animated: true)
-        self.view .addSubview(toolbar)
+        view .addSubview(toolbar)
         
         //マップの中心にカーソルを表示
-        self.drawCenterSign()
+        drawCenterSign()
         
     }
     
     
     func drawCenterSign() {
         
-        UIGraphicsBeginImageContext(CGSizeMake(20, 20))
+        UIGraphicsBeginImageContext(CGSize(width: 20, height: 20))
         let context = UIGraphicsGetCurrentContext()
         
-        CGContextSetStrokeColorWithColor(context, UIColor.blackColor().CGColor)
-        CGContextSetLineWidth(context, 1.0)
-        CGContextMoveToPoint(context, 10, 0)
-        CGContextAddLineToPoint(context, 10, 20)
-        CGContextMoveToPoint(context, 0, 10)
-        CGContextAddLineToPoint(context, 20, 10)
-        CGContextStrokePath(context)
+        context?.setStrokeColor(UIColor.black.cgColor)
+        context?.setLineWidth(1.0)
+        context?.move(to: CGPoint(x: 10, y: 0))
+        context?.addLine(to: CGPoint(x: 10, y: 20))
+        context?.move(to: CGPoint(x: 0, y: 10))
+        context?.addLine(to: CGPoint(x: 20, y: 10))
+        context?.strokePath()
         
-        CGContextSetStrokeColorWithColor(context, UIColor.whiteColor().CGColor)
+        context?.setStrokeColor(UIColor.white.cgColor)
         
-        CGContextSetLineWidth(context, 1.0)
-        CGContextMoveToPoint(context, 10, 9)
-        CGContextAddLineToPoint(context, 10, 11)
-        CGContextMoveToPoint(context, 9, 10)
-        CGContextAddLineToPoint(context, 11, 9)
-        CGContextStrokePath(context)
+        context?.setLineWidth(1.0)
+        context?.move(to: CGPoint(x: 10, y: 9))
+        context?.addLine(to: CGPoint(x: 10, y: 11))
+        context?.move(to: CGPoint(x: 9, y: 10))
+        context?.addLine(to: CGPoint(x: 11, y: 9))
+        context?.strokePath()
         
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
         let caLayer = CALayer()
-        caLayer.frame = CGRectMake(self.agsMapView.frame.size.width / 2 - 10, self.agsMapView.frame.size.height / 2 - 10, 20, 20)
-        caLayer.contents = image.CGImage
-        self.view.layer.addSublayer(caLayer)
+        caLayer.frame = CGRect(x: agsMapView.frame.size.width / 2 - 10, y: agsMapView.frame.size.height / 2 - 10, width: 20, height: 20)
+        caLayer.contents = image?.cgImage
+        view.layer.addSublayer(caLayer)
         
     }
     
     
-    func addAttachment (sender: UIBarButtonItem) {
+    func addAttachment (_ sender: UIBarButtonItem) {
         
         //添付する写真をフォトライブリから選択
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
-        imagePickerController.sourceType = .PhotoLibrary
-        self.presentViewController(imagePickerController, animated: true, completion: nil)
+        imagePickerController.sourceType = .photoLibrary
+        present(imagePickerController, animated: true, completion: nil)
         
     }
 
     
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
 
-        
-        self.image = image
-        picker.dismissViewControllerAnimated(true, completion: nil)
-        
+        image = info[UIImagePickerControllerOriginalImage] as? UIImage
+        picker.dismiss(animated: true, completion: nil)
+   
         //ジオメトリと属性を指定してフィーチャを新規に作成する
-        let agsPoint = self.agsMapView.visibleAreaEnvelope.center
+        let agsPoint = agsMapView.visibleAreaEnvelope.center
         let agsFeature = AGSGraphic()
         agsFeature.geometry = agsPoint
-        //agsFeature.setAttribute("Tree Maintenance or Damage", forKey: "req_type")
         agsFeature.setAttribute("Minor", forKey: "typdamage")
         
         //フィーチャをフィーチャレイヤーに更新
-        self.agsFeatureLayer.applyEditsWithFeaturesToAdd(NSArray(array: [agsFeature]) as [AnyObject], toUpdate: nil, toDelete: nil)
-        self.agsFeatureLayer.editingDelegate = self
+        agsFeatureLayer.applyEditsWithFeatures(toAdd: [agsFeature], toUpdate: nil, toDelete: nil)
+
+        agsFeatureLayer.editingDelegate = self
         
     }
     
     
-    func featureLayer(featureLayer: AGSFeatureLayer!, operation op: NSOperation!, didFailFeatureEditsWithError error: NSError!) {
+    func featureLayer(_ featureLayer: AGSFeatureLayer!, operation op: Operation!, didFailFeatureEditsWithError error: Error!) {
         
         // 編集に失敗
-        print("Error:\(error)")
+        print("Error:\(error.localizedDescription)")
 
     }
     
     
-    func featureLayer(featureLayer: AGSFeatureLayer!, operation op: NSOperation!, didFeatureEditsWithResults editResults: AGSFeatureLayerEditResults!) {
+    func featureLayer(_ featureLayer: AGSFeatureLayer!, operation op: Operation!, didFeatureEditsWith editResults: AGSFeatureLayerEditResults!) {
         
         
         let results = editResults.addResults[0] as! AGSEditResult
@@ -135,15 +134,15 @@ class AttachmentManagerViewController: UIViewController, AGSAttachmentManagerDel
             
             // 編集に成功
             //新規に作成したフィーチャに対してAGSAttachmentManagerを作成
-            let agsFeature = self.agsFeatureLayer.lookupFeatureWithObjectId(results.objectId)
-            self.agsAttachmentMgr = self.agsFeatureLayer.attachmentManagerForFeature(agsFeature)
-            self.agsAttachmentMgr.delegate = self
+            let agsFeature = agsFeatureLayer.lookupFeature(withObjectId: results.objectId)
+            agsAttachmentMgr = agsFeatureLayer.attachmentManager(forFeature: agsFeature)
+            agsAttachmentMgr.delegate = self
             
             //フォトライブリから選択した写真に名前を指定してフィーチャに添付
-            self.agsAttachmentMgr.addAttachmentAsJpgWithImage(self.image, name: "temp.jpg")
+            agsAttachmentMgr.addAttachmentAsJpg(with: image, name: "temp.jpg")
             
-            if(self.agsAttachmentMgr .hasLocalEdits()){
-                self.agsAttachmentMgr.postLocalEditsToServer()
+            if(agsAttachmentMgr .hasLocalEdits()){
+                agsAttachmentMgr.postLocalEditsToServer()
             }
             
         }
@@ -152,7 +151,7 @@ class AttachmentManagerViewController: UIViewController, AGSAttachmentManagerDel
     }
     
     
-    func attachmentManager(attachmentManager: AGSAttachmentManager!, didPostLocalEditsToServer attachmentsPosted: [AnyObject]!) {
+    private func attachmentManager(_ attachmentManager: AGSAttachmentManager!, didPostLocalEditsToServer attachmentsPosted: [AnyObject]!) {
         
         var success = true
         

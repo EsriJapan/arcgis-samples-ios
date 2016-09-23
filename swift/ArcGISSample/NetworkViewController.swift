@@ -18,7 +18,7 @@ class NetworkViewController: UIViewController, AGSRouteTaskDelegate {
     var agsRouteResult: AGSRouteResult!
     
     var directionLabel: UILabel!
-    var stopPoints: NSMutableArray!
+    var stopPoints: [AGSStopGraphic]! = []
     var directionIndex: Int = 0
     var pointIndex: Int = 0
 
@@ -27,179 +27,178 @@ class NetworkViewController: UIViewController, AGSRouteTaskDelegate {
         
         super.viewDidLoad()
         
-        self.agsMapView = AGSMapView(frame: self.view.bounds)
-        self.view.addSubview(self.agsMapView)
+        agsMapView = AGSMapView(frame: view.bounds)
+        view.addSubview(agsMapView)
         
         //タイルマップサービスレイヤーの追加
-        let url = NSURL(string: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer")
-        let tiledLyr = AGSTiledMapServiceLayer(URL:url)
-        self.agsMapView.addMapLayer(tiledLyr, withName:"Tiled Layer")
+        let url = URL(string: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer")
+        let tiledLyr = AGSTiledMapServiceLayer(url:url)
+        agsMapView.addMapLayer(tiledLyr, withName:"Tiled Layer")
         
         //初期表示範囲の設定
-        let point = AGSPoint(x: 15554789.5566484, y: 4254781.24130285, spatialReference:AGSSpatialReference(WKID: 102100))
-        self.agsMapView .zoomToScale(50000, withCenterPoint: point, animated: true)
+        let point = AGSPoint(x: 15554789.5566484, y: 4254781.24130285, spatialReference:AGSSpatialReference(wkid: 102100))
+        agsMapView .zoom(toScale: 50000, withCenter: point, animated: true)
         
         //認証の設定:検証用（ArcGIS Onlineのユーザー名とパスワードを指定）
-        let credntial = AGSCredential(user: "<ユーザー名>", password: "<パスワード>", authenticationType: .Token)
+        let credntial = AGSCredential(user: "<ユーザー名>", password: "<パスワード>", authenticationType: .token)
 
 
         //ルート検索用のサービスURLの指定
-        let networkUrl = NSURL(string: "https://route.arcgis.com/arcgis/rest/services/World/Route/NAServer/Route_World")
-        self.agsRouteTask = AGSRouteTask(URL: networkUrl, credential: credntial)
-        self.agsRouteTask.delegate = self
+        let networkUrl = URL(string: "https://route.arcgis.com/arcgis/rest/services/World/Route/NAServer/Route_World")
+        agsRouteTask = AGSRouteTask(url: networkUrl, credential: credntial)
+        agsRouteTask.delegate = self
 
         //検索結果のルートを表示するためのグラフィックスレイヤーを追加
         let graphicsLayer = AGSGraphicsLayer()
-        self.agsMapView.addMapLayer(graphicsLayer, withName:"Graphics Layer")
+        agsMapView.addMapLayer(graphicsLayer, withName:"Graphics Layer")
         
         //通過ポイントを表示するためのグラフィックスレイヤーを追加
         let agsStopsLayer = AGSGraphicsLayer()
-        self.agsMapView.addMapLayer(agsStopsLayer, withName:"Stops Layer")
+        agsMapView.addMapLayer(agsStopsLayer, withName:"Stops Layer")
         
-        //通過ポイント格納用
-        self.stopPoints = NSMutableArray()
+        directionLabel = UILabel(frame: CGRect(x: 0, y: 100, width: view.frame.size.width, height: 30))
+        directionLabel.backgroundColor = UIColor.darkGray
+        directionLabel.alpha = 0.8
+        directionLabel.textColor = UIColor.white
+        directionLabel.adjustsFontSizeToFitWidth = true
+        view.addSubview(directionLabel)
         
-        self.directionLabel = UILabel(frame: CGRectMake(0, 100, self.view.frame.size.width, 30))
-        self.directionLabel.backgroundColor = UIColor.darkGrayColor()
-        self.directionLabel.alpha = 0.8
-        self.directionLabel.textColor = UIColor.whiteColor()
-        self.directionLabel.adjustsFontSizeToFitWidth = true
-        self.view.addSubview(self.directionLabel)
+        directionLabel.layer.cornerRadius = 10.0
+        directionLabel.clipsToBounds = true
+        directionLabel.layer.borderColor = UIColor.darkGray.cgColor
+        directionLabel.layer.borderWidth = 3.0
         
-        self.directionLabel.layer.cornerRadius = 10.0
-        self.directionLabel.clipsToBounds = true
-        self.directionLabel.layer.borderColor = UIColor.darkGrayColor().CGColor
-        self.directionLabel.layer.borderWidth = 3.0
+        let buttonAdd = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(NetworkViewController.addStop))
+        let buttonSolve = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(NetworkViewController.networkSolve))
+        let buttonClear = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(NetworkViewController.clearStops))
+        let buttonNext = UIBarButtonItem(barButtonSystemItem: .play, target: self, action: #selector(NetworkViewController.moveToNextPoint))
+        let flexibleItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+
         
-        let buttonAdd = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(NetworkViewController.addStop))
-        let buttonSolve = UIBarButtonItem(barButtonSystemItem: .Search, target: self, action: #selector(NetworkViewController.networkSolve))
-        let buttonClear = UIBarButtonItem(barButtonSystemItem: .Trash, target: self, action: #selector(NetworkViewController.clearStops))
-        let buttonNext = UIBarButtonItem(barButtonSystemItem: .Play, target: self, action: #selector(NetworkViewController.moveToNextPoint))
-        
-        let buttons = ([buttonAdd, buttonSolve, buttonClear, buttonNext])
-        let toolbar: UIToolbar = UIToolbar(frame: CGRectMake(0, self.view.frame.size.height - 44, self.view.frame.size.width, 44))
+        let buttons = ([buttonAdd, flexibleItem, buttonSolve, flexibleItem, buttonClear, flexibleItem, buttonNext])
+        let toolbar: UIToolbar = UIToolbar(frame: CGRect(x: 0, y: view.frame.size.height - 44, width: view.frame.size.width, height: 44))
         toolbar.setItems(buttons as [UIBarButtonItem], animated: true)
-        self.view .addSubview(toolbar)
+        view .addSubview(toolbar)
         
         //マップの中心にカーソルを表示
-        self.drawCenterSign()
+        drawCenterSign()
         
     }
     
     
     func drawCenterSign() {
         
-        UIGraphicsBeginImageContext(CGSizeMake(20, 20))
+        UIGraphicsBeginImageContext(CGSize(width: 20, height: 20))
         let context = UIGraphicsGetCurrentContext()
         
-        CGContextSetStrokeColorWithColor(context, UIColor.blackColor().CGColor)
-        CGContextSetLineWidth(context, 1.0)
-        CGContextMoveToPoint(context, 10, 0)
-        CGContextAddLineToPoint(context, 10, 20)
-        CGContextMoveToPoint(context, 0, 10)
-        CGContextAddLineToPoint(context, 20, 10)
-        CGContextStrokePath(context)
+        context?.setStrokeColor(UIColor.black.cgColor)
+        context?.setLineWidth(1.0)
+        context?.move(to: CGPoint(x: 10, y: 0))
+        context?.addLine(to: CGPoint(x: 10, y: 20))
+        context?.move(to: CGPoint(x: 0, y: 10))
+        context?.addLine(to: CGPoint(x: 20, y: 10))
+        context?.strokePath()
         
-        CGContextSetStrokeColorWithColor(context, UIColor.whiteColor().CGColor)
+        context?.setStrokeColor(UIColor.white.cgColor)
         
-        CGContextSetLineWidth(context, 1.0)
-        CGContextMoveToPoint(context, 10, 9)
-        CGContextAddLineToPoint(context, 10, 11)
-        CGContextMoveToPoint(context, 9, 10)
-        CGContextAddLineToPoint(context, 11, 9)
-        CGContextStrokePath(context)
+        context?.setLineWidth(1.0)
+        context?.move(to: CGPoint(x: 10, y: 9))
+        context?.addLine(to: CGPoint(x: 10, y: 11))
+        context?.move(to: CGPoint(x: 9, y: 10))
+        context?.addLine(to: CGPoint(x: 11, y: 9))
+        context?.strokePath()
         
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
         let caLayer = CALayer()
-        caLayer.frame = CGRectMake(self.agsMapView.frame.size.width / 2 - 10, self.agsMapView.frame.size.height / 2 - 10, 20, 20)
-        caLayer.contents = image.CGImage
-        self.view.layer.addSublayer(caLayer)
+        caLayer.frame = CGRect(x: agsMapView.frame.size.width / 2 - 10, y: agsMapView.frame.size.height / 2 - 10, width: 20, height: 20)
+        caLayer.contents = image?.cgImage
+        view.layer.addSublayer(caLayer)
         
     }
     
-    func addStop(sender: UIBarButtonItem) {
+    func addStop(_ sender: UIBarButtonItem) {
 
         
         //通過ポイントをグラフィックスレイヤーに追加
-        let agsPoint = self.agsMapView.visibleAreaEnvelope.center
-        let agsSym = self.stopSymbol()
+        let agsPoint = agsMapView.visibleAreaEnvelope.center
+        let agsSym = stopSymbol()
         let agsGraphic = AGSGraphic(geometry: agsPoint, symbol: agsSym, attributes: nil)
-        (self.agsMapView.mapLayerForName("Stops Layer") as! AGSGraphicsLayer).addGraphic(agsGraphic)
+        (agsMapView.mapLayer(forName: "Stops Layer") as! AGSGraphicsLayer).addGraphic(agsGraphic)
         
         //通過ポイントを配列に格納
         let agsStopGraphic = AGSStopGraphic(geometry: agsPoint, symbol: agsSym, attributes: nil)
-        self.stopPoints.addObject(agsStopGraphic)
+        stopPoints.append(agsStopGraphic!)
         
     }
     
     
-    func clearStops(sender: UIBarButtonItem) {
+    func clearStops(_ sender: UIBarButtonItem) {
         
-        (self.agsMapView.mapLayerForName("Graphics Layer") as! AGSGraphicsLayer).removeAllGraphics()
-        (self.agsMapView.mapLayerForName("Stops Layer") as! AGSGraphicsLayer).removeAllGraphics()
+        (agsMapView.mapLayer(forName: "Graphics Layer") as! AGSGraphicsLayer).removeAllGraphics()
+        (agsMapView.mapLayer(forName: "Stops Layer") as! AGSGraphicsLayer).removeAllGraphics()
 
-        self.directionLabel.text = ""
-        self.stopPoints.removeAllObjects()
-        self.agsRouteResult = nil
+        directionLabel.text = ""
+        stopPoints.removeAll()
+        agsRouteResult = nil
         
     }
     
-    func networkSolve(sender: UIBarButtonItem) {
+    func networkSolve(_ sender: UIBarButtonItem) {
         
-        self.pointIndex = 0
-        self.directionIndex = 0
+        pointIndex = 0
+        directionIndex = 0
         
         //通過ポイントが2点以上ある場合
-        if self.stopPoints.count > 1 {
+        if stopPoints.count > 1 {
             
             //ルート検索用のパラメータを設定
             let agsRouteTaskParams = AGSRouteTaskParameters()
             agsRouteTaskParams.directionsLanguage = "ja-JP"
             agsRouteTaskParams.returnRouteGraphics = true
             agsRouteTaskParams.returnDirections = true
-            agsRouteTaskParams.outSpatialReference = AGSSpatialReference(WKID :102100)
-            agsRouteTaskParams.setStopsWithFeatures(self.stopPoints as [AnyObject])
+            agsRouteTaskParams.outSpatialReference = AGSSpatialReference(wkid :102100)
+            agsRouteTaskParams.setStopsWithFeatures(stopPoints)
             
             //ルート検索を実行
-            self.agsRouteTask.solveWithParameters(agsRouteTaskParams)
+            agsRouteTask.solve(with: agsRouteTaskParams)
             
         } else {
             
-            let alert = UIAlertController(title:"確認", message: "通過点を2ポイント以上追加してください。", preferredStyle: UIAlertControllerStyle.Alert)
-            let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            let alert = UIAlertController(title:"確認", message: "通過点を2ポイント以上追加してください。", preferredStyle: UIAlertControllerStyle.alert)
+            let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             alert.addAction(defaultAction)
-            presentViewController(alert, animated: true, completion: nil)
+            present(alert, animated: true, completion: nil)
             
         }
     }
     
     
-    func routeTask(routeTask: AGSRouteTask!, operation op: NSOperation!, didFailSolveWithError error: NSError!) {
+    func routeTask(_ routeTask: AGSRouteTask!, operation op: Operation!, didFailSolveWithError error: Error!) {
         
         //ルート検索の処理に失敗した場合にエラー内容を表示
-        let alert = UIAlertController(title:"ルートを検索できませんでした。", message: "Error:" + error.description, preferredStyle: UIAlertControllerStyle.Alert)
-        let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+        let alert = UIAlertController(title:"ルートを検索できませんでした。", message: "Error:" + error.localizedDescription, preferredStyle: UIAlertControllerStyle.alert)
+        let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         alert.addAction(defaultAction)
-        presentViewController(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
         
     }
     
-    func routeTask(routeTask: AGSRouteTask!, operation op: NSOperation!, didSolveWithResult routeTaskResult: AGSRouteTaskResult!) {
+    func routeTask(_ routeTask: AGSRouteTask!, operation op: Operation!, didSolveWith routeTaskResult: AGSRouteTaskResult!) {
         
         //検索結果のルートデータを取得
-        self.agsRouteResult = routeTaskResult.routeResults.last as! AGSRouteResult
+        agsRouteResult = routeTaskResult.routeResults.last as! AGSRouteResult
 
         //検索結果のルートデータをグラフィックレイヤに表示
-        let agsGraphic = self.agsRouteResult.routeGraphic
-        agsGraphic.symbol = self.routeSymbol()
-        (self.agsMapView.mapLayerForName("Graphics Layer") as! AGSGraphicsLayer).addGraphic(agsGraphic)
+        let agsGraphic = agsRouteResult.routeGraphic
+        agsGraphic?.symbol = routeSymbol()
+        (agsMapView.mapLayer(forName: "Graphics Layer") as! AGSGraphicsLayer).addGraphic(agsGraphic)
         
         //検索結果のルートデータにズーム
-        let agsEnvelope: AnyObject = self.agsRouteResult.routeGraphic.geometry.envelope.mutableCopy()
-        agsEnvelope.expandByFactor(2.0)
-        self.agsMapView.zoomToEnvelope(agsEnvelope as! AGSEnvelope, animated: true)
+        let agsEnvelope = agsRouteResult.routeGraphic.geometry.envelope.mutableCopy() as AnyObject
+        agsEnvelope.expand(byFactor: 2.0)
+        agsMapView.zoom(to: agsEnvelope as! AGSEnvelope, animated: true)
         
     }
     
@@ -211,13 +210,13 @@ class NetworkViewController: UIViewController, AGSRouteTaskDelegate {
         
         let sls1 = AGSSimpleLineSymbol()
         sls1.color = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 0.9)
-        sls1.style = .Solid
+        sls1.style = .solid
         sls1.width = 8
         rs.addSymbol(sls1)
         
         let sls2 = AGSSimpleLineSymbol()
         sls2.color = UIColor(red: 0.5, green: 0.2, blue: 0.8, alpha: 0.4)
-        sls2.style = .Solid;
+        sls2.style = .solid;
         sls2.width = 4
         rs.addSymbol(sls2)
         
@@ -231,45 +230,45 @@ class NetworkViewController: UIViewController, AGSRouteTaskDelegate {
         
         let sms1 = AGSSimpleMarkerSymbol()
         sms1.color = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 0.9)
-        sms1.style = .Circle
-        sms1.size = CGSizeMake(18,18)
+        sms1.style = .circle
+        sms1.size = CGSize(width: 18,height: 18)
         ss.addSymbol(sms1)
         
         let sms2 = AGSSimpleMarkerSymbol()
-        sms2.color = UIColor.magentaColor()
-        sms2.style = .Circle
-        sms2.size = CGSizeMake(14, 14)
+        sms2.color = UIColor.magenta
+        sms2.style = .circle
+        sms2.size = CGSize(width: 14, height: 14)
         ss.addSymbol(sms2)
         
         return ss
 
     }
     
-    func moveToNextPoint(sender: UIBarButtonItem) {
+    func moveToNextPoint(_ sender: UIBarButtonItem) {
 
-        if self.agsRouteResult == nil {
+        if agsRouteResult == nil {
             return
         }
         
         //検索結果のルートデータの道順を表示する
-        let agsDirections = self.agsRouteResult.directions
-        let agsDirectionGraphic = agsDirections.graphics[self.directionIndex] as! AGSDirectionGraphic
+        let agsDirections = agsRouteResult.directions
+        let agsDirectionGraphic = agsDirections?.graphics[directionIndex] as! AGSDirectionGraphic
         
-        self.directionLabel.text = "  " + agsDirectionGraphic.text
+        directionLabel.text = "  " + agsDirectionGraphic.text
         
         let agsDirectionPoly = agsDirectionGraphic.geometry as! AGSPolyline
-        let agsPoint = agsDirectionPoly.pointOnPath(0, atIndex: self.pointIndex)
-        self.agsMapView.centerAtPoint(agsPoint, animated: true)
+        let agsPoint = agsDirectionPoly.point(onPath: 0, at: pointIndex)
+        agsMapView.center(at: agsPoint, animated: true)
         
-        if self.pointIndex == agsDirectionPoly.numPointsInPath(0) - 1 {
-            self.pointIndex = 0
-            if self.directionIndex == agsDirections.graphics.count - 1 {
-                self.directionIndex = 0
+        if pointIndex == agsDirectionPoly.numPoints(inPath: 0) - 1 {
+            pointIndex = 0
+            if directionIndex == (agsDirections?.graphics.count)! - 1 {
+                directionIndex = 0
             } else {
-                self.directionIndex += 1
+                directionIndex += 1
             }
         } else {
-            self.pointIndex += 1
+            pointIndex += 1
         }
     }
     

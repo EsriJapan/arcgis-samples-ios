@@ -10,51 +10,70 @@ import UIKit
 import ArcGIS
 
 
-class WebmapViewController: UIViewController, AGSWebMapDelegate {
+// デリゲート プロトコルの宣言
+class WebmapViewController: UIViewController, AGSMapViewLayerDelegate, AGSWebMapDelegate {
     
     
+    var mapView: AGSMapView!
     var webmap: AGSWebMap!
-
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
-        //Webマップを表示するマップの作成
-        let agsMapView = AGSMapView(frame: self.view.bounds)
-        self.view.addSubview(agsMapView)
+        // Webマップを表示するマップの作成
+        mapView = AGSMapView(frame: view.bounds)
+        view.addSubview(mapView)
         
-        //組織のArcGIS OnlineのURLとWebマップのIDを指定して、Webマップを作成
-        let portalUrl = NSURL(string: "https://ej.maps.arcgis.com/sharing")
-        self.webmap = AGSWebMap(itemId: "d2dacbb4215d44da903a73c245bdce67", sharingEndPoint: portalUrl, credential: nil)
+        // AGSMapView のデリゲートを自身に設定
+        mapView.layerDelegate = self
         
-        self.webmap.delegate = self
+        // Web マップの取得
+        //webMap = AGSWebMap(itemId: "<Web マップ ID>", credential: nil)
+        webmap = AGSWebMap(itemId: "d3ee769333954213b2f7e894e8e1032c", credential: nil)
         
-        //Webマップを開く
-        self.webmap .openIntoMapView(agsMapView)
+        // 地図を表示するビュー（AGSMapView クラス）上で、Web マップを開く
+        webmap.open(into: mapView)
         
+        // AGSWebMap のデリゲートを自身に設定
+        webmap.delegate = self
+
     }
     
+    
+    // AGSMapView のデリゲート メソッド（地図の読み込み完了時に実行）
+    func mapViewDidLoad(_ mapView: AGSMapView!) {
+        
+        // 位置情報の表示モードを設定
+        mapView.locationDisplay.autoPanMode = .default
+        
+        // 地図が現在位置にズームされる際の表示縮尺の設定
+        self.mapView.locationDisplay.zoomScale = 100000
+        
+        // 現在位置の表示を開始
+        self.mapView.locationDisplay.startDataSource()
+        
+    }
 
     
-    func didOpenWebMap(webMap: AGSWebMap!, intoMapView mapView: AGSMapView!) {
+    func didOpen(_ webMap: AGSWebMap!, into mapView: AGSMapView!) {
         
-        //Webマップの読み込み
+        // Webマップの読み込み
         print("didOpenWebMap:\(webmap.version)")
         
     }
     
-    func didLoadLayer(layer: AGSLayer!) {
+    func didLoad(_ layer: AGSLayer!) {
         
-        //Webマップに含まれるレイヤの読み込み
-        print("didLoadLayer:\(layer.name)")
+        // Webマップに含まれるレイヤの読み込み
+        print("didLoadLayer:\(layer.name as String)")
         
     }
     
-    func didFailToLoadLayer(layerTitle: String!, url: NSURL!, baseLayer: Bool, withError error: NSError!) {
+    func didFail(toLoadLayer layerTitle: String!, url: URL!, baseLayer: Bool, withError error: Error!) {
         
-        //Webマップの読み込み失敗
-        print("\(error)")
+        // Webマップの読み込み失敗
+        print("\(error.localizedDescription)")
         
     }
     

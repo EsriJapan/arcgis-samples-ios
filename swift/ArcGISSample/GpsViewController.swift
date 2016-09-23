@@ -22,86 +22,86 @@ class GpsViewController: UIViewController, AGSMapViewLayerDelegate {
         
         super.viewDidLoad()
         
-        self.agsMapView = AGSMapView(frame: self.view.bounds)
-        self.view.addSubview(self.agsMapView)
+        agsMapView = AGSMapView(frame: view.bounds)
+        view.addSubview(agsMapView)
         
         //タイルマップサービスレイヤーの追加
-        let url = NSURL(string: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer")
-        let tiledLyr = AGSTiledMapServiceLayer(URL:url)
-        self.agsMapView.addMapLayer(tiledLyr, withName:"Tiled Layer")
-        self.agsMapView.layerDelegate = self
+        let url = URL(string: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer")
+        let tiledLyr = AGSTiledMapServiceLayer(url:url)
+        agsMapView.addMapLayer(tiledLyr, withName:"Tiled Layer")
+        agsMapView.layerDelegate = self
         
         
-        self.modeText = UIBarButtonItem(title: "Off", style: .Plain, target: self, action: #selector(GpsViewController.changeMode))
-        self.dataText = UIBarButtonItem(title: "GPS", style: .Plain, target: self, action: #selector(GpsViewController.changeData))
-        let flexibleItem = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
-        let buttons = ([self.modeText, flexibleItem, self.dataText])
-        let toolbar: UIToolbar = UIToolbar(frame: CGRectMake(0, self.view.frame.size.height - 44, self.view.frame.size.width, 44))
+        modeText = UIBarButtonItem(title: "Off", style: .plain, target: self, action: #selector(GpsViewController.changeMode))
+        dataText = UIBarButtonItem(title: "GPS", style: .plain, target: self, action: #selector(GpsViewController.changeData))
+        let flexibleItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let buttons = ([modeText, flexibleItem, dataText])
+        let toolbar: UIToolbar = UIToolbar(frame: CGRect(x: 0, y: view.frame.size.height - 44, width: view.frame.size.width, height: 44))
         
         toolbar.setItems(buttons as? [UIBarButtonItem], animated: true)
-        self.view .addSubview(toolbar)
+        view .addSubview(toolbar)
         
     }
     
     
-    func mapViewDidLoad(mapView: AGSMapView!) {
+    func mapViewDidLoad(_ mapView: AGSMapView!) {
         
         //マップが読み込まれたら位置情報の取得を開始
-        self.agsMapView.locationDisplay.startDataSource()
+        agsMapView.locationDisplay.startDataSource()
         
     }
     
     
-    func changeMode(sender: UIBarButtonItem) {
+    func changeMode(_ sender: UIBarButtonItem) {
         
-        if self.agsMapView.locationDisplay.autoPanMode == .Off {
+        if agsMapView.locationDisplay.autoPanMode == .off {
             
             //位置情報の表示モードをAutoPanModeDefaultに変更
-            self.agsMapView.locationDisplay.autoPanMode = .Default
-            self.modeText.title = "Default"
+            agsMapView.locationDisplay.autoPanMode = .default
+            modeText.title = "Default"
             
-        } else if self.agsMapView.locationDisplay.autoPanMode == .Default {
+        } else if agsMapView.locationDisplay.autoPanMode == .default {
             
             //位置情報の表示モードをAutoPanModeNavigationに変更
-            self.agsMapView.locationDisplay.autoPanMode = .Navigation
-            self.modeText.title = "Navigation"
+            agsMapView.locationDisplay.autoPanMode = .navigation
+            modeText.title = "Navigation"
             
-        } else if self.agsMapView.locationDisplay.autoPanMode == .Navigation {
+        } else if agsMapView.locationDisplay.autoPanMode == .navigation {
             
             //位置情報の表示モードをAutoPanModeCompassNavigationに変更
-            self.agsMapView.locationDisplay.autoPanMode = .CompassNavigation
-            self.modeText.title = "CompassNavigation"
+            agsMapView.locationDisplay.autoPanMode = .compassNavigation
+            modeText.title = "CompassNavigation"
             
-        } else if self.agsMapView.locationDisplay.autoPanMode == .CompassNavigation {
+        } else if agsMapView.locationDisplay.autoPanMode == .compassNavigation {
             
             //位置情報の表示モードをAutoPanModeOffに変更
-            self.agsMapView.locationDisplay.autoPanMode = .Off
-            self.modeText.title = "Off"
+            agsMapView.locationDisplay.autoPanMode = .off
+            modeText.title = "Off"
             
         }
         
     }
     
-    func changeData(sender: UIBarButtonItem) {
+    func changeData(_ sender: UIBarButtonItem) {
         
         
-        if self.useGPX == true {
+        if useGPX == true {
             
-            self.useGPX = false
-            self.dataText.title = "GPS"
+            useGPX = false
+            dataText.title = "GPS"
             //端末の位置情報サービスをもとにデバイスの位置情報をシミュレート
-            self.agsMapView.locationDisplay.dataSource = AGSCLLocationManagerLocationDisplayDataSource()
-            self.agsMapView.locationDisplay.startDataSource()
+            agsMapView.locationDisplay.dataSource = AGSCLLocationManagerLocationDisplayDataSource()
+            agsMapView.locationDisplay.startDataSource()
             
         } else {
             
-            self.useGPX = true
-            self.dataText.title = "GPX"
+            useGPX = true
+            dataText.title = "GPX"
             //gpxファイルのGPSログをもとにデバイスの位置情報をシミュレート
-            let gpxPath = NSBundle.mainBundle().pathForResource("tokyo_yokohama", ofType: "gpx")
+            let gpxPath = Bundle.main.path(forResource: "tokyo_yokohama", ofType: "gpx")
             let gpxLDS = AGSGPXLocationDisplayDataSource(path: gpxPath)
-            self.agsMapView.locationDisplay.dataSource = gpxLDS
-            self.agsMapView.locationDisplay.startDataSource()
+            agsMapView.locationDisplay.dataSource = gpxLDS
+            agsMapView.locationDisplay.startDataSource()
             
         }
         
