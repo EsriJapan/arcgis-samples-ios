@@ -32,12 +32,12 @@ class ServiceAreaViewController: UIViewController, AGSServiceAreaTaskDelegate {
         agsMapView .zoom(toScale: 50000, withCenter: point, animated: true)
         
         //認証の設定:検証用（ArcGIS Onlineのユーザー名とパスワードを指定）
-        let credntial = AGSCredential(user: "<ユーザー名>", password: "<パスワード>", authenticationType: .token)
+        let credential = AGSCredential(user: "<ユーザー名>", password: "<パスワード>")
 
 
         //到達圏解析用のサービスURLの指定
         let saUrl = URL(string: "https://route.arcgis.com/arcgis/rest/services/World/ServiceAreas/NAServer/ServiceArea_World")
-        agsSaTask = AGSServiceAreaTask(url: saUrl, credential: credntial)
+        agsSaTask = AGSServiceAreaTask(url: saUrl, credential: credential)
         agsSaTask.delegate = self
         
         //検索結果の到達圏（ポリゴン）を表示するためのグラフィックスレイヤーを追加
@@ -49,8 +49,8 @@ class ServiceAreaViewController: UIViewController, AGSServiceAreaTaskDelegate {
         agsMapView.addMapLayer(agsFacilitiesLayer, withName:"Facilities Layer")
         
         
-        let buttonSolve = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(ServiceAreaViewController.networkSolve))
-        let buttonClear = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(ServiceAreaViewController.clearStops))
+        let buttonSolve = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(ServiceAreaViewController.networkSolve(sender:)))
+        let buttonClear = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(ServiceAreaViewController.clearStops(sender:)))
         let flexibleItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
 
         
@@ -98,7 +98,7 @@ class ServiceAreaViewController: UIViewController, AGSServiceAreaTaskDelegate {
     }
     
     
-    func clearStops(_ sender: UIBarButtonItem) {
+    func clearStops(sender: UIBarButtonItem) {
         
         //グラフィックスレイヤーに追加されたグラフィックを削除
         (agsMapView.mapLayer(forName: "Graphics Layer") as! AGSGraphicsLayer).removeAllGraphics()
@@ -107,7 +107,7 @@ class ServiceAreaViewController: UIViewController, AGSServiceAreaTaskDelegate {
     }
     
     
-    func networkSolve(_ sender: UIBarButtonItem) {
+    func networkSolve(sender: UIBarButtonItem) {
         
         //解析地点のポイントを作成しグラフィックスレイヤーに追加
         let agsPoint = agsMapView.visibleAreaEnvelope.center
@@ -172,7 +172,7 @@ class ServiceAreaViewController: UIViewController, AGSServiceAreaTaskDelegate {
         
         let agsSym2 = AGSSimpleFillSymbol()
         agsSym2.color = UIColor(red: 0, green: 0, blue: 1.0, alpha: 0.5)
-        agsSym2.style = .solid;
+        agsSym2.style = .solid
         agsSym2.outline = agsOutlineSym2
         
         agsGraphic2.symbol = agsSym2

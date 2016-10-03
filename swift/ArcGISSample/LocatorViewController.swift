@@ -46,7 +46,7 @@ class LocatorViewController: UIViewController, AGSLocatorDelegate, AGSMapViewTou
     
     
     //マップ上でタップされたときに実行される
-    func mapView(_ mapView: AGSMapView!, didClickAt screen: CGPoint, mapPoint mappoint: AGSPoint!, graphics: [AnyHashable: Any]!) {
+    func mapView(_ mapView: AGSMapView!, didClickAt screen: CGPoint, mapPoint mappoint: AGSPoint!, features: [AnyHashable : Any]!) {
         
         agsMapView.callout.isHidden = true
         agsPoint = mappoint

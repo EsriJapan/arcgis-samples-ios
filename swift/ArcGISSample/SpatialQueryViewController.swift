@@ -36,7 +36,7 @@ class SpatialQueryViewController: UIViewController, AGSQueryTaskDelegate, AGSMap
         //フィーチャ検索用のフィーチャレイヤーの追加（流山市のオープンデータ:AED設置場所）        
         let flayerUrl = URL(string: "https://services.arcgis.com/CmCcqeRAPUx17PGk/arcgis/rest/services/AED_2_201506/FeatureServer/0")
         let agsFeatureLayer = AGSFeatureLayer(url: flayerUrl, mode: .onDemand)
-        agsFeatureLayer?.outFields = ["*"];
+        agsFeatureLayer?.outFields = ["*"]
         agsMapView.addMapLayer(agsFeatureLayer, withName:"Feature Layer")
 
         
@@ -54,7 +54,8 @@ class SpatialQueryViewController: UIViewController, AGSQueryTaskDelegate, AGSMap
         
     }
     
-    func mapView(_ mapView: AGSMapView!, didTapAndHoldAt screen: CGPoint, mapPoint mappoint: AGSPoint!, graphics: [AnyHashable: Any]!) {
+    
+    func mapView(_ mapView: AGSMapView!, didTapAndHoldAt screen: CGPoint, mapPoint mappoint: AGSPoint!, features: [AnyHashable : Any]!) {
         
         print("Tap")
         
@@ -69,7 +70,7 @@ class SpatialQueryViewController: UIViewController, AGSQueryTaskDelegate, AGSMap
         
     }
     
-    func mapView(_ mapView: AGSMapView!, didMoveTapAndHoldAt screen: CGPoint, mapPoint mappoint: AGSPoint!, graphics: [AnyHashable: Any]!) {
+    func mapView(_ mapView: AGSMapView!, didMoveTapAndHoldAt screen: CGPoint, mapPoint mappoint: AGSPoint!, features: [AnyHashable : Any]!) {
         
         print("Move")
         
@@ -87,7 +88,7 @@ class SpatialQueryViewController: UIViewController, AGSQueryTaskDelegate, AGSMap
         
     }
     
-    func mapView(_ mapView: AGSMapView!, didEndTapAndHoldAt screen: CGPoint, mapPoint mappoint: AGSPoint!, graphics: [AnyHashable: Any]!) {
+    func mapView(_ mapView: AGSMapView!, didEndTapAndHoldAt screen: CGPoint, mapPoint mappoint: AGSPoint!, features: [AnyHashable : Any]!) {
         
         print("End")
         

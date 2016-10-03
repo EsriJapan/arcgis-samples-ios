@@ -36,7 +36,7 @@ class AttachmentManagerViewController: UIViewController, AGSAttachmentManagerDel
         agsMapView.addMapLayer(agsFeatureLayer, withName:"Feature Layer")
         
         
-        let buttonAttachment = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(AttachmentManagerViewController.addAttachment))
+        let buttonAttachment = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(AttachmentManagerViewController.addAttachment(sender:)))
         let buttons = ([buttonAttachment])
         let toolbar: UIToolbar = UIToolbar(frame: CGRect(x: 0, y: view.frame.size.height - 44, width: view.frame.size.width, height: 44))
         toolbar.setItems(buttons as [UIBarButtonItem], animated: true)
@@ -81,7 +81,7 @@ class AttachmentManagerViewController: UIViewController, AGSAttachmentManagerDel
     }
     
     
-    func addAttachment (_ sender: UIBarButtonItem) {
+    func addAttachment (sender: UIBarButtonItem) {
         
         //添付する写真をフォトライブリから選択
         let imagePickerController = UIImagePickerController()
@@ -151,7 +151,7 @@ class AttachmentManagerViewController: UIViewController, AGSAttachmentManagerDel
     }
     
     
-    private func attachmentManager(_ attachmentManager: AGSAttachmentManager!, didPostLocalEditsToServer attachmentsPosted: [AnyObject]!) {
+    func attachmentManager(_ attachmentManager: AGSAttachmentManager!, didPostLocalEditsToServer attachmentsPosted: [Any]!) {
         
         var success = true
         

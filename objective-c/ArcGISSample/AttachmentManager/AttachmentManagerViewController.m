@@ -96,7 +96,6 @@
     AGSPoint *agsPoint = self.agsMapView.visibleAreaEnvelope.center;
     AGSGraphic *agsFeature = [[AGSGraphic alloc] init];
     agsFeature.geometry = agsPoint;
-    //[agsFeature setAttribute:@"Tree Maintenance or Damage" forKey:@"req_type"];
     [agsFeature setAttribute:@"Minor" forKey:@"typdamage"];
     
     //フィーチャをフィーチャレイヤーに更新
@@ -109,7 +108,7 @@
 - (void)featureLayer:(AGSFeatureLayer *) featureLayer operation:(NSOperation *) op didFailFeatureEditsWithError:(NSError *)error{
     
     // 編集に失敗
-    NSLog(@"Error:%@", error);
+    NSLog(@"Error:%@", error.localizedDescription);
     
 }
 

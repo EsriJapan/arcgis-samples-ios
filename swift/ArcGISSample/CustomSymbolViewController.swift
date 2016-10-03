@@ -55,13 +55,13 @@ class CustomSymbolViewController: UIViewController {
         let slider = UISlider(frame: CGRect(x: 0, y: 100, width: view.frame.size.width, height: 50))
         slider.minimumValue = -180.0
         slider.maximumValue = 180.0
-        slider.addTarget(self, action: #selector(CustomSymbolViewController.sliderEvent), for: .valueChanged)
+        slider.addTarget(self, action: #selector(CustomSymbolViewController.sliderEvent(sender:)), for: .valueChanged)
         view.addSubview(slider)
 
     }
     
     
-    func sliderEvent(_ sender: UISlider) {
+    func sliderEvent(sender: UISlider) {
         
         //レイヤー名を指定して、マップ上のレイヤーを取得
         let graphicsLayer = agsMapView.mapLayer(forName: "Graphics Layer") as! AGSGraphicsLayer

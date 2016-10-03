@@ -32,11 +32,11 @@
     
     
     //認証の設定:検証用（ArcGIS Onlineのユーザー名とパスワードを指定）
-    AGSCredential *credntial = [[AGSCredential alloc] initWithUser:@"<ユーザー名>" password:@"<パスワード>" authenticationType:AGSAuthenticationTypeToken];
+    AGSCredential *credential = [[AGSCredential alloc] initWithUser:@"<ユーザー名>" password:@"<パスワード>"];
 
     //ルート検索用のサービスURLの指定
     NSURL *networkUrl = [NSURL URLWithString:@"https://route.arcgis.com/arcgis/rest/services/World/Route/NAServer/Route_World"];
-    self.agsRouteTask = [[AGSRouteTask alloc] initWithURL:networkUrl credential:credntial];
+    self.agsRouteTask = [[AGSRouteTask alloc] initWithURL:networkUrl credential:credential];
     self.agsRouteTask.delegate = self;
 
     //検索結果のルートを表示するためのグラフィックスレイヤーを追加
@@ -68,7 +68,9 @@
     UIBarButtonItem *buttonSolve = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(networkSolve)];
     UIBarButtonItem *buttonClear = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(clearStops)];
     UIBarButtonItem *buttonNext = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPlay target:self action:@selector(moveToNextPoint)];
-    NSArray *buttons = [NSArray arrayWithObjects:buttonAdd, buttonClear, buttonSolve, buttonNext, nil];
+    UIBarButtonItem *flexibleItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+
+    NSArray *buttons = [NSArray arrayWithObjects:buttonAdd, flexibleItem, buttonClear, flexibleItem, buttonSolve, flexibleItem, buttonNext, nil];
 
 	UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 44, self.view.frame.size.width, 44)];
 	[toolbar setItems:buttons];	
@@ -155,7 +157,6 @@
         agsRouteTaskParams.returnDirections = YES;
         agsRouteTaskParams.outSpatialReference = [AGSSpatialReference spatialReferenceWithWKID:102100];
         [agsRouteTaskParams setStopsWithFeatures:self.stopPoints];
-        agsRouteTaskParams.impedanceAttributeName = @"WalkTime";
         
         //ルート検索を実行
         [self.agsRouteTask solveWithParameters:agsRouteTaskParams];
@@ -173,8 +174,9 @@
 
 - (void)routeTask:(AGSRouteTask *)routeTask operation:(NSOperation *)op didFailSolveWithError:(NSError *)error
 {
+    
     //ルート検索の処理に失敗した場合にエラー内容を表示
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"ルートを検索できませんでした。" message:[NSString stringWithFormat:@"Error:%@", error] preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"ルートを検索できませんでした。" message:[NSString stringWithFormat:@"Error:%@", error.localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
     [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
     [self presentViewController:alertController animated:YES completion:nil];
 }

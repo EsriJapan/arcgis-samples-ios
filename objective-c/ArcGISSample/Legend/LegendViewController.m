@@ -98,7 +98,7 @@
 
 - (void)mapServiceInfo:(AGSMapServiceInfo *)mapServiceInfo operation:(NSOperation *)op didFailToRetrieveLegendInfoWithError:(NSError *)error {
     
-    NSLog(@"Error: %@", error);
+    NSLog(@"Error: %@", error.localizedDescription);
     
 }
 

@@ -37,15 +37,15 @@ class NetworkViewController: UIViewController, AGSRouteTaskDelegate {
         
         //初期表示範囲の設定
         let point = AGSPoint(x: 15554789.5566484, y: 4254781.24130285, spatialReference:AGSSpatialReference(wkid: 102100))
-        agsMapView .zoom(toScale: 50000, withCenter: point, animated: true)
+        agsMapView.zoom(toScale: 50000, withCenter: point, animated: true)
         
         //認証の設定:検証用（ArcGIS Onlineのユーザー名とパスワードを指定）
-        let credntial = AGSCredential(user: "<ユーザー名>", password: "<パスワード>", authenticationType: .token)
+        let credential = AGSCredential(user: "<ユーザー名>", password: "<パスワード>")
 
 
         //ルート検索用のサービスURLの指定
         let networkUrl = URL(string: "https://route.arcgis.com/arcgis/rest/services/World/Route/NAServer/Route_World")
-        agsRouteTask = AGSRouteTask(url: networkUrl, credential: credntial)
+        agsRouteTask = AGSRouteTask(url: networkUrl, credential: credential)
         agsRouteTask.delegate = self
 
         //検索結果のルートを表示するためのグラフィックスレイヤーを追加
@@ -68,17 +68,17 @@ class NetworkViewController: UIViewController, AGSRouteTaskDelegate {
         directionLabel.layer.borderColor = UIColor.darkGray.cgColor
         directionLabel.layer.borderWidth = 3.0
         
-        let buttonAdd = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(NetworkViewController.addStop))
-        let buttonSolve = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(NetworkViewController.networkSolve))
-        let buttonClear = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(NetworkViewController.clearStops))
-        let buttonNext = UIBarButtonItem(barButtonSystemItem: .play, target: self, action: #selector(NetworkViewController.moveToNextPoint))
+        let buttonAdd = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(NetworkViewController.addStop(sender:)))
+        let buttonSolve = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(NetworkViewController.networkSolve(sender:)))
+        let buttonClear = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(NetworkViewController.clearStops(sender:)))
+        let buttonNext = UIBarButtonItem(barButtonSystemItem: .play, target: self, action: #selector(NetworkViewController.moveToNextPoint(sender:)))
         let flexibleItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
 
         
         let buttons = ([buttonAdd, flexibleItem, buttonSolve, flexibleItem, buttonClear, flexibleItem, buttonNext])
         let toolbar: UIToolbar = UIToolbar(frame: CGRect(x: 0, y: view.frame.size.height - 44, width: view.frame.size.width, height: 44))
         toolbar.setItems(buttons as [UIBarButtonItem], animated: true)
-        view .addSubview(toolbar)
+        view.addSubview(toolbar)
         
         //マップの中心にカーソルを表示
         drawCenterSign()
@@ -118,7 +118,7 @@ class NetworkViewController: UIViewController, AGSRouteTaskDelegate {
         
     }
     
-    func addStop(_ sender: UIBarButtonItem) {
+    func addStop(sender: UIBarButtonItem) {
 
         
         //通過ポイントをグラフィックスレイヤーに追加
@@ -134,7 +134,7 @@ class NetworkViewController: UIViewController, AGSRouteTaskDelegate {
     }
     
     
-    func clearStops(_ sender: UIBarButtonItem) {
+    func clearStops(sender: UIBarButtonItem) {
         
         (agsMapView.mapLayer(forName: "Graphics Layer") as! AGSGraphicsLayer).removeAllGraphics()
         (agsMapView.mapLayer(forName: "Stops Layer") as! AGSGraphicsLayer).removeAllGraphics()
@@ -145,7 +145,7 @@ class NetworkViewController: UIViewController, AGSRouteTaskDelegate {
         
     }
     
-    func networkSolve(_ sender: UIBarButtonItem) {
+    func networkSolve(sender: UIBarButtonItem) {
         
         pointIndex = 0
         directionIndex = 0
@@ -244,7 +244,7 @@ class NetworkViewController: UIViewController, AGSRouteTaskDelegate {
 
     }
     
-    func moveToNextPoint(_ sender: UIBarButtonItem) {
+    func moveToNextPoint(sender: UIBarButtonItem) {
 
         if agsRouteResult == nil {
             return

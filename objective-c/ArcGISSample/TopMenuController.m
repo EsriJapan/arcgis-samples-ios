@@ -35,7 +35,6 @@
                       @"NetworkViewController",
                       @"ServiceAreaViewController",
                       @"CoordinateConversionViewController",
-                      @"ClosestFacilityViewController",
                       @"JsonViewController",
                       nil];
         
@@ -58,9 +57,8 @@
                           @"リバース ジオコーディング",
                           @"ルート検索",
                           @"到達圏解析",
-                          @"座標変換",
-                          @"最寄り施設検索",
-                          @"JSONのエンコード・デコード",
+                          @"座標の表示形式",
+                          @"フィーチャをJSON形式で保存",
                           nil];
     }
     return self;
@@ -76,7 +74,6 @@
     
     if(!cell){
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"simple-cell"];
-        
     }
     
     cell.textLabel.text = [self.itemNames objectAtIndex:indexPath.row];

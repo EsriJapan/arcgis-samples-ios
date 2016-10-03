@@ -35,29 +35,27 @@ class ExportTilesViewController: UIViewController, AGSLayerDelegate {
         agsMapView.zoom(toScale: 36111.909643, withCenter: agsProjectedPoint, animated: true)
         agsMapView.maxScale = MaxScale
         
-        
         //ArcGIS for Developers のアカウントのユーザー名とパスワードを入力（検証用）
-        let agsCredential = AGSCredential(user: "<ユーザー名>", password: "<パスワード>")
+        let credential = AGSCredential(user: "<ユーザー名>", password: "<パスワード>")
         
         //ArcGIS Online のベースマップ（タイルのダウンロード専用）の URL を設定
         let tileServiceURL = "https://tiledbasemaps.arcgis.com/arcgis/rest/services/World_Street_Map/MapServer"
         
         //タイル レイヤーをマップに追加
         //レイヤー読み込みのためのデリゲートを設定
-        let tiledUrl = URL(string: tileServiceURL)
-        tiledLayer = AGSTiledMapServiceLayer(url: tiledUrl, credential: agsCredential)
+        tiledLayer = AGSTiledMapServiceLayer(url: URL(string: tileServiceURL), credential: credential)
         tiledLayer.delegate  = self
         agsMapView.addMapLayer(tiledLayer, withName:"World Street Map")
         
         
         //タイルのエクスポート用タスクを作成
         if exportTileTask == nil {
-            exportTileTask = AGSExportTileCacheTask(url: tiledUrl, credential: agsCredential)
+            exportTileTask = AGSExportTileCacheTask(url: URL(string: tileServiceURL), credential: credential)
         }
         
         //ダウンロード ボタンの追加
-        downloadBtn = UIBarButtonItem(title: "ダウンロード", style: .plain, target: self, action: #selector(ExportTilesViewController.exportTiles))
-        resetBtn = UIBarButtonItem(title: "リセット", style: .plain, target: self, action: #selector(ExportTilesViewController.resetMap))
+        downloadBtn = UIBarButtonItem(title: "ダウンロード", style: .plain, target: self, action: #selector(ExportTilesViewController.exportTiles(sender:)))
+        resetBtn = UIBarButtonItem(title: "リセット", style: .plain, target: self, action: #selector(ExportTilesViewController.resetMap(sender:)))
         downloadBtn.isEnabled = false
         resetBtn.isEnabled = false
         

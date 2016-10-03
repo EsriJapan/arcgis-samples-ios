@@ -45,7 +45,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, AGSQueryTaskD
         
         //検索するレイヤーのURLを指定してフィーチャ検索用タスク（AGSQueryTask）を作成
         agsQueryTask = AGSQueryTask(url: flayerUrl)
-        agsQueryTask.delegate = self;
+        agsQueryTask.delegate = self
         
         
         let searchBar = UISearchBar(frame: CGRect(x: 0, y: UIApplication.shared.statusBarFrame.size.height + navigationController!.navigationBar.frame.size.height, width: view.frame.size.width, height: 50))

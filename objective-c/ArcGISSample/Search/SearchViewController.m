@@ -94,7 +94,7 @@
 
 - (void)queryTask:(AGSQueryTask *)queryTask operation:(NSOperation *)op didFailWithError:(NSError *)error {
     
-    NSLog(@"%@", error);
+    NSLog(@"%@", error.localizedDescription);
     
 }
 

@@ -43,10 +43,10 @@ class SketchViewController: UIViewController{
         agsMapView.touchDelegate = agsSketchGraphicsLayer
         
         
-        let buttonUndo = UIBarButtonItem(barButtonSystemItem: .undo, target: self, action: #selector(SketchViewController.undoSketch))
-        let buttonRedo = UIBarButtonItem(barButtonSystemItem: .redo, target: self, action: #selector(SketchViewController.redoSketch))
-        let buttonRemove = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(SketchViewController.removeSketch))
-        let buttonSubmit = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(SketchViewController.submitSketch))
+        let buttonUndo = UIBarButtonItem(barButtonSystemItem: .undo, target: self, action: #selector(SketchViewController.undoSketch(sender:)))
+        let buttonRedo = UIBarButtonItem(barButtonSystemItem: .redo, target: self, action: #selector(SketchViewController.redoSketch(sender:)))
+        let buttonRemove = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(SketchViewController.removeSketch(sender:)))
+        let buttonSubmit = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(SketchViewController.submitSketch(sender:)))
         let flexibleItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
 
 
@@ -58,7 +58,7 @@ class SketchViewController: UIViewController{
     }
     
     
-    func undoSketch(_ sender: UIBarButtonItem) {
+    func undoSketch(sender: UIBarButtonItem) {
         
         //編集を元に戻す
         if (agsSketchGraphicsLayer.undoManager.canUndo) {
@@ -67,7 +67,7 @@ class SketchViewController: UIViewController{
         
     }
     
-    func redoSketch(_ sender: UIBarButtonItem) {
+    func redoSketch(sender: UIBarButtonItem) {
         
         //編集をやり直す
         if (agsSketchGraphicsLayer.undoManager.canRedo) {
@@ -76,7 +76,7 @@ class SketchViewController: UIViewController{
         
     }
     
-    func removeSketch(_ sender: UIBarButtonItem) {
+    func removeSketch(sender: UIBarButtonItem) {
         
         //選択されている頂点を削除する
         agsSketchGraphicsLayer.removeSelectedVertex()
@@ -84,7 +84,7 @@ class SketchViewController: UIViewController{
     }
     
     
-    func submitSketch(_ sender: UIBarButtonItem) {
+    func submitSketch(sender: UIBarButtonItem) {
         
         //作成したジオメトリからシンボルを指定してグラフィックを作成し、グラフィックスレイヤーに追加
         let fillSymbol = AGSSimpleFillSymbol(color: UIColor.purple .withAlphaComponent(0.25), outlineColor: UIColor.darkGray)

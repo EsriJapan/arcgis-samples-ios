@@ -28,8 +28,7 @@ class WebmapViewController: UIViewController, AGSMapViewLayerDelegate, AGSWebMap
         // AGSMapView のデリゲートを自身に設定
         mapView.layerDelegate = self
         
-        // Web マップの取得
-        //webMap = AGSWebMap(itemId: "<Web マップ ID>", credential: nil)
+        // WebマップのアイテムIDを指定して、Webマップを作成
         webmap = AGSWebMap(itemId: "d3ee769333954213b2f7e894e8e1032c", credential: nil)
         
         // 地図を表示するビュー（AGSMapView クラス）上で、Web マップを開く
@@ -55,6 +54,7 @@ class WebmapViewController: UIViewController, AGSMapViewLayerDelegate, AGSWebMap
         
     }
 
+
     
     func didOpen(_ webMap: AGSWebMap!, into mapView: AGSMapView!) {
         
@@ -63,14 +63,16 @@ class WebmapViewController: UIViewController, AGSMapViewLayerDelegate, AGSWebMap
         
     }
     
-    func didLoad(_ layer: AGSLayer!) {
+    
+    func webMap(_ webMap: AGSWebMap!, didLoad layer: AGSLayer!) {
         
         // Webマップに含まれるレイヤの読み込み
-        print("didLoadLayer:\(layer.name as String)")
+        print("didLoadLayer:\(layer.name)")
         
     }
     
-    func didFail(toLoadLayer layerTitle: String!, url: URL!, baseLayer: Bool, withError error: Error!) {
+    
+    func webMap(_ webMap: AGSWebMap!, didFailToLoadWithError error: Error!) {
         
         // Webマップの読み込み失敗
         print("\(error.localizedDescription)")

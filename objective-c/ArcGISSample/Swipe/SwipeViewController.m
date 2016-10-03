@@ -25,10 +25,11 @@
 	NSURL *url1 = [NSURL URLWithString:@"https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer"];
 	AGSTiledMapServiceLayer *tiledMapServiceLayer1 = [[AGSTiledMapServiceLayer alloc] initWithURL:url1];
 	[agsMapView1 addMapLayer:tiledMapServiceLayer1 withName:@"Tiled Layer1"];
-    
+    [agsMapView1 setUserInteractionEnabled:NO];
+
     AGSEnvelope *envelope = [AGSEnvelope envelopeWithXmin:1.5557970122810215E7 ymin:4258398.013496462 xmax:1.5558175713936899E7  ymax:4258509.895960432  spatialReference:agsMapView1.spatialReference];
     [agsMapView1 zoomToEnvelope:envelope animated:NO];
-    
+
     
     //衛星画像レイヤー表示用のUIViewの作成
     self.layerView = [[UIView alloc] initWithFrame:self.view.bounds];
@@ -37,6 +38,7 @@
     //UIViewに衛星画像レイヤー表示用のマップを追加
     AGSMapView *agsMapView2 = [[AGSMapView alloc] initWithFrame:self.view.bounds];
 	[self.layerView addSubview:agsMapView2];
+    [agsMapView2 setUserInteractionEnabled:NO];
     
     //マップにタイルマップサービスレイヤーを追加（衛星画像）
     NSURL *url2 = [NSURL URLWithString:@"https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer"];

@@ -32,8 +32,8 @@ class GpsViewController: UIViewController, AGSMapViewLayerDelegate {
         agsMapView.layerDelegate = self
         
         
-        modeText = UIBarButtonItem(title: "Off", style: .plain, target: self, action: #selector(GpsViewController.changeMode))
-        dataText = UIBarButtonItem(title: "GPS", style: .plain, target: self, action: #selector(GpsViewController.changeData))
+        modeText = UIBarButtonItem(title: "Off", style: .plain, target: self, action: #selector(GpsViewController.changeMode(sender:)))
+        dataText = UIBarButtonItem(title: "GPS", style: .plain, target: self, action: #selector(GpsViewController.changeData(sender:)))
         let flexibleItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let buttons = ([modeText, flexibleItem, dataText])
         let toolbar: UIToolbar = UIToolbar(frame: CGRect(x: 0, y: view.frame.size.height - 44, width: view.frame.size.width, height: 44))
@@ -52,7 +52,7 @@ class GpsViewController: UIViewController, AGSMapViewLayerDelegate {
     }
     
     
-    func changeMode(_ sender: UIBarButtonItem) {
+    func changeMode(sender: UIBarButtonItem) {
         
         if agsMapView.locationDisplay.autoPanMode == .off {
             
@@ -82,7 +82,7 @@ class GpsViewController: UIViewController, AGSMapViewLayerDelegate {
         
     }
     
-    func changeData(_ sender: UIBarButtonItem) {
+    func changeData(sender: UIBarButtonItem) {
         
         
         if useGPX == true {

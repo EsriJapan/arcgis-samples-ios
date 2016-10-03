@@ -22,9 +22,8 @@
     AGSMapView *agsMapView = [[AGSMapView alloc] initWithFrame:self.view.bounds];
     [self.view addSubview:agsMapView];
     
-    //組織のArcGIS OnlineのURLとWebマップのIDを指定して、Webマップを作成
-    NSURL *portalUrl = [NSURL URLWithString:@"https://ej.maps.arcgis.com/sharing"];
-    self.webmap = [[AGSWebMap alloc] initWithItemId:@"d2dacbb4215d44da903a73c245bdce67" sharingEndPoint:portalUrl credential:nil];
+    //WebマップのアイテムIDを指定して、Webマップを作成
+    self.webmap = [[AGSWebMap alloc] initWithItemId:@"d3ee769333954213b2f7e894e8e1032c" credential:nil];
     
     self.webmap.delegate = self;
     
@@ -41,8 +40,10 @@
     
 }
 
-- (void)didLoadLayer:(AGSLayer *)layer {
+
+-(void)webMap:(AGSWebMap *)webMap didLoadLayer:(AGSLayer *)layer{
     
+
     //Webマップに含まれるレイヤの読み込み
     NSLog(@"didLoadLayer: %@", layer.name);
     
@@ -51,7 +52,7 @@
 - (void)didFailToLoadLayer:(NSString *)layerTitle withError:(NSError *)error {
     
     //Webマップの読み込み失敗
-    NSLog(@"%@", [error localizedDescription]);
+    NSLog(@"%@", error.localizedDescription);
     
 }
 

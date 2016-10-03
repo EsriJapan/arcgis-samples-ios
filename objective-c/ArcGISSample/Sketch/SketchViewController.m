@@ -45,7 +45,8 @@
     UIBarButtonItem *buttonRedo = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRedo target:self action:@selector(redoSketch)];
     UIBarButtonItem *buttonRemove = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(removeVertex)];
     UIBarButtonItem *buttonSubmit = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(submitFeature)];
-    NSArray *buttons = [NSArray arrayWithObjects:buttonUndo, buttonRedo, buttonRemove, buttonSubmit, nil];
+    UIBarButtonItem *flexibleItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    NSArray *buttons = [NSArray arrayWithObjects:buttonUndo, flexibleItem, buttonRedo, flexibleItem, buttonRemove, flexibleItem, buttonSubmit, nil];
 
 	UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 44, self.view.frame.size.width, 44)];
 	[toolbar setItems:buttons];	

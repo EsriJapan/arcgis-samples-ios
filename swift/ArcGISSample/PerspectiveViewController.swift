@@ -44,7 +44,7 @@ class PerspectiveViewController: UIViewController, AGSMapViewLayerDelegate, CAAn
         agsMapView2.addMapLayer(tiledLyr2, withName:"Tiled Layer2")
         
         
-        let persItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(PerspectiveViewController.buttonEvent))
+        let persItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(PerspectiveViewController.buttonEvent(sender:)))
         navigationItem.rightBarButtonItem = persItem
         
         perspective = false
@@ -95,7 +95,7 @@ class PerspectiveViewController: UIViewController, AGSMapViewLayerDelegate, CAAn
     }
     
 
-    func buttonEvent(_ sender: UIBarButtonItem) {
+    func buttonEvent(sender: UIBarButtonItem) {
         
         if perspective == true {
             reversePerspectiveAnimation()
@@ -133,7 +133,7 @@ class PerspectiveViewController: UIViewController, AGSMapViewLayerDelegate, CAAn
         caLayer1.shadowRadius = 3;
         caLayer1.shadowOffset = CGSize(width: 10, height: 10)
         caLayer1.shadowOpacity = 0.7
-        caLayer1 .add(animation, forKey: "transform1")
+        caLayer1.add(animation, forKey: "transform1")
         
         let scaleAnim2 = CATransform3DMakeScale(0.8, 0.8, 0.8)
         let rotateAnim2 = CATransform3DRotate(transformID, 45.0 * CGFloat(M_PI / 180.0), 1.0, -0.5, 0.5)
@@ -147,7 +147,7 @@ class PerspectiveViewController: UIViewController, AGSMapViewLayerDelegate, CAAn
         caLayer2.shadowRadius = 3
         caLayer2.shadowOffset = CGSize(width: 10, height: 10)
         caLayer2.shadowOpacity = 0.7
-        caLayer2 .add(animation, forKey: "transform2")
+        caLayer2.add(animation, forKey: "transform2")
 
     }
     
@@ -174,7 +174,7 @@ class PerspectiveViewController: UIViewController, AGSMapViewLayerDelegate, CAAn
         agsMapView1.layer.transform = transformID
         let caLayer1 = agsMapView1.layer
         caLayer1.shadowOpacity = 0
-        caLayer1 .add(animation, forKey: "transform1")
+        caLayer1.add(animation, forKey: "transform1")
         
         let scaleAnim2 = CATransform3DMakeScale(0.8, 0.8, 0.8)
         let rotateAnim2 = CATransform3DRotate(transformID, 45.0 * CGFloat(M_PI / 180.0), 1.0, -0.5, 0.5)
@@ -185,7 +185,7 @@ class PerspectiveViewController: UIViewController, AGSMapViewLayerDelegate, CAAn
         agsMapView2.layer.transform = transformID
         let caLayer2 = agsMapView2.layer
         caLayer2.shadowOpacity = 0
-        caLayer2 .add(animation, forKey: "transform2")
+        caLayer2.add(animation, forKey: "transform2")
 
     }
     

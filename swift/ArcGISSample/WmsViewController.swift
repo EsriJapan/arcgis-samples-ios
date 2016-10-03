@@ -26,18 +26,14 @@ class WmsViewController: UIViewController, AGSWebMapDelegate {
         
         
         //コピーライト用のラベルを追加
-        let label:UILabel = UILabel(frame: CGRect(x: 0, y: view.frame.size.height - 20, width: 70, height: 20))
+        let label = UILabel(frame: CGRect(x: 0, y: view.frame.size.height - 20, width: 70, height: 20))
         label.text = "(c) JAXA"
         label.backgroundColor = UIColor.white
         label.alpha = 0.5
         view.addSubview(label)
         
     }
-    
-    
-    
 
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

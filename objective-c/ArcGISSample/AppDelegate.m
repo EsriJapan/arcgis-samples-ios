@@ -23,10 +23,10 @@
     
     TopMenuController *topMenu = [[TopMenuController alloc] init];
     self.rootController = [[UINavigationController alloc] initWithRootViewController:topMenu];
+    [self.rootController.interactivePopGestureRecognizer setEnabled:NO];
     [self.window addSubview:self.rootController.view];
     [self.window makeKeyAndVisible];
     [self.window setRootViewController:self.rootController];
-    
     
     return YES;
 }

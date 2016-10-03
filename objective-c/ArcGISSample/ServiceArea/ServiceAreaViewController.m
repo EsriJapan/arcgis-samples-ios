@@ -23,18 +23,18 @@
     //タイルマップサービスレイヤーの追加
     NSURL *url = [NSURL URLWithString:@"https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer"];
     AGSTiledMapServiceLayer *tiledMapServiceLayer = [[AGSTiledMapServiceLayer alloc] initWithURL:url];
-    [_agsMapView addMapLayer:tiledMapServiceLayer withName:@"Tiled Layer"];
+    [self.agsMapView addMapLayer:tiledMapServiceLayer withName:@"Tiled Layer"];
     
     AGSSpatialReference *agsSpRef = [AGSSpatialReference spatialReferenceWithWKID:102100];
     AGSPoint *point = [AGSPoint pointWithX:15554789.5566484 y:4254781.24130285 spatialReference:agsSpRef];
     [self.agsMapView zoomToScale:50000 withCenterPoint:point animated:YES];
     
     //認証の設定:検証用（ArcGIS Onlineのユーザー名とパスワードを指定）
-    AGSCredential *credntial = [[AGSCredential alloc] initWithUser:@"<ユーザー名>" password:@"<パスワード>" authenticationType:AGSAuthenticationTypeToken];
+    AGSCredential *credential = [[AGSCredential alloc] initWithUser:@"<ユーザー名>" password:@"<パスワード>"];
 
     //到達圏解析用のサービスURLの指定
     NSURL *saUrl = [NSURL URLWithString:@"https://route.arcgis.com/arcgis/rest/services/World/ServiceAreas/NAServer/ServiceArea_World"];
-    self.agsSaTask = [[AGSServiceAreaTask alloc] initWithURL:saUrl credential:credntial];
+    self.agsSaTask = [[AGSServiceAreaTask alloc] initWithURL:saUrl credential:credential];
     self.agsSaTask.delegate = self;
     
     //検索結果の到達圏（ポリゴン）を表示するためのグラフィックスレイヤーを追加
@@ -48,8 +48,9 @@
     
     UIBarButtonItem *buttonSolve = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(networkSolve)];
     UIBarButtonItem *buttonClear = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(clearResults)];
-    
-    NSArray *buttons = [NSArray arrayWithObjects:buttonSolve, buttonClear, nil];
+    UIBarButtonItem *flexibleItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+
+    NSArray *buttons = [NSArray arrayWithObjects:buttonSolve, flexibleItem, buttonClear, nil];
 	UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 44, self.view.frame.size.width, 44)];
 	[toolbar setItems:buttons];	
 	[self.view addSubview:toolbar];
@@ -85,7 +86,7 @@
 	UIGraphicsEndImageContext();
 	
 	CALayer *caLayer = [CALayer layer];
-	caLayer.frame = CGRectMake(_agsMapView.frame.size.width / 2 - 10, _agsMapView.frame.size.height / 2 - 10, 20, 20);
+    caLayer.frame = CGRectMake(self.agsMapView.frame.size.width / 2 - 10, self.agsMapView.frame.size.height / 2 - 10, 20, 20);
 	caLayer.contents = (id)image.CGImage;
 	[self.view.layer addSublayer:caLayer];
     
@@ -132,7 +133,7 @@
     agsSaTaskParams.returnPointBarriers = NO;
     agsSaTaskParams.returnPolylineBarriers = NO;
     agsSaTaskParams.returnPolygonBarriers = NO;
-    agsSaTaskParams.outputPolygons = AGSNAOutputPolygonSimplified;
+    agsSaTaskParams.outputPolygons = AGSNAOutputPolygonDetailed;
     agsSaTaskParams.defaultBreaks = breaks;
     
     //到達圏解析を実行
@@ -185,9 +186,9 @@
 
 
 - (void)serviceAreaTask:(AGSServiceAreaTask *)serviceAreaTask operation:(NSOperation *)op didFailSolveWithError:(NSError *)error {
-    
+
     //到達圏解析の処理に失敗した場合にエラー内容を表示
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"到達圏を検索できませんでした。" message:[NSString stringWithFormat:@"Error:%@", error] preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"到達圏を検索できませんでした。" message:[NSString stringWithFormat:@"Error:%@", error.localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
     [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
     [self presentViewController:alertController animated:YES completion:nil];
     

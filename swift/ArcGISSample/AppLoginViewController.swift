@@ -23,7 +23,7 @@ class AppLoginViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         
         //マップの作成
-        mapView = AGSMapView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))
+        mapView = AGSMapView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height))
         view.addSubview(self.mapView)
         
         //タイルマップサービスレイヤーの追加
@@ -39,6 +39,7 @@ class AppLoginViewController: UIViewController {
         let clientId:String = "<Applications_Client_Id>"
         //秘密鍵の設定
         let clientSecret:String = "<Applications_Client_Secret>"
+        
         //トークンの有効期限の設定（1時間）
         let expiration:String = "60"
         

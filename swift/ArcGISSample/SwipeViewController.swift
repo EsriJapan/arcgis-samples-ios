@@ -56,13 +56,13 @@ class SwipeViewController: UIViewController{
         let slider = UISlider(frame: CGRect(x: 0, y: 100, width: view.frame.size.width, height: 50))
         slider.minimumValue = 0.0
         slider.maximumValue = 1.0
-        slider .addTarget(self, action: #selector(SwipeViewController.sliderEvent), for: .valueChanged)        
+        slider.addTarget(self, action: #selector(SwipeViewController.sliderEvent(sender:)), for: .valueChanged)
         view.addSubview(slider)
         
     }
     
     
-    func sliderEvent(_ sender: UISlider) {
+    func sliderEvent(sender: UISlider) {
         
         //衛星画像レイヤー表示用のUIViewのframeを変更する
         layerView.frame = CGRect(x: 0, y: 0, width: view.frame.size.width * CGFloat(sender.value), height: view.frame.size.height)

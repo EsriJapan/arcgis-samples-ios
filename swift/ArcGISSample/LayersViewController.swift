@@ -38,19 +38,19 @@ class LayersViewController: UIViewController {
         let switch1 = UISwitch(frame: CGRect(x: 20, y: 90, width: 20, height: 20))
         switch1.tag = 1
         switch1.isOn = true
-        switch1.addTarget(self, action:#selector(LayersViewController.switchEvent), for: .valueChanged)
+        switch1.addTarget(self, action:#selector(LayersViewController.switchEvent(sender:)), for: .valueChanged)
         view.addSubview(switch1)
         
         let switch2 = UISwitch(frame: CGRect(x: 20, y: 130, width: 20, height: 20))
         switch2.tag = 2
         switch2.isOn = true
-        switch2.addTarget(self, action:#selector(LayersViewController.switchEvent), for: .valueChanged)
+        switch2.addTarget(self, action:#selector(LayersViewController.switchEvent(sender:)), for: .valueChanged)
         view.addSubview(switch2)
         
     }
     
     
-    func switchEvent(_ sender: UISwitch) {
+    func switchEvent(sender: UISwitch) {
         
         //衛星画像・道路地図レイヤーの表示・非表示
         let sw = sender

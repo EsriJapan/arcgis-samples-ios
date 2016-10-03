@@ -41,13 +41,13 @@
 }
 
 //マップ上でタップされたときに実行される
--(void)mapView:(AGSMapView *)mapView didClickAtPoint:(CGPoint)screen mapPoint:(AGSPoint *)clickPoint graphics:(NSDictionary *)graphics{
-    
+-(void)mapView:(AGSMapView *)mapView didClickAtPoint:(CGPoint)screen mapPoint:(AGSPoint *)mappoint features:(NSDictionary *)features {
+
     self.agsMapView.callout.hidden = YES;
-    self.agsPoint = clickPoint;
+    self.agsPoint = mappoint;
     
     //住所を検索する位置をパラメータに指定してタスクを実行
-    [self.agsLocator addressForLocation:clickPoint maxSearchDistance:100];
+    [self.agsLocator addressForLocation:mappoint maxSearchDistance:100];
     
 }
 
@@ -72,7 +72,7 @@
 
 -(void)locator:(AGSLocator *)locator operation:(NSOperation *)op didFailAddressForLocation:(NSError *)error{
     
-    NSLog(@"Error: %@", error);
+    NSLog(@"Error: %@", error.localizedDescription);
     
 }
 

@@ -10,7 +10,7 @@
 #import <ArcGIS/ArcGIS.h>
 
 
-@interface PerspectiveViewController : UIViewController <AGSMapViewLayerDelegate>
+@interface PerspectiveViewController : UIViewController <AGSMapViewLayerDelegate, CAAnimationDelegate>
 
 @property (nonatomic, strong) AGSMapView *agsMapView1;
 @property (nonatomic, strong) AGSMapView *agsMapView2;

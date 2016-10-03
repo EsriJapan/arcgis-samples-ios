@@ -47,13 +47,13 @@ class TimeViewController: UIViewController, AGSWebMapDelegate {
         agsMapView.timeExtent = agsTimeExtent
         
         
-        let timeItem = UIBarButtonItem(barButtonSystemItem: .play, target: self, action: #selector(TimeViewController.buttonEvent))
+        let timeItem = UIBarButtonItem(barButtonSystemItem: .play, target: self, action: #selector(TimeViewController.buttonEvent(sender:)))
         navigationItem.rightBarButtonItem = timeItem
         
     }
     
     
-    func buttonEvent(_ sender: UIBarButtonItem) {
+    func buttonEvent(sender: UIBarButtonItem) {
         
         //マップ上でフィーチャを表示する時間範囲を1年単位で変更
         var comps = DateComponents()
