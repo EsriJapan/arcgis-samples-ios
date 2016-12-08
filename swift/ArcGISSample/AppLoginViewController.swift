@@ -12,7 +12,7 @@ import ArcGIS
 
 
 //プライベートなサービスにアクセスするためにアプリ認証をクライアント側で実装するサンプル
-//アプリの登録と認証: http://esrijapan.github.io/arcgis-dev-resources/register-app/
+//アプリの登録と認証: https://esrijapan.github.io/arcgis-dev-resources/register-app/
 
 class AppLoginViewController: UIViewController {
     
@@ -22,25 +22,25 @@ class AppLoginViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        //マップの作成
-        mapView = AGSMapView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height))
-        view.addSubview(self.mapView)
         
-        //タイルマップサービスレイヤーの追加
-        let tiledMapServiceLayer = AGSTiledMapServiceLayer (url: URL(string: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer"))
-        mapView.addMapLayer(tiledMapServiceLayer, withName:"Tiled Map Service Layer")
+        // 道路地図レイヤー表示用のマップの作成
+        mapView = AGSMapView(frame: view.bounds)
+        view.addSubview(mapView)
+        let map = AGSMap(basemapType: AGSBasemapType.streets, latitude: 35.681298, longitude: 139.766247, levelOfDetail: 5)
+        mapView.map = map
         
-        //トークンのリクエスト先URLの設定
+        // トークンのリクエスト先 URL の設定
         let urlString = "https://www.arcgis.com/sharing/oauth2/token"
         let request = NSMutableURLRequest(url: URL(string: urlString)!)
         request.httpMethod = "POST"
         
-        //アプリ ID の設定
+        // アプリ ID の設定
         let clientId:String = "<Applications_Client_Id>"
-        //秘密鍵の設定
+
+        // 秘密鍵の設定
         let clientSecret:String = "<Applications_Client_Secret>"
         
-        //トークンの有効期限の設定（1時間）
+        // トークンの有効期限の設定（1時間）
         let expiration:String = "60"
         
         let grantType:String = "client_credentials"
@@ -57,7 +57,7 @@ class AppLoginViewController: UIViewController {
                     
                     DispatchQueue.main.async {
                         
-                        
+                        // トークンの取得に失敗
                         if res["error"] != nil {
                             
                             let error = res["error"] as! [String: Any]
@@ -71,13 +71,19 @@ class AppLoginViewController: UIViewController {
                             
                         } else {
                             
+                            // トークンの取得に成功
                             let token = res["access_token"] as! String
                             print(token)
                             
-                            let credential = AGSCredential(token: token)
-                            let featureLayer = AGSFeatureLayer(url: URL(string: "<Secure_Service_Layer_URL>"), mode: .onDemand, credential: credential)
+                            // 認証情報を付与してフィーチャ サービスを読み込む
+                            let credential = AGSCredential(token: token, referer: nil)
                             
-                            self.mapView.addMapLayer(featureLayer, withName:"Feature Service Layer")
+                            let flayerUrl = URL(string: "<Secure_Service_Layer_URL>")
+                            let featureTable = AGSServiceFeatureTable(url: flayerUrl!)
+                            let featureLayer = AGSFeatureLayer(featureTable: featureTable)
+                            featureTable.credential = credential
+                            self.mapView.map?.operationalLayers.add(featureLayer)
+                            
                             
                         }
                         
