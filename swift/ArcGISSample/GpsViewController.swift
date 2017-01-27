@@ -13,7 +13,6 @@ import ArcGIS
 class GpsViewController: UIViewController {
     
     var mapView: AGSMapView!
-    var map: AGSMap!
     var modeText: UIBarButtonItem!
     var dataText: UIBarButtonItem!
     var useGPX: Bool! = false
@@ -27,14 +26,21 @@ class GpsViewController: UIViewController {
         // 道路地図レイヤー表示用のマップを作成する
         mapView = AGSMapView(frame: view.bounds)
         view.addSubview(mapView)
-        map = AGSMap(basemapType: AGSBasemapType.streets, latitude: 35.681298, longitude: 139.766247, levelOfDetail: 15)
+        let map = AGSMap(basemapType: AGSBasemapType.streets, latitude: 35.681298, longitude: 139.766247, levelOfDetail: 15)
         mapView.map = map
         
         
-        // マップの読み込みを監視する
-        map.addObserver(self, forKeyPath: "loadStatus", options: .new, context: nil)
+        // マップが読み込まれたら位置情報の取得を開始
+        mapView.locationDisplay.start(completion: { (error) -> Void in
+            if let error = error {
+                print("Error:\(error.localizedDescription)")
+            } else {
+                print("Start")
+            }
+        })
 
-        
+
+        // 位置情報の表示モード/データソースの変更ボタンを作成
         modeText = UIBarButtonItem(title: "Off", style: .plain, target: self, action: #selector(GpsViewController.changeMode(sender:)))
         dataText = UIBarButtonItem(title: "GPS", style: .plain, target: self, action: #selector(GpsViewController.changeData(sender:)))
         let flexibleItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
@@ -44,29 +50,6 @@ class GpsViewController: UIViewController {
         toolbar.setItems(buttons as? [UIBarButtonItem], animated: true)
         view .addSubview(toolbar)
         
-    }
-    
-    
-    
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if map.loadStatus == AGSLoadStatus.loaded {
-            
-            // マップが読み込まれたら位置情報の取得を開始
-            mapView.locationDisplay.start(completion: { (error) -> Void in
-                if let error = error {
-                    
-                    print("Error:\(error.localizedDescription)")
-                    
-                } else {
-                    
-                    print("Start")
-                    
-                }
-            })
-            
-        }
-        
-
     }
     
     

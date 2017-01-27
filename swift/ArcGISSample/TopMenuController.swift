@@ -13,16 +13,16 @@ class TopMenuController: UIViewController, UITableViewDelegate, UITableViewDataS
     
     let items = [
         "GpsViewController",
-        "SwipeViewController",
         "SpatialQueryViewController",
-        "AppLoginViewController"
+        "SwipeViewController",
+        "AppLoginViewController",
     ]
     
     let itemNames = [
         "ナビゲーション",
-        "スワイプ",
         "空間検索",
-        "アプリ認証"
+        "スワイプ",
+        "アプリ認証",
     ]
     
     
@@ -63,7 +63,6 @@ class TopMenuController: UIViewController, UITableViewDelegate, UITableViewDataS
             let controller = theClass.init(nibName: nil, bundle: nil)
             navigationController!.pushViewController(controller, animated: true)
         }
-
 
     }
         

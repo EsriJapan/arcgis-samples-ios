@@ -40,31 +40,10 @@ class SpatialQueryViewController: UIViewController, AGSGeoViewTouchDelegate {
         let flayerUrl = URL(string: "https://services.arcgis.com/CmCcqeRAPUx17PGk/arcgis/rest/services/AED_2_201506/FeatureServer/0")
         featureTable = AGSServiceFeatureTable(url: flayerUrl!)
         
-        // フィーチャ レイヤーのフィーチャのリクエスト モードを手動に設定
-        featureTable.featureRequestMode = .manualCache
+        // フィーチャ レイヤーのフィーチャのリクエスト モードを設定
+        featureTable.featureRequestMode = .onInteractionNoCache
         let featureLayer = AGSFeatureLayer(featureTable: featureTable)
         map.operationalLayers.add(featureLayer)
-        
-        
-        // フィーチャの取得（検索）時のパラメーターを設定
-        let params = AGSQueryParameters()
-        
-        // 全てのフィーチャを取得する
-        params.whereClause = "1 = 1"
-
-        // 検索結果にフィーチャの全属性（outFields の配列に "*" を指定）を含める
-        self.featureTable.populateFromService(with: params, clearCache: true, outFields: ["*"]) {(result, error) -> Void in
-            if let error = error {
-                
-                print("Error:\(error.localizedDescription)")
-                
-            } else {
-                
-                // フィーチャ数を表示
-                print(result?.featureEnumerator().allObjects.count ?? "0")
-                
-            }
-        }
         
 
         // 検索結果表示用のグラフィックス オーバレイの追加
@@ -123,7 +102,7 @@ class SpatialQueryViewController: UIViewController, AGSGeoViewTouchDelegate {
         queryParameters.spatialRelationship = .contains
         
         // フィーチャの検索を実行
-        featureTable.queryFeatures(with: queryParameters, completion:{ (result, error) -> Void in
+        featureTable.queryFeatures(with: queryParameters, fields: .loadAll, completion:{ (result, error) -> Void in
             if let error = error {
                 
                 print("Error:\(error.localizedDescription)")
