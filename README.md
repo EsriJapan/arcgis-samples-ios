@@ -1,6 +1,6 @@
 # arcgis-samples-ios
 
-ArcGIS Runtime SDK for iOS のサンプル集です。
+ArcGIS Runtime SDK for iOS バージョン 100.x のサンプル集です。
 
 ## 使用している製品・プロジェクト
 
