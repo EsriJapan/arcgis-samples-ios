@@ -12,55 +12,17 @@ class TopMenuController: UIViewController, UITableViewDelegate, UITableViewDataS
 
     
     let items = [
-        "LayersViewController",
-        "SwipeViewController",
-        "PerspectiveViewController",
         "GpsViewController",
-        "SensorViewController",
-        "LegendViewController",
-        "MagnifierViewController",
-        "SketchViewController",
-        "WmsViewController",
-        "TimeViewController",
-        "WebmapViewController",
-        "CustomSymbolViewController",
-        "RotationRendererViewController",
-        "SearchViewController",
         "SpatialQueryViewController",
-        "AttachmentManagerViewController",
-        "LocatorViewController",
-        "NetworkViewController",
-        "ServiceAreaViewController",
-        "CoordinateConversionViewController",
-        "JsonViewController",
-        "ExportTilesViewController",
-        "AppLoginViewController"
+        "SwipeViewController",
+        "AppLoginViewController",
     ]
     
     let itemNames = [
-        "レイヤの表示・非表示",
-        "スワイプ",
-        "パース表示",
         "ナビゲーション",
-        "地図の回転",
-        "凡例",
-        "拡大鏡",
-        "スケッチレイヤー",
-        "WMSレイヤー",
-        "時間対応レイヤー",
-        "Webマップの表示",
-        "シンボルの表示",
-        "レンダラー",
-        "属性検索",
         "空間検索",
-        "写真の添付",
-        "リバース ジオコーディング",
-        "ルート検索",
-        "到達圏解析",
-        "座標の表示形式",
-        "フィーチャをJSON形式で保存",
-        "タイルのエクスポート",
-        "アプリ認証"
+        "スワイプ",
+        "アプリ認証",
     ]
     
     
@@ -101,7 +63,6 @@ class TopMenuController: UIViewController, UITableViewDelegate, UITableViewDataS
             let controller = theClass.init(nibName: nil, bundle: nil)
             navigationController!.pushViewController(controller, animated: true)
         }
-
 
     }
         
