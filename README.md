@@ -17,7 +17,7 @@ ArcGIS Runtime SDK for iOS のサンプル集です。
 
 * [ArcGIS Runtime SDK for iOS](https://developers.arcgis.com/ios/)
 * [ArcGIS Runtime SDK for iOS（ESRIジャパン）](https://www.esrij.com/products/arcgis-runtime-sdk-for-ios/)
-* [ArcGIS Runtime SDK for iOS スタートアップ ガイド](http://www.esrij.com/products/arcgis-runtime-sdk-for-ios/documents/)
+* [ArcGIS Runtime SDK for iOS インストール ガイド](http://www.esrij.com/products/arcgis-runtime-sdk-for-ios/documents/)
 * [リファレンス](https://developers.arcgis.com/ios/latest/api-reference/)
 
 
