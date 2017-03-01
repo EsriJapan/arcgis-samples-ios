@@ -16,6 +16,11 @@ class TopMenuController: UIViewController, UITableViewDelegate, UITableViewDataS
         "SpatialQueryViewController",
         "SwipeViewController",
         "AppLoginViewController",
+        "ElevationViewController",
+        "SceneLayerViewController",
+        "SceneGraphicsViewController",
+        "FeatureLayerViewController",
+        "ExtrusionRendererViewController"
     ]
     
     let itemNames = [
@@ -23,6 +28,11 @@ class TopMenuController: UIViewController, UITableViewDelegate, UITableViewDataS
         "空間検索",
         "スワイプ",
         "アプリ認証",
+        "地形表示（3D）",
+        "景観表示（3D）",
+        "グラフィック表示（3D）",
+        "レイヤーの表示（3D）",
+        "レイヤーの立ち上げ（3D）"
     ]
     
     
@@ -36,6 +46,7 @@ class TopMenuController: UIViewController, UITableViewDelegate, UITableViewDataS
         title = "メニュー"
         tableView = UITableView(frame: view.bounds)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView.cellLayoutMarginsFollowReadableWidth = false
         tableView.dataSource = self
         tableView.delegate = self
         view.addSubview(tableView)

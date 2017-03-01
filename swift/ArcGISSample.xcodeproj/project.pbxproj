@@ -7,7 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9632D10C1E5D1FD100DEB1F4 /* SceneGraphicsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9632D10B1E5D1FD100DEB1F4 /* SceneGraphicsViewController.swift */; };
+		9632D10E1E5D21FB00DEB1F4 /* FeatureLayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9632D10D1E5D21FB00DEB1F4 /* FeatureLayerViewController.swift */; };
+		9632D1101E5D376700DEB1F4 /* ExtrusionRendererViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9632D10F1E5D376700DEB1F4 /* ExtrusionRendererViewController.swift */; };
+		963839361E5EC1670088F077 /* Bristol.3ds in Resources */ = {isa = PBXBuildFile; fileRef = 963839351E5EC1670088F077 /* Bristol.3ds */; };
+		9644B7821E55A078004F505C /* ElevationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9644B7811E55A078004F505C /* ElevationViewController.swift */; };
 		965D07CB1DF90BAC0084B91B /* ArcGIS.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 965D07CA1DF90BAC0084B91B /* ArcGIS.bundle */; };
+		969197351E56820C00C0E9EF /* SceneLayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969197341E56820C00C0E9EF /* SceneLayerViewController.swift */; };
 		96A698731D8BB6B1003F53EA /* AppLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A698721D8BB6B1003F53EA /* AppLoginViewController.swift */; };
 		96AF6D711BB5081800625E21 /* SpatialQueryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AF6D701BB5081800625E21 /* SpatialQueryViewController.swift */; };
 		96CDC83D1DF8231E00EE0AA9 /* tokyo_yokohama.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 96CDC83C1DF8231E00EE0AA9 /* tokyo_yokohama.gpx */; };
@@ -21,7 +27,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9632D10B1E5D1FD100DEB1F4 /* SceneGraphicsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneGraphicsViewController.swift; sourceTree = "<group>"; };
+		9632D10D1E5D21FB00DEB1F4 /* FeatureLayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeatureLayerViewController.swift; sourceTree = "<group>"; };
+		9632D10F1E5D376700DEB1F4 /* ExtrusionRendererViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtrusionRendererViewController.swift; sourceTree = "<group>"; };
+		963839351E5EC1670088F077 /* Bristol.3ds */ = {isa = PBXFileReference; lastKnownFileType = file; path = Bristol.3ds; sourceTree = "<group>"; };
+		9644B7811E55A078004F505C /* ElevationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ElevationViewController.swift; sourceTree = "<group>"; };
 		965D07CA1DF90BAC0084B91B /* ArcGIS.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = ArcGIS.bundle; path = ../../../../../Library/SDKs/ArcGIS/iOS/Frameworks/Static/ArcGIS.framework/Versions/Current/Resources/ArcGIS.bundle; sourceTree = "<group>"; };
+		969197341E56820C00C0E9EF /* SceneLayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneLayerViewController.swift; sourceTree = "<group>"; };
 		96A698721D8BB6B1003F53EA /* AppLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppLoginViewController.swift; sourceTree = "<group>"; };
 		96AF6D701BB5081800625E21 /* SpatialQueryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpatialQueryViewController.swift; sourceTree = "<group>"; };
 		96C270191D8A391900F291F9 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
@@ -53,6 +65,7 @@
 			isa = PBXGroup;
 			children = (
 				96CDC83C1DF8231E00EE0AA9 /* tokyo_yokohama.gpx */,
+				963839351E5EC1670088F077 /* Bristol.3ds */,
 				965D07CA1DF90BAC0084B91B /* ArcGIS.bundle */,
 				96CE6BAC1B662B9E0053F476 /* ArcGISSample */,
 				96CE6BAB1B662B9E0053F476 /* Products */,
@@ -76,6 +89,11 @@
 				96FCA3891B68E38B007B5D25 /* SwipeViewController.swift */,
 				96F1ABC31B6707F800A088F8 /* GpsViewController.swift */,
 				96AF6D701BB5081800625E21 /* SpatialQueryViewController.swift */,
+				9644B7811E55A078004F505C /* ElevationViewController.swift */,
+				969197341E56820C00C0E9EF /* SceneLayerViewController.swift */,
+				9632D10B1E5D1FD100DEB1F4 /* SceneGraphicsViewController.swift */,
+				9632D10D1E5D21FB00DEB1F4 /* FeatureLayerViewController.swift */,
+				9632D10F1E5D376700DEB1F4 /* ExtrusionRendererViewController.swift */,
 				96CE6BB31B662B9E0053F476 /* Main.storyboard */,
 				96CE6BB61B662B9E0053F476 /* Images.xcassets */,
 				96CE6BB81B662B9E0053F476 /* LaunchScreen.xib */,
@@ -159,6 +177,7 @@
 			files = (
 				965D07CB1DF90BAC0084B91B /* ArcGIS.bundle in Resources */,
 				96CE6BB51B662B9E0053F476 /* Main.storyboard in Resources */,
+				963839361E5EC1670088F077 /* Bristol.3ds in Resources */,
 				96CE6BBA1B662B9E0053F476 /* LaunchScreen.xib in Resources */,
 				96CDC83D1DF8231E00EE0AA9 /* tokyo_yokohama.gpx in Resources */,
 				96CE6BB71B662B9E0053F476 /* Images.xcassets in Resources */,
@@ -172,12 +191,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				969197351E56820C00C0E9EF /* SceneLayerViewController.swift in Sources */,
 				96CE6BB21B662B9E0053F476 /* TopMenuController.swift in Sources */,
 				96F1ABC41B6707F800A088F8 /* GpsViewController.swift in Sources */,
 				96AF6D711BB5081800625E21 /* SpatialQueryViewController.swift in Sources */,
+				9632D10E1E5D21FB00DEB1F4 /* FeatureLayerViewController.swift in Sources */,
 				96CE6BB01B662B9E0053F476 /* AppDelegate.swift in Sources */,
+				9632D10C1E5D1FD100DEB1F4 /* SceneGraphicsViewController.swift in Sources */,
+				9632D1101E5D376700DEB1F4 /* ExtrusionRendererViewController.swift in Sources */,
 				96FCA38A1B68E38B007B5D25 /* SwipeViewController.swift in Sources */,
 				96A698731D8BB6B1003F53EA /* AppLoginViewController.swift in Sources */,
+				9644B7821E55A078004F505C /* ElevationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -322,6 +346,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "esrij.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "armv7 armv7s arm64";
 				"VALID_ARCHS[sdk=*]" = "armv7 armv7s arm64";
 			};
@@ -348,6 +373,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "esrij.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Release;

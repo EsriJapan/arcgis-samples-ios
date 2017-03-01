@@ -22,7 +22,6 @@ class SpatialQueryViewController: UIViewController, AGSGeoViewTouchDelegate {
         
         super.viewDidLoad()
         
-        
         // 道路地図レイヤー表示用のマップを作成する
         mapView = AGSMapView(frame: view.bounds)
         view.addSubview(mapView)
