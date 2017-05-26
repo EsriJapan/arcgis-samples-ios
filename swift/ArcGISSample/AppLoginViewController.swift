@@ -17,6 +17,8 @@ import ArcGIS
 class AppLoginViewController: UIViewController {
     
     var mapView: AGSMapView!
+    var myCredential: AGSCredential!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +30,7 @@ class AppLoginViewController: UIViewController {
         view.addSubview(mapView)
         let map = AGSMap(basemapType: AGSBasemapType.streets, latitude: 35.681298, longitude: 139.766247, levelOfDetail: 5)
         mapView.map = map
+        
         
         // トークンのリクエスト先 URL の設定
         let urlString = "https://www.arcgis.com/sharing/oauth2/token"
@@ -75,15 +78,14 @@ class AppLoginViewController: UIViewController {
                             let token = res["access_token"] as! String
                             print(token)
                             
-                            // 認証情報を付与してフィーチャ サービスを読み込む
-                            let credential = AGSCredential(token: token, referer: nil)
+                            // トークンを指定して認証情報(AGSCredential)を作成
+                            self.myCredential = AGSCredential(token: token, referer: nil)
                             
-                            let flayerUrl = URL(string: "<Secure_Service_Layer_URL>")
-                            let featureTable = AGSServiceFeatureTable(url: flayerUrl!)
-                            let featureLayer = AGSFeatureLayer(featureTable: featureTable)
-                            featureTable.credential = credential
-                            self.mapView.map?.operationalLayers.add(featureLayer)
+                            // 認証が必要な ArcGIS Online のサービスを使用するタスクに認証情報を設定
+                            let routeTask = AGSRouteTask(url: URL(string: "https://route.arcgis.com/arcgis/rest/services/World/Route/NAServer/Route_World")!)
+                            routeTask.credential = self.myCredential
                             
+                            // ルート検索（AGSRouteTask）を実行
                             
                         }
                         

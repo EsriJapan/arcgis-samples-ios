@@ -29,8 +29,8 @@ class GpsViewController: UIViewController {
         let map = AGSMap(basemapType: AGSBasemapType.streets, latitude: 35.681298, longitude: 139.766247, levelOfDetail: 15)
         mapView.map = map
         
-        
-        // マップが読み込まれたら位置情報の取得を開始
+
+        // 位置情報の取得を開始
         mapView.locationDisplay.start(completion: { (error) -> Void in
             if let error = error {
                 print("Error:\(error.localizedDescription)")

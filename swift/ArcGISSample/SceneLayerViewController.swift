@@ -29,10 +29,20 @@ class SceneLayerViewController: UIViewController{
         self.sceneView = AGSSceneView(frame: view.bounds)
         self.view.addSubview(self.sceneView)
         
+        
         // 地図の背景を衛星画像に設定する
         let scene = AGSScene(basemapType: AGSBasemapType.imagery)
         self.sceneView.scene = scene
-
+        
+        // ArcGIS Online の標高サービスを標高データソースに設定する
+        let surface = AGSSurface()
+        let elevationSource = AGSArcGISTiledElevationSource(url: URL(string: "https://elevation3d.arcgis.com/arcgis/rest/services/WorldElevation3D/Terrain3D/ImageServer")!)
+        
+        // 標高データソースを地図ビューに設定する
+        surface.elevationSources.append(elevationSource)
+        scene.baseSurface = surface
+        
+        
         // Web サービス（シーン サービス）の URL を指定して 3D モデル表示用のシーン レイヤーを作成する
         let sceneLayer1 = AGSArcGISSceneLayer(url: URL(string: "https://scenesampleserverdev.arcgis.com/arcgis/rest/services/Hosted/DevB_BuildingShell_Textured/SceneServer/layers/0")!)
         let sceneLayer2 = AGSArcGISSceneLayer(url: URL(string: "https://scenesampleserverdev.arcgis.com/arcgis/rest/services/Hosted/DevB_Trees/SceneServer/layers/0")!)
@@ -41,13 +51,11 @@ class SceneLayerViewController: UIViewController{
         
         // 作成したシーン レイヤーを地図ビューに追加する
         scene.operationalLayers.addObjects(from: [sceneLayer1, sceneLayer2, sceneLayer3, sceneLayer4])
-        
-        
+
         // 地図を表示する視点を設定する
-        let camera = AGSCamera(latitude: 45.53434103868734, longitude: -122.68408745527267, altitude: 20, heading: 180, pitch: 90, roll: 0)
+        let camera = AGSCamera(latitude: 45.534228971124, longitude: -122.683544417081, altitude: 18.2814124021679, heading: 180, pitch: 100.3416162570851, roll: 0)
         self.sceneView.setViewpointCamera(camera)
-        
-        
+
         
         // CMMotionManager を作成する
         self.motionManager = CMMotionManager()

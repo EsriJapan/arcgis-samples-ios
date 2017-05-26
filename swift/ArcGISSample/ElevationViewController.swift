@@ -33,7 +33,6 @@ class ElevationViewController: UIViewController{
         // 標高データソースを地図ビューに設定する
         surface.elevationSources.append(elevationSource)
         scene.baseSurface = surface
-        
         // 地図を表示する視点を設定する
         let camera = AGSCamera(latitude: 35.160556, longitude: 138.677778, altitude: 17000, heading: 10, pitch: 50, roll: 300)
         self.sceneView.setViewpointCamera(camera)
