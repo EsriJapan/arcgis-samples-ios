@@ -9,6 +9,17 @@ ArcGIS Runtime SDK for iOS バージョン 100.x のサンプル集です。
 
 ArcGIS の開発キットを使用して開発を行う場合は ArcGIS Online 開発者アカウント（[ArcGIS for Developers](https://developers.arcgis.com/en/)）が必要です。開発者アカウント作成は[こちら](https://esrijapan.github.io/arcgis-dev-resources/get-dev-account/)
 
+## サンプルの内容
+* GPS を使用したナビゲーション
+* 空間検索
+* レイヤーのスワイプ
+* アプリ認証
+* 地形表示（3D）
+* 景観表示（3D）
+* グラフィック表示（3D）
+* レイヤーの表示（3D）
+* レイヤーの立ち上げ（3D）
+
 ## インストール
 ArcGIS Runtime SDK for iOS のインストールが必要です。インストール方法は[こちら](https://esrijapan.github.io/arcgis-dev-resources/ios/install-ios-100.x/)
 

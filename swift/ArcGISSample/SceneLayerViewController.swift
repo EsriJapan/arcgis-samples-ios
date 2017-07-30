@@ -49,6 +49,7 @@ class SceneLayerViewController: UIViewController{
         let sceneLayer3 = AGSArcGISSceneLayer(url: URL(string: "https://scenesampleserverdev.arcgis.com/arcgis/rest/services/Hosted/DevA_BuildingShell_Textured/SceneServer/layers/0")!)
         let sceneLayer4 = AGSArcGISSceneLayer(url: URL(string: "https://scenesampleserverdev.arcgis.com/arcgis/rest/services/Hosted/Existing_BuildingShell/SceneServer/layers/0")!)
         
+        
         // 作成したシーン レイヤーを地図ビューに追加する
         scene.operationalLayers.addObjects(from: [sceneLayer1, sceneLayer2, sceneLayer3, sceneLayer4])
 

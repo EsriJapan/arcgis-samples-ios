@@ -83,7 +83,7 @@ class ExtrusionRendererViewController: UIViewController{
                     let green:CGFloat = CGFloat(drand48())
                     let blue:CGFloat = CGFloat(drand48())
                     let randomColor = UIColor(red: red, green: green, blue: blue, alpha: 0.8)
-                    let lineSymbol = AGSSimpleLineSymbol(style: .solid, color: UIColor.black, width: 1)
+                    let lineSymbol = AGSSimpleLineSymbol(style: .solid, color: UIColor.black, width: 0.5)
                     let fillSymbol = AGSSimpleFillSymbol(style: .solid, color: randomColor, outline: lineSymbol)
                     let value = AGSUniqueValue(description: "", label: "", symbol: fillSymbol, values: [i + 1])
                     myRenderer.uniqueValues.append(value)
