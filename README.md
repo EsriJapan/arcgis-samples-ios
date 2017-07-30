@@ -1,10 +1,10 @@
 # arcgis-samples-ios
 
-ArcGIS Runtime SDK for iOS のサンプル集です。Objective-C と Swift 用のサンプルがあります。
+ArcGIS Runtime SDK for iOS バージョン 10.2.x のサンプル集です。Objective-C と Swift 用のサンプルがあります。
 
 ## 使用している製品・プロジェクト
 
-* [ArcGIS Runtime SDK for iOS](https://developers.arcgis.com/ios/)
+* [ArcGIS Runtime SDK for iOS](https://developers.arcgis.com/ios/10-2/)
 * [ArcGIS for Developers](https://developers.arcgis.com/en/)
 
 **ArcGIS の開発キットを使用して開発を行う場合は ArcGIS Online 開発者アカウント（[ArcGIS for Developers](https://developers.arcgis.com/en/)）が必要です。開発者アカウント作成ガイドは[こちら](http://www.esrij.com/cgi-bin/wp/wp-content/uploads/documents/signup-esri-developers.pdf)**

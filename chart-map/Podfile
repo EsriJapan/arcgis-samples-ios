@@ -1,0 +1,9 @@
+target 'chart-map' do
+
+use_frameworks!
+platform :ios, '9.0'
+
+pod 'ArcGIS-Runtime-SDK-iOS', '10.2.5'
+pod 'Charts'
+
+end

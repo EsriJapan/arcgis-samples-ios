@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina5_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="chart_map" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AwH-v2-9Gu" customClass="AGSMapView">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BsS-mZ-HEj" customClass="BarChartView" customModule="Charts">
+                                        <rect key="frame" x="10" y="476" width="394" height="250"/>
+                                        <color key="backgroundColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="250" id="GLG-5o-C2k"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="BsS-mZ-HEj" firstAttribute="leading" secondItem="AwH-v2-9Gu" secondAttribute="leading" constant="10" id="D2r-vu-WsJ"/>
+                                    <constraint firstAttribute="trailing" secondItem="BsS-mZ-HEj" secondAttribute="trailing" constant="10" id="T3J-aK-FNe"/>
+                                    <constraint firstAttribute="bottom" secondItem="BsS-mZ-HEj" secondAttribute="bottom" constant="10" id="qM6-nm-7yO"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="AwH-v2-9Gu" secondAttribute="bottom" id="11k-1s-Kz9"/>
+                            <constraint firstAttribute="trailing" secondItem="AwH-v2-9Gu" secondAttribute="trailing" id="BJE-6A-aj0"/>
+                            <constraint firstItem="AwH-v2-9Gu" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="MDH-oP-UMA"/>
+                            <constraint firstItem="AwH-v2-9Gu" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="kdK-u8-gKv"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="chartView" destination="BsS-mZ-HEj" id="Lph-KR-I9c"/>
+                        <outlet property="mapView" destination="AwH-v2-9Gu" id="lPD-tz-rsU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="136.23188405797103" y="138.58695652173915"/>
+        </scene>
+    </scenes>
+</document>
