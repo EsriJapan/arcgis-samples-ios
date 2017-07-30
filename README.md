@@ -9,6 +9,36 @@ ArcGIS Runtime SDK for iOS のサンプル集です。Objective-C と Swift 用�
 
 **ArcGIS の開発キットを使用して開発を行う場合は ArcGIS Online 開発者アカウント（[ArcGIS for Developers](https://developers.arcgis.com/en/)）が必要です。開発者アカウント作成ガイドは[こちら](http://www.esrij.com/cgi-bin/wp/wp-content/uploads/documents/signup-esri-developers.pdf)**
 
+## サンプルの内容
+
+* レイヤの表示・非表示（Objective-C / Swift）
+* スワイプ（Objective-C / Swift）
+* パース表示（Objective-C / Swift）
+* ナビゲーション（Objective-C / Swift）
+* 地図の回転（Objective-C / Swift）
+* 凡例（Objective-C / Swift）
+* 拡大鏡（Objective-C / Swift）
+* スケッチレイヤー（Objective-C / Swift）
+* WMSレイヤー（Objective-C / Swift）
+* 時間対応レイヤー（Objective-C / Swift）
+* Webマップの表示（Objective-C / Swift）
+* シンボルの表示（Objective-C / Swift）
+* レンダラー（Objective-C / Swift）
+* 属性検索（Objective-C / Swift）
+* 空間検索（Swift）
+* 写真の添付（Objective-C / Swift）
+* リバース ジオコーディング（Objective-C / Swift）
+* ルート検索（Objective-C / Swift）
+* 到達圏解析（Objective-C / Swift）
+* 座標の表示形式（Objective-C / Swift）
+* フィーチャをJSON形式で保存（Objective-C / Swift）
+* タイルのエクスポート（Swift）
+* アプリ認証（Swift）
+
+## インストール
+
+ArcGIS Runtime SDK for iOS のインストールが必要です。インストール方法は[こちら](https://www.esrij.com/cgi-bin/wp/wp-content/uploads/documents/startup-ios-v1025.pdf)
+
 ## 動作環境
 
 * iOS 8 以降

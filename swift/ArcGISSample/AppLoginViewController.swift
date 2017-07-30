@@ -71,13 +71,18 @@ class AppLoginViewController: UIViewController {
                             
                         } else {
                             
+                            // トークンの取得に成功
                             let token = res["access_token"] as! String
                             print(token)
                             
+                            // トークンを指定して認証情報(AGSCredential)を作成
                             let credential = AGSCredential(token: token)
-                            let featureLayer = AGSFeatureLayer(url: URL(string: "<Secure_Service_Layer_URL>"), mode: .onDemand, credential: credential)
                             
-                            self.mapView.addMapLayer(featureLayer, withName:"Feature Service Layer")
+                            // 認証が必要な ArcGIS Online のサービスを使用するタスクに認証情報を設定
+                            let routeTask = AGSRouteTask(url: URL(string: "https://route.arcgis.com/arcgis/rest/services/World/Route/NAServer/Route_World")!)
+                            routeTask?.credential = credential
+                            
+                            // ルート検索（AGSRouteTask）を実行
                             
                         }
                         
