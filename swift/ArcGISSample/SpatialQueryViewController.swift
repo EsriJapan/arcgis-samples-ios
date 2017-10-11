@@ -52,7 +52,7 @@ class SpatialQueryViewController: UIViewController, AGSGeoViewTouchDelegate {
     }
     
     
-    func respondToGeomChanged() {
+    @objc func respondToGeomChanged() {
         
         // フリーハンド ポリゴン作成時
         if !self.sketchEditor.geometry!.isEmpty {

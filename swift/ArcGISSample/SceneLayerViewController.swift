@@ -76,7 +76,7 @@ class SceneLayerViewController: UIViewController{
         
     }
     
-    func motionChanged(segment: UISegmentedControl){
+    @objc func motionChanged(segment: UISegmentedControl){
         
         // 「ジャイロ有効」が選択されたら、デバイスのモーション データの取得を開始する
         switch segment.selectedSegmentIndex {

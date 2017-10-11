@@ -54,7 +54,7 @@ class GpsViewController: UIViewController {
     
     
     
-    func changeMode(sender: UIBarButtonItem) {
+    @objc func changeMode(sender: UIBarButtonItem) {
         
         if mapView.locationDisplay.autoPanMode == .off {
             
@@ -85,7 +85,7 @@ class GpsViewController: UIViewController {
     }
     
     
-    func changeData(sender: UIBarButtonItem) {
+    @objc func changeData(sender: UIBarButtonItem) {
         
         if useGPX == true {
             
