@@ -37,8 +37,19 @@ class ElevationViewController: UIViewController{
         let camera = AGSCamera(latitude: 35.160556, longitude: 138.677778, altitude: 17000, heading: 10, pitch: 50, roll: 300)
         self.sceneView.setViewpointCamera(camera)
         
+        // スライダーの作成
+        let slider = UISlider(frame: CGRect(x: 0, y: 100, width: view.frame.size.width, height: 50))
+        slider.minimumValue = 0.0
+        slider.maximumValue = 10.0
+        slider.addTarget(self, action: #selector(ElevationViewController.sliderEvent(sender:)), for: .valueChanged)
+        view.addSubview(slider)
+        
     }
     
+    @objc func sliderEvent(sender: UISlider) {
+        // 実際の標高値を誇張表現する際の係数を指定
+        self.sceneView.scene?.baseSurface?.elevationExaggeration = sender.value
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
