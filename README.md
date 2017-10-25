@@ -45,5 +45,3 @@ Apache License Version 2.0（「本ライセンス」）に基づいてライセ
 
 ライセンスのコピーは本リポジトリの[ライセンス ファイル](./LICENSE)で利用可能です。
 
-[](EsriJapan Tags: <タグ（半角スペース区切り）>)
-[](EsriJapan Language: <開発言語>)
