@@ -36,10 +36,7 @@ class SpatialQueryViewController: UIViewController, AGSGeoViewTouchDelegate {
         let flayerUrl = URL(string: "https://services.arcgis.com/CmCcqeRAPUx17PGk/arcgis/rest/services/AED_2_201506/FeatureServer/0")
         self.featureTable = AGSServiceFeatureTable(url: flayerUrl!)
         self.featureLayer = AGSFeatureLayer(featureTable: featureTable)
-        map.operationalLayers.add(self.featureLayer)
-        
-        // フィーチャの選択シンボルのライン幅の設定
-        self.featureLayer.selectionWidth = 3.0
+        map.operationalLayers.add(self.featureLayer!)
 
         // スケッチ エディターの作成
         self.sketchEditor = AGSSketchEditor()
@@ -55,7 +52,7 @@ class SpatialQueryViewController: UIViewController, AGSGeoViewTouchDelegate {
     @objc func respondToGeomChanged() {
         
         // フリーハンド ポリゴン作成時
-        if !self.sketchEditor.geometry!.isEmpty {
+        if (self.sketchEditor!.geometry != nil) && !self.sketchEditor.geometry!.isEmpty {
         
             // フィーチャの選択状態をクリア
             self.featureLayer.clearSelection()
@@ -79,7 +76,7 @@ class SpatialQueryViewController: UIViewController, AGSGeoViewTouchDelegate {
                     
                     // 検索されたフィーチャの個数を表示
                     let count = result?.featureEnumerator().allObjects.count.description                    
-                    let alert = UIAlertController(title:"検索結果", message: count! + "箇所に AED があります。", preferredStyle: UIAlertControllerStyle.alert)
+                    let alert = UIAlertController(title:"検索結果", message: count! + "箇所に AED があります。", preferredStyle: UIAlertController.Style.alert)
                     let defaultAction = UIAlertAction(title: "OK", style: .default, handler: {(action:UIAlertAction!) -> Void in
                         // スケッチ エディターで作成したポリゴンを削除
                         self.sketchEditor.clearGeometry()

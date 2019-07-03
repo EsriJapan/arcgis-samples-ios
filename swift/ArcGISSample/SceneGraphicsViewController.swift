@@ -36,7 +36,7 @@ class SceneGraphicsViewController: UIViewController {
         scene.baseSurface = surface
         
         // 地図を表示する視点を設定する
-        let camera = AGSCamera(latitude: 35.160556, longitude: 138.677778, altitude: 10000, heading: 10, pitch: 90, roll: 300)
+        let camera = AGSCamera(latitude: 35.160556, longitude: 138.677778, altitude: 10000, heading: 10, pitch: 90, roll: 0)
         self.sceneView.setViewpointCamera(camera)
         
         // グラフィック表示用のレイヤーに、グラフィックを表示する際の高さの指定方法のプロパティを設定する

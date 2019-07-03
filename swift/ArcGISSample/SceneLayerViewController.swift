@@ -70,7 +70,7 @@ class SceneLayerViewController: UIViewController{
         segmentedControl.tintColor = UIColor.gray
         
         // セグメント切り替え時のイベントを追加する
-        segmentedControl.addTarget(self, action: #selector(SceneLayerViewController.motionChanged(segment:)), for: UIControlEvents.valueChanged)
+        segmentedControl.addTarget(self, action: #selector(SceneLayerViewController.motionChanged(segment:)), for: UIControl.Event.valueChanged)
         self.view.addSubview(segmentedControl)
 
         

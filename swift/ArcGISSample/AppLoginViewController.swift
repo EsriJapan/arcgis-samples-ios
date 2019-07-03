@@ -40,8 +40,10 @@ class AppLoginViewController: UIViewController {
         // アプリ ID の設定
         let clientId:String = "<Applications_Client_Id>"
 
+
         // 秘密鍵の設定
         let clientSecret:String = "<Applications_Client_Secret>"
+
         
         // トークンの有効期限の設定（1時間）
         let expiration:String = "60"
@@ -67,7 +69,7 @@ class AppLoginViewController: UIViewController {
                             let errorDetails = error["error_description"] as! String
                             print(errorDetails)
 
-                            let alert = UIAlertController(title:"Error", message: errorDetails, preferredStyle: UIAlertControllerStyle.alert)
+                            let alert = UIAlertController(title:"Error", message: errorDetails, preferredStyle: UIAlertController.Style.alert)
                             let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
                             alert.addAction(defaultAction)
                             self.present(alert, animated: true, completion: nil)

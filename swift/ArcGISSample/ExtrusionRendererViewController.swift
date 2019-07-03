@@ -27,7 +27,7 @@ class ExtrusionRendererViewController: UIViewController{
         self.sceneView.scene = scene
         
         // 地図を表示する視点を設定する
-        let camera = AGSCamera(latitude: 25.745912, longitude: 134.226785, altitude: 1000000, heading: 10, pitch: 45, roll: 300)
+        let camera = AGSCamera(latitude: 25.745912, longitude: 134.226785, altitude: 1000000, heading: 10, pitch: 45, roll: 0)
         self.sceneView.setViewpointCamera(camera)
         
         
@@ -82,8 +82,8 @@ class ExtrusionRendererViewController: UIViewController{
                     let red:CGFloat = CGFloat(drand48())
                     let green:CGFloat = CGFloat(drand48())
                     let blue:CGFloat = CGFloat(drand48())
-                    let randomColor = UIColor(red: red, green: green, blue: blue, alpha: 0.8)
-                    let lineSymbol = AGSSimpleLineSymbol(style: .solid, color: UIColor.black, width: 0.5)
+                    let randomColor = UIColor(red: red, green: green, blue: blue, alpha: 1.0)
+                    let lineSymbol = AGSSimpleLineSymbol(style: .solid, color: UIColor.clear, width: 0.5)
                     let fillSymbol = AGSSimpleFillSymbol(style: .solid, color: randomColor, outline: lineSymbol)
                     let value = AGSUniqueValue(description: "", label: "", symbol: fillSymbol, values: [i + 1])
                     myRenderer.uniqueValues.append(value)

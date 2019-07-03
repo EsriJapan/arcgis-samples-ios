@@ -37,7 +37,7 @@ class FeatureLayerViewController: UIViewController{
         scene.baseSurface = surface
         
         // 地図を表示する視点を設定する
-        let camera = AGSCamera(latitude: 42.314235, longitude: 140.994363, altitude: 150, heading: 250, pitch: 90, roll: 300)
+        let camera = AGSCamera(latitude: 42.314235, longitude: 140.994363, altitude: 150, heading: 250, pitch: 90, roll: 0)
         self.sceneView.setViewpointCamera(camera)
         
         
